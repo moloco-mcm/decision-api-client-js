@@ -1,0 +1,71 @@
+{
+  "name": "@rmp-portal/rmp-decision-api-client",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./dist/lib/index.js",
+  "types": "./dist/types/index.d.ts",
+  "sideEffects": false,
+  "files": [
+    "./dist"
+  ],
+  "scripts": {
+    "build": "yarn clean && tsc -b ./tsconfig.prod.json",
+    "clean": "rm -rf ./dist",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "lint": "eslint --ext .ts,.js .",
+    "format": "prettier --write .",
+    "check-ts": "tsc --noEmit",
+    "hooks:pre-commit": "yarn check-ts && lint-staged && yarn test",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "@types/faker": "^5.5.9",
+    "@types/jest": "^26.0.15",
+    "@typescript-eslint/eslint-plugin": "^4.26.0",
+    "@typescript-eslint/parser": "^4.26.0",
+    "axios": "^0.21.1",
+    "eslint": "^7.27.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-json": "^3.1.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "faker": "^5.5.3",
+    "husky": "^6.0.0",
+    "jest": "26.6.0",
+    "lint-staged": "^11.0.0",
+    "msw": "^0.29.0",
+    "prettier": "^2.3.0",
+    "ts-jest": "^26.5.6",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.2"
+  },
+  "dependencies": {
+    "axios": "^0.21.1"
+  },
+  "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint",
+      "prettier"
+    ],
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended",
+      "prettier"
+    ],
+    "rules": {
+      "prettier/prettier": "warn",
+      "@typescript-eslint/explicit-module-boundary-types": "off"
+    },
+    "ignorePatterns": [
+      "dist/**/*"
+    ]
+  },
+  "lint-staged": {
+    "src/**/*.{js,ts,json}": [
+      "prettier --write",
+      "eslint",
+      "git add"
+    ]
+  }
+}
