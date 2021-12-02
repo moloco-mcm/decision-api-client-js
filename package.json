@@ -1,5 +1,5 @@
 {
-  "name": "@rmp-portal/rmp-decision-api-client",
+  "name": "@moloco-rmp/decision-api-client",
   "version": "0.1.0",
   "private": true,
   "main": "./dist/lib/index.js",
