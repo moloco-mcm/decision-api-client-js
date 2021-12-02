@@ -11,9 +11,9 @@ export type CreateClientOptions = {
 };
 
 export function createClient(options: CreateClientOptions) {
-  const { baseURL, region = 'us', platformId, apiKey } = options;
+  const { baseURL, region = 'sel', platformId, apiKey } = options;
 
-  const url = baseURL ?? `https://rmp-decision-api-${region}.moloco.com`;
+  const url = baseURL ?? `https://dcsn-${region}.rmp-api.moloco.com`;
 
   const axios = Axios.create({
     baseURL: `${url}/rmp/decision/v1`,
