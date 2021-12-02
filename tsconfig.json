@@ -1,21 +1,19 @@
 {
   "compilerOptions": {
-    "target": "ES2018",
+    "target": "ES5",
     "lib": [
       "dom",
-      "ES2018"
+      "ES6"
     ],
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
     "strict": true,
+    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "module": "CommonJs",
     "moduleResolution": "node",
     "sourceMap": true,
-    "declaration": true,
-    "declarationDir": "dist/types",
-    "outDir": "dist/lib"
   },
   "include": [
     "src",

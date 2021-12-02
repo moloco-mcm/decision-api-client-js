@@ -1,0 +1,8 @@
+{
+  "extends": "./tsconfig.build.cjs.json",
+  "compilerOptions": {
+    "target": "ES2015",
+    "module": "ES2020",
+    "outDir": "dist/esm",
+  }
+}
