@@ -1,7 +1,6 @@
 {
   "name": "@moloco-rmp/decision-api-client",
   "version": "0.1.0",
-  "private": true,
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/types/index.d.ts",
