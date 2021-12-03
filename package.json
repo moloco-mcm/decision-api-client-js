@@ -1,12 +1,12 @@
 {
   "name": "@moloco-rmp/decision-api-client",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/types/index.d.ts",
   "sideEffects": false,
   "files": [
-    "./dist"
+    "dist"
   ],
   "scripts": {
     "build": "yarn clean && yarn build:cjs && yarn build:esm",
@@ -68,5 +68,8 @@
       "eslint",
       "git add"
     ]
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
