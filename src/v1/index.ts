@@ -1,16 +1,21 @@
 import Axios from 'axios';
 import auction from './auction';
 import recommendation from './recommendation';
-import { Context } from './types';
 
-export type CreateClientOptions = {
-  baseURL?: string;
-  region?: string;
-  platformId: string;
-  apiKey: string;
-};
+import { Client, Context, CreateClientOptions } from './types';
 
-export function createClient(options: CreateClientOptions) {
+/**
+ * Creates a new instance of API client.
+ *
+ * Example
+ * ```typescript
+ * const client = v1.createClient({
+ *   apiKey: process.env.RMP_DECISION_API_KEY,
+ *   platformId: process.env.RMP_PLATFORM_ID,
+ * });
+ * ```
+ */
+export function createClient(options: CreateClientOptions): Client {
   const { baseURL, region = 'sel', platformId, apiKey } = options;
 
   const url = baseURL ?? `https://dcsn-${region}.rmp-api.moloco.com`;

@@ -92,8 +92,7 @@ export type RecommendationHttpResponseBody = {
   }[];
 };
 
-export type RecommendationResult = {
+export type RecommendationData = {
   requestId: string;
-  // TODO: use separated type once API doc is updated  (@sjhan-moloco)
   decidedItems: DecidedItem[];
 };

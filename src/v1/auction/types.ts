@@ -91,7 +91,7 @@ export type AuctionHttpResponseBody = {
   }[];
 };
 
-export type AuctionResult = {
+export type AuctionData = {
   requestId: string;
   decidedItems: DecidedItem[];
 };

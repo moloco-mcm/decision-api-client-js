@@ -19,7 +19,10 @@
     "format": "prettier --write .",
     "check-ts": "tsc --noEmit",
     "hooks:pre-commit": "yarn check-ts && lint-staged && yarn test",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "docs": "yarn docs:clean && yarn docs:build",
+    "docs:build": "typedoc src/index.ts",
+    "docs:clean": "rm -rf ./docs"
   },
   "devDependencies": {
     "@types/faker": "^5.5.9",
@@ -38,6 +41,7 @@
     "prettier": "^2.3.0",
     "ts-jest": "^26.5.6",
     "ts-node": "^9.1.1",
+    "typedoc": "^0.22.10",
     "typescript": "4.4.2"
   },
   "dependencies": {

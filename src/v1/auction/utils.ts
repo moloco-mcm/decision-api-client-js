@@ -2,7 +2,7 @@ import {
   AuctionParams,
   AuctionHttpRequestBody,
   AuctionHttpResponseBody,
-  AuctionResult,
+  AuctionData,
 } from './types';
 
 export const translateAuctionParamsToAuctionHttpRequestBody = (
@@ -40,7 +40,7 @@ export const translateAuctionParamsToAuctionHttpRequestBody = (
 
 export const translateAuctionHttpResponseBodyToAuctionResult = (
   data: AuctionHttpResponseBody
-): AuctionResult => ({
+): AuctionData => ({
   requestId: data.request_id,
   decidedItems: data.decided_items.map((item) => ({
     itemId: item.item_id,

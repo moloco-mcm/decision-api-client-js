@@ -4,7 +4,7 @@ import {
   AuctionParams,
   AuctionHttpRequestBody,
   AuctionHttpResponseBody,
-  AuctionResult,
+  AuctionData,
 } from './types';
 import { translateAuctionParamsToAuctionHttpRequestBody } from './utils';
 
@@ -27,7 +27,7 @@ const postAuction: AxiosFn<AuctionParams, AuctionHttpResponseBody> = (args) => {
 const translatePostAuctionResponse: TranslationFn<
   AuctionParams,
   AuctionHttpResponseBody,
-  AuctionResult
+  AuctionData
 > = (args) => {
   const {
     response: { data },

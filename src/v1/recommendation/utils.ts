@@ -2,7 +2,7 @@ import {
   RecommendationParams,
   RecommendationHttpRequestBody,
   RecommendationHttpResponseBody,
-  RecommendationResult,
+  RecommendationData,
 } from './types';
 
 export const translateRecommendationParamsToRecommendationHttpRequestBody = (
@@ -40,7 +40,7 @@ export const translateRecommendationParamsToRecommendationHttpRequestBody = (
 
 export const translateRecommendationHttpResponseBodyToRecommendationResult = (
   data: RecommendationHttpResponseBody
-): RecommendationResult => ({
+): RecommendationData => ({
   requestId: data.request_id,
   decidedItems: data.decided_items.map((item) => ({
     itemId: item.item_id,
