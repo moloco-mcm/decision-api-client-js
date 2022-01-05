@@ -6,7 +6,6 @@ import { Client, Context, CreateClientOptions } from './types';
 
 /**
  * Creates a new instance of API client.
- *
  * Example
  * ```typescript
  * const client = v1.createClient({
@@ -14,6 +13,8 @@ import { Client, Context, CreateClientOptions } from './types';
  *   platformId: process.env.RMP_PLATFORM_ID,
  * });
  * ```
+ *
+ * @category Client
  */
 export function createClient(options: CreateClientOptions): Client {
   const { baseURL, region = 'sel', platformId, apiKey } = options;
@@ -39,6 +40,9 @@ export function createClient(options: CreateClientOptions): Client {
 }
 
 // export error types
+/**
+ * @category Error
+ */
 export * as errors from './utils/errors';
 
 // export common data types

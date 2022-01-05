@@ -4,6 +4,9 @@ import {
   RecommendationParams,
 } from '../recommendation/types';
 
+/**
+ * @category Item
+ */
 export type DecidedItem = {
   itemId: string;
   auctionResult?: {
@@ -30,6 +33,9 @@ export type DecidedItem = {
   };
 };
 
+/**
+ * @category Client
+ */
 export type CreateClientOptions = {
   baseURL?: string;
   region?: string;
@@ -37,6 +43,9 @@ export type CreateClientOptions = {
   apiKey: string;
 };
 
+/**
+ * @category Client
+ */
 export interface Client {
   /**
    * Send an auction request. Throws one of the errors defined in {@link v1.errors}.
@@ -48,8 +57,14 @@ export interface Client {
   recommendation: (params: RecommendationParams) => Promise<RecommendationData>;
 }
 
+/**
+ * @category Auction
+ */
 export { AuctionParams, AuctionData } from '../auction/types';
 
+/**
+ * @category Recommendation
+ */
 export {
   RecommendationParams,
   RecommendationData,

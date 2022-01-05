@@ -1,5 +1,6 @@
 {
   "hideGenerator": true,
   "includeVersion": true,
+  "categorizeByGroup": false,
   "githubPages": true
 }
