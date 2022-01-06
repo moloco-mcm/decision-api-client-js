@@ -4,7 +4,7 @@ import {
   RecommendationParams,
   RecommendationHttpRequestBody,
   RecommendationHttpResponseBody,
-  RecommendationResult,
+  RecommendationData,
 } from './types';
 import { translateRecommendationParamsToRecommendationHttpRequestBody } from './utils';
 
@@ -30,7 +30,7 @@ const postRecommendation: AxiosFn<
 const translatePostRecommendationResponse: TranslationFn<
   RecommendationParams,
   RecommendationHttpResponseBody,
-  RecommendationResult
+  RecommendationData
 > = (args) => {
   const {
     response: { data },
