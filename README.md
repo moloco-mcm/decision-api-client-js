@@ -112,3 +112,5 @@ client.auction({ ... })
 ## Documentation
 
 [RMP Decision API Reference](https://moloco-rmp.readme.io/reference)
+
+© Moloco, Inc. 2022 All rights reserved. Released under Apache 2.0 License
