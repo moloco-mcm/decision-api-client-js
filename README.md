@@ -111,7 +111,7 @@ client.auction({ ... })
 
 ## Documentation
 
-[Full Library Reference](https://moloco-rmp.github.io/decision-api-client-js)
-[RMP Decision API Reference](https://moloco-rmp.readme.io/reference)
+- [Full Library Reference](https://moloco-rmp.github.io/decision-api-client-js)
+- [RMP Decision API Reference](https://moloco-rmp.readme.io/reference)
 
 © Moloco, Inc. 2022 All rights reserved. Released under Apache 2.0 License
