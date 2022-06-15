@@ -29,6 +29,9 @@ describe('auction/utils', () => {
         items: ['test_item_id_1', 'test_item_id_2'],
         categories: ['Sports & Fitness > Athletic Clothing > Shoe'],
         searchQuery: 'test_query',
+        searchMetadata: {
+          synonyms: ['vehicle', 'automobile'],
+        },
       },
     };
 
@@ -57,6 +60,9 @@ describe('auction/utils', () => {
         items: ['test_item_id_1', 'test_item_id_2'],
         categories: ['Sports & Fitness > Athletic Clothing > Shoe'],
         search_query: 'test_query',
+        search_metadata: {
+          synonyms: ['vehicle', 'automobile'],
+        },
       },
     });
   });

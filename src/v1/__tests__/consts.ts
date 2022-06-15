@@ -25,5 +25,8 @@ export const AUCTION_PARAMS: AuctionParams = {
     items: ['test_item_id_1', 'test_item_id_2'],
     categories: ['Sports & Fitness > Athletic Clothing > Shoe'],
     searchQuery: 'test_query',
+    searchMetadata: {
+      synonyms: ['test_synonym_1', 'test_synonym_2'],
+    },
   },
 };

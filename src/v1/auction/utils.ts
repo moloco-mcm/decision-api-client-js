@@ -30,6 +30,11 @@ export const translateAuctionParamsToAuctionHttpRequestBody = (
     items: params.inventory.items && [...params.inventory.items],
     categories: params.inventory.categories && [...params.inventory.categories],
     search_query: params.inventory.searchQuery,
+    search_metadata: params.inventory.searchMetadata && {
+      synonyms: params.inventory.searchMetadata.synonyms && [
+        ...params.inventory.searchMetadata.synonyms,
+      ],
+    },
   },
 });
 
