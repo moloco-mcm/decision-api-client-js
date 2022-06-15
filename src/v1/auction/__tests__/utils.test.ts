@@ -25,15 +25,10 @@ describe('auction/utils', () => {
       },
       inventory: {
         inventoryId: 'my_inventory',
-        type: 'HOME',
         numItems: 10,
         items: ['test_item_id_1', 'test_item_id_2'],
         categories: ['Sports & Fitness > Athletic Clothing > Shoe'],
         searchQuery: 'test_query',
-      },
-      options: {
-        requireItemMetadata: true,
-        requireScore: true,
       },
     };
 
@@ -58,15 +53,10 @@ describe('auction/utils', () => {
       },
       inventory: {
         inventory_id: 'my_inventory',
-        type: 'HOME',
         num_items: 10,
         items: ['test_item_id_1', 'test_item_id_2'],
         categories: ['Sports & Fitness > Athletic Clothing > Shoe'],
         search_query: 'test_query',
-      },
-      options: {
-        require_item_metadata: true,
-        require_score: true,
       },
     });
   });
@@ -93,18 +83,6 @@ describe('auction/utils', () => {
             'https://mock-click-tracker-1',
             'https://mock-click-tracker-2',
           ],
-          metadata: {
-            item: {
-              title: 'test_item_title',
-              categories: ['category1', 'category2'],
-              image_urls: ['https://image-url'],
-              price: {
-                currency: 'USD',
-                amount: 100,
-              },
-            },
-            score: 10,
-          },
         },
       ],
     };
@@ -131,18 +109,6 @@ describe('auction/utils', () => {
               'https://mock-click-tracker-1',
               'https://mock-click-tracker-2',
             ],
-            metadata: {
-              item: {
-                title: 'test_item_title',
-                categories: ['category1', 'category2'],
-                imageUrls: ['https://image-url'],
-                price: {
-                  currency: 'USD',
-                  amount: 100,
-                },
-              },
-              score: 10,
-            },
           },
         ],
       }

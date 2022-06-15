@@ -47,22 +47,6 @@ const translatePostAuctionResponse: TranslationFn<
       },
       impTrackers: [...item.imp_trackers],
       clickTrackers: [...item.click_trackers],
-      metadata: item.metadata && {
-        item: item.metadata.item && {
-          title: item.metadata.item.title,
-          categories: item.metadata.item.categories && [
-            ...item.metadata.item.categories,
-          ],
-          imageUrls: item.metadata.item.image_urls && [
-            ...item.metadata.item.image_urls,
-          ],
-          price: {
-            currency: item.metadata.item.price.currency,
-            amount: item.metadata.item.price.amount,
-          },
-        },
-        score: item.metadata.score,
-      },
     })),
   };
 };

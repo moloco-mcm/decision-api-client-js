@@ -53,23 +53,6 @@ const auction = (config: Config) => {
               'https://mock-click-tracker-1',
               'https://mock-click-tracker-2',
             ],
-            metadata: {
-              item: req.body.options?.require_item_metadata
-                ? {
-                    title: faker.commerce.productName(),
-                    categories: [
-                      faker.commerce.department(),
-                      faker.commerce.department(),
-                    ],
-                    image_urls: [faker.image.image()],
-                    price: {
-                      currency: 'USD',
-                      amount: Number(faker.finance.amount(1, 500)),
-                    },
-                  }
-                : undefined,
-              score: req.body.options?.require_score ? 10 : undefined,
-            },
           })),
       };
 
@@ -120,23 +103,6 @@ const recommendation = (config: Config) => {
               'https://mock-click-tracker-1',
               'https://mock-click-tracker-2',
             ],
-            metadata: {
-              item: req.body.options?.require_item_metadata
-                ? {
-                    title: faker.commerce.productName(),
-                    categories: [
-                      faker.commerce.department(),
-                      faker.commerce.department(),
-                    ],
-                    image_urls: [faker.image.image()],
-                    price: {
-                      currency: 'USD',
-                      amount: Number(faker.finance.amount(1, 500)),
-                    },
-                  }
-                : undefined,
-              score: req.body.options?.require_score ? 10 : undefined,
-            },
           })),
       };
 

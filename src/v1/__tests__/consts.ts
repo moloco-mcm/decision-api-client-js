@@ -21,14 +21,9 @@ export const AUCTION_PARAMS: AuctionParams = {
   },
   inventory: {
     inventoryId: 'my_inventory',
-    type: 'HOME',
     numItems: 50,
     items: ['test_item_id_1', 'test_item_id_2'],
     categories: ['Sports & Fitness > Athletic Clothing > Shoe'],
     searchQuery: 'test_query',
-  },
-  options: {
-    requireItemMetadata: true,
-    requireScore: true,
   },
 };

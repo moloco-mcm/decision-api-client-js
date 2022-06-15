@@ -26,15 +26,10 @@ export const translateRecommendationParamsToRecommendationHttpRequestBody = (
   },
   inventory: {
     inventory_id: params.inventory.inventoryId,
-    type: params.inventory.type,
     num_items: params.inventory.numItems,
     items: params.inventory.items && [...params.inventory.items],
     categories: params.inventory.categories && [...params.inventory.categories],
     search_query: params.inventory.searchQuery,
-  },
-  options: params.options && {
-    require_item_metadata: params.options.requireItemMetadata,
-    require_score: params.options.requireScore,
   },
 });
 
@@ -54,21 +49,5 @@ export const translateRecommendationHttpResponseBodyToRecommendationResult = (
     },
     impTrackers: [...item.imp_trackers],
     clickTrackers: [...item.click_trackers],
-    metadata: item.metadata && {
-      item: item.metadata.item && {
-        title: item.metadata.item.title,
-        categories: item.metadata.item.categories && [
-          ...item.metadata.item.categories,
-        ],
-        imageUrls: item.metadata.item.image_urls && [
-          ...item.metadata.item.image_urls,
-        ],
-        price: {
-          currency: item.metadata.item.price.currency,
-          amount: item.metadata.item.price.amount,
-        },
-      },
-      score: item.metadata.score,
-    },
   })),
 });
