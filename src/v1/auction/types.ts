@@ -19,15 +19,13 @@ export type AuctionParams = {
   };
   inventory: {
     inventoryId: string;
-    type: string;
     numItems: number;
     items?: string[];
     categories?: string[];
     searchQuery?: string;
-  };
-  options?: {
-    requireItemMetadata?: boolean;
-    requireScore?: boolean;
+    searchMetadata?: {
+      synonyms?: string[];
+    };
   };
 };
 
@@ -50,15 +48,13 @@ export type AuctionHttpRequestBody = {
   };
   inventory: {
     inventory_id: string;
-    type: string;
     num_items: number;
     items?: string[];
     categories?: string[];
     search_query?: string;
-  };
-  options?: {
-    require_item_metadata?: boolean;
-    require_score?: boolean;
+    search_metadata?: {
+      synonyms?: string[];
+    };
   };
 };
 
@@ -76,18 +72,6 @@ export type AuctionHttpResponseBody = {
     };
     imp_trackers: string[];
     click_trackers: string[];
-    metadata?: {
-      item?: {
-        title: string;
-        categories?: string[];
-        image_urls?: string[];
-        price: {
-          currency: string;
-          amount: number;
-        };
-      };
-      score?: number;
-    };
   }[];
 };
 

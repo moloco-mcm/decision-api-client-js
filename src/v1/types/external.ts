@@ -19,18 +19,6 @@ export type DecidedItem = {
   };
   impTrackers: string[];
   clickTrackers: string[];
-  metadata?: {
-    item?: {
-      title: string;
-      categories?: string[];
-      imageUrls?: string[];
-      price: {
-        currency: string;
-        amount: number;
-      };
-    };
-    score?: number;
-  };
 };
 
 /**
