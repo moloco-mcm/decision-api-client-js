@@ -6,7 +6,10 @@ import {
   AuctionHttpResponseBody,
   AuctionData,
 } from './types';
-import { translateAuctionParamsToAuctionHttpRequestBody } from './utils';
+import {
+  translateAuctionHttpResponseBodyToAuctionResult,
+  translateAuctionParamsToAuctionHttpRequestBody,
+} from './utils';
 
 const postAuction: AxiosFn<AuctionParams, AuctionHttpResponseBody> = (args) => {
   const {
@@ -33,22 +36,7 @@ const translatePostAuctionResponse: TranslationFn<
     response: { data },
   } = args;
 
-  return {
-    requestId: data.request_id,
-    decidedItems: data.decided_items.map((item) => ({
-      itemId: item.item_id,
-      auctionResult: item.auction_result && {
-        adAccountId: item.auction_result.ad_account_id,
-        campaignId: item.auction_result.campaign_id,
-        winPrice: item.auction_result.win_price && {
-          currency: item.auction_result.win_price.currency,
-          amountMicro: item.auction_result.win_price.amount_micro,
-        },
-      },
-      impTrackers: [...item.imp_trackers],
-      clickTrackers: [...item.click_trackers],
-    })),
-  };
+  return translateAuctionHttpResponseBodyToAuctionResult(data);
 };
 
 export const auction = (context: Context) =>

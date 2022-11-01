@@ -19,6 +19,7 @@ export type DecidedItem = {
   };
   impTrackers: string[];
   clickTrackers: string[];
+  trackId?: string;
 };
 
 /**

@@ -73,6 +73,7 @@ export type RecommendationHttpResponseBody = {
     };
     imp_trackers: string[];
     click_trackers: string[];
+    track_id?: string;
   }[];
 };
 
