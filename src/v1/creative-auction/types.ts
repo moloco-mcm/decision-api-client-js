@@ -19,13 +19,9 @@ export type CreativeAuctionParams = {
   };
   inventory: {
     inventoryId: string;
-    numItems: number;
     items?: string[];
     categories?: string[];
     searchQuery?: string;
-    searchMetadata?: {
-      synonyms?: string[];
-    };
   };
   pageId?: string;
 };
@@ -49,13 +45,9 @@ export type CreativeAuctionHttpRequestBody = {
   };
   inventory: {
     inventory_id: string;
-    num_items: number;
     items?: string[];
     categories?: string[];
     search_query?: string;
-    search_metadata?: {
-      synonyms?: string[];
-    };
   };
   page_id?: string;
 };

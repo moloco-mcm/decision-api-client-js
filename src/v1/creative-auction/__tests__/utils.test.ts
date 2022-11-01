@@ -28,13 +28,9 @@ describe('creative-auction/utils', () => {
       },
       inventory: {
         inventoryId: 'my_inventory',
-        numItems: 10,
         items: ['test_item_id_1', 'test_item_id_2'],
         categories: ['Sports & Fitness > Athletic Clothing > Shoe'],
         searchQuery: 'test_query',
-        searchMetadata: {
-          synonyms: ['vehicle', 'automobile'],
-        },
       },
       pageId: 'test_page_id',
     };
@@ -60,13 +56,9 @@ describe('creative-auction/utils', () => {
       },
       inventory: {
         inventory_id: 'my_inventory',
-        num_items: 10,
         items: ['test_item_id_1', 'test_item_id_2'],
         categories: ['Sports & Fitness > Athletic Clothing > Shoe'],
         search_query: 'test_query',
-        search_metadata: {
-          synonyms: ['vehicle', 'automobile'],
-        },
       },
       page_id: 'test_page_id',
     });
