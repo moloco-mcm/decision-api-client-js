@@ -1,12 +1,15 @@
-import { RecommendationHttpResponseBody, RecommendationParams } from '../types';
 import {
-  translateRecommendationParamsToRecommendationHttpRequestBody,
-  translateRecommendationHttpResponseBodyToRecommendationResult,
+  CreativeAuctionHttpResponseBody,
+  CreativeAuctionParams,
+} from '../types';
+import {
+  translateCreativeAuctionParamsToCreativeAuctionHttpRequestBody,
+  translateCreativeAuctionHttpResponseBodyToCreativeAuctionData,
 } from '../utils';
 
-describe('recommendation/utils', () => {
-  test('translateRecommendationParamsToRecommendationHttpRequestBody', () => {
-    const params: RecommendationParams = {
+describe('creative-auction/utils', () => {
+  test('translateCreativeAuctionParamsToCreativeAuctionHttpRequestBody', () => {
+    const params: CreativeAuctionParams = {
       requestId: 'test_request_id',
       sessionId: 'test_session_id',
       user: {
@@ -25,18 +28,15 @@ describe('recommendation/utils', () => {
       },
       inventory: {
         inventoryId: 'my_inventory',
-        numItems: 10,
         items: ['test_item_id_1', 'test_item_id_2'],
         categories: ['Sports & Fitness > Athletic Clothing > Shoe'],
         searchQuery: 'test_query',
-        searchMetadata: {
-          synonyms: ['vehicle', 'automobile'],
-        },
       },
+      pageId: 'test_page_id',
     };
 
     expect(
-      translateRecommendationParamsToRecommendationHttpRequestBody(params)
+      translateCreativeAuctionParamsToCreativeAuctionHttpRequestBody(params)
     ).toMatchObject({
       request_id: 'test_request_id',
       session_id: 'test_session_id',
@@ -56,31 +56,40 @@ describe('recommendation/utils', () => {
       },
       inventory: {
         inventory_id: 'my_inventory',
-        num_items: 10,
         items: ['test_item_id_1', 'test_item_id_2'],
         categories: ['Sports & Fitness > Athletic Clothing > Shoe'],
         search_query: 'test_query',
-        search_metadata: {
-          synonyms: ['vehicle', 'automobile'],
-        },
       },
+      page_id: 'test_page_id',
     });
   });
 
-  test('translateRecommendationHttpResponseBodyToRecommendationResult', () => {
-    const data: RecommendationHttpResponseBody = {
+  test('translateAuctionHttpResponseBodyToAuctionResult', () => {
+    const data: CreativeAuctionHttpResponseBody = {
       request_id: 'test_request_id',
-      decided_items: [
+      auction_result: {
+        ad_account_id: 'test_ad_account_id',
+        campaign_id: 'test_campaign_id',
+        win_price: {
+          currency: 'USD',
+          amount_micro: '100',
+        },
+      },
+      banner: {
+        creative_id: 'test_creative_id',
+        image_url: 'http://test-creative-image-url',
+        imp_trackers: [
+          'https://mock-imp-tracker-1',
+          'https://mock-imp-tracker-2',
+        ],
+        click_trackers: [
+          'https://mock-click-tracker-1',
+          'https://mock-click-tracker-2',
+        ],
+      },
+      items: [
         {
-          item_id: 'test_item_id',
-          auction_result: {
-            ad_account_id: 'test_ad_account_id',
-            campaign_id: 'test_campaign_id',
-            win_price: {
-              currency: 'USD',
-              amount_micro: '100',
-            },
-          },
+          item_id: 'test-item-id',
           imp_trackers: [
             'https://mock-imp-tracker-1',
             'https://mock-imp-tracker-2',
@@ -89,26 +98,37 @@ describe('recommendation/utils', () => {
             'https://mock-click-tracker-1',
             'https://mock-click-tracker-2',
           ],
-          track_id: 'test_track_id',
         },
       ],
     };
 
     expect(
-      translateRecommendationHttpResponseBodyToRecommendationResult(data)
+      translateCreativeAuctionHttpResponseBodyToCreativeAuctionData(data)
     ).toMatchObject({
       requestId: 'test_request_id',
-      decidedItems: [
+      auctionResult: {
+        adAccountId: 'test_ad_account_id',
+        campaignId: 'test_campaign_id',
+        winPrice: {
+          currency: 'USD',
+          amountMicro: '100',
+        },
+      },
+      banner: {
+        creativeId: 'test_creative_id',
+        imageUrl: 'http://test-creative-image-url',
+        impTrackers: [
+          'https://mock-imp-tracker-1',
+          'https://mock-imp-tracker-2',
+        ],
+        clickTrackers: [
+          'https://mock-click-tracker-1',
+          'https://mock-click-tracker-2',
+        ],
+      },
+      items: [
         {
-          itemId: 'test_item_id',
-          auctionResult: {
-            adAccountId: 'test_ad_account_id',
-            campaignId: 'test_campaign_id',
-            winPrice: {
-              currency: 'USD',
-              amountMicro: '100',
-            },
-          },
+          itemId: 'test-item-id',
           impTrackers: [
             'https://mock-imp-tracker-1',
             'https://mock-imp-tracker-2',
@@ -117,7 +137,6 @@ describe('recommendation/utils', () => {
             'https://mock-click-tracker-1',
             'https://mock-click-tracker-2',
           ],
-          trackId: 'test_track_id',
         },
       ],
     });

@@ -1,6 +1,6 @@
-import { DecidedItem } from '../types/external';
+import { AuctionResult, Banner, CreativeAdItem } from '../types/external';
 
-export type RecommendationParams = {
+export type CreativeAuctionParams = {
   requestId: string;
   sessionId?: string;
   user?: {
@@ -19,17 +19,14 @@ export type RecommendationParams = {
   };
   inventory: {
     inventoryId: string;
-    numItems: number;
     items?: string[];
     categories?: string[];
     searchQuery?: string;
-    searchMetadata?: {
-      synonyms?: string[];
-    };
   };
+  pageId?: string;
 };
 
-export type RecommendationHttpRequestBody = {
+export type CreativeAuctionHttpRequestBody = {
   request_id: string;
   session_id?: string;
   user?: {
@@ -48,36 +45,39 @@ export type RecommendationHttpRequestBody = {
   };
   inventory: {
     inventory_id: string;
-    num_items: number;
     items?: string[];
     categories?: string[];
     search_query?: string;
-    search_metadata?: {
-      synonyms?: string[];
-    };
   };
+  page_id?: string;
 };
 
-export type RecommendationHttpResponseBody = {
+export type CreativeAuctionHttpResponseBody = {
   request_id: string;
-  decided_items: {
-    item_id: string;
-    // TODO: remove auction_result field once API doc is updated (@sjhan-moloco)
-    auction_result?: {
-      ad_account_id: string;
-      campaign_id: string;
-      win_price?: {
-        currency: string;
-        amount_micro: string;
-      };
+  auction_result?: {
+    ad_account_id: string;
+    campaign_id: string;
+    win_price?: {
+      currency: string;
+      amount_micro: string;
     };
+  };
+  banner?: {
+    creative_id: string;
+    image_url: string;
     imp_trackers: string[];
     click_trackers: string[];
-    track_id?: string;
+  };
+  items?: {
+    item_id: string;
+    imp_trackers: string[];
+    click_trackers: string[];
   }[];
 };
 
-export type RecommendationData = {
+export type CreativeAuctionData = {
   requestId: string;
-  decidedItems: DecidedItem[];
+  auctionResult?: AuctionResult;
+  banner?: Banner;
+  items?: CreativeAdItem[];
 };

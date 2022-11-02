@@ -1,24 +1,53 @@
 import { AuctionData, AuctionParams } from '../auction/types';
 import {
+  CreativeAuctionData,
+  CreativeAuctionParams,
+} from '../creative-auction/types';
+import {
   RecommendationData,
   RecommendationParams,
 } from '../recommendation/types';
+
+/**
+ * @category AuctionResult
+ */
+export type AuctionResult = {
+  adAccountId: string;
+  campaignId: string;
+  winPrice?: {
+    currency: string;
+    amountMicro: string;
+  };
+};
+
+/**
+ * @category CreativeAdItem
+ */
+export type CreativeAdItem = {
+  itemId: string;
+  impTrackers: string[];
+  clickTrackers: string[];
+};
+
+/**
+ * @category Banner
+ */
+export type Banner = {
+  creativeId: string;
+  imageUrl: string;
+  impTrackers: string[];
+  clickTrackers: string[];
+};
 
 /**
  * @category Item
  */
 export type DecidedItem = {
   itemId: string;
-  auctionResult?: {
-    adAccountId: string;
-    campaignId: string;
-    winPrice?: {
-      currency: string;
-      amountMicro: string;
-    };
-  };
+  auctionResult?: AuctionResult;
   impTrackers: string[];
   clickTrackers: string[];
+  trackId?: string;
 };
 
 /**
@@ -39,6 +68,12 @@ export interface Client {
    * Send an auction request. Throws one of the errors defined in {@link v1.errors}.
    */
   auction: (params: AuctionParams) => Promise<AuctionData>;
+  /**
+   * Send an auction request for creative ads. Throws one of the errors defined in {@link v1.errors}.
+   */
+  creativeAuction: (
+    params: CreativeAuctionParams
+  ) => Promise<CreativeAuctionData>;
   /**
    * Send a recommendation request. Throws one of the errors defined in {@link v1.errors}.
    */

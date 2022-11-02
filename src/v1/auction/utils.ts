@@ -54,5 +54,6 @@ export const translateAuctionHttpResponseBodyToAuctionResult = (
     },
     impTrackers: [...item.imp_trackers],
     clickTrackers: [...item.click_trackers],
+    trackId: item.track_id,
   })),
 });

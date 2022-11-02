@@ -89,6 +89,7 @@ describe('auction/utils', () => {
             'https://mock-click-tracker-1',
             'https://mock-click-tracker-2',
           ],
+          track_id: 'test_track_id',
         },
       ],
     };
@@ -115,6 +116,7 @@ describe('auction/utils', () => {
               'https://mock-click-tracker-1',
               'https://mock-click-tracker-2',
             ],
+            trackId: 'test_track_id',
           },
         ],
       }
