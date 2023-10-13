@@ -1,5 +1,9 @@
 import { AuctionData, AuctionParams } from '../auction/types';
 import {
+  CreativeAuctionBulkData,
+  CreativeAuctionBulkParams,
+} from '../creative-auction-bulk/types';
+import {
   CreativeAuctionData,
   CreativeAuctionParams,
 } from '../creative-auction/types';
@@ -75,6 +79,12 @@ export interface Client {
     params: CreativeAuctionParams
   ) => Promise<CreativeAuctionData>;
   /**
+   * Send an bulk auction request for creative ads. Throws one of the errors defined in {@link v1.errors}.
+   */
+  creativeAuctionBulk: (
+    params: CreativeAuctionBulkParams
+  ) => Promise<CreativeAuctionBulkData>;
+  /**
    * Send a recommendation request. Throws one of the errors defined in {@link v1.errors}.
    */
   recommendation: (params: RecommendationParams) => Promise<RecommendationData>;
@@ -83,12 +93,12 @@ export interface Client {
 /**
  * @category Auction
  */
-export { AuctionParams, AuctionData } from '../auction/types';
+export { AuctionData, AuctionParams } from '../auction/types';
 
 /**
  * @category Recommendation
  */
 export {
-  RecommendationParams,
   RecommendationData,
+  RecommendationParams,
 } from '../recommendation/types';
