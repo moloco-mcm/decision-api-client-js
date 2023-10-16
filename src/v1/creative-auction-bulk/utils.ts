@@ -35,7 +35,7 @@ export const translateCreativeAuctionBulkParamsToCreativeAuctionBulkHttpRequestB
 export const translateCreativeAuctionBulkHttpResponseBodyToCreativeAuctionBulkData =
   (data: CreativeAuctionBulkHttpResponseBody): CreativeAuctionBulkData => ({
     requestId: data.request_id,
-    results: data.results.map((result) => ({
+    results: data.results?.map((result) => ({
       auctionResult: result.auction_result && {
         adAccountId: result.auction_result.ad_account_id,
         campaignId: result.auction_result.campaign_id,

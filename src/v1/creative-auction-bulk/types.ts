@@ -54,7 +54,7 @@ export type CreativeAuctionBulkHttpRequestBody = {
 
 export type CreativeAuctionBulkHttpResponseBody = {
   request_id: string;
-  results: {
+  results?: {
     auction_result?: {
       ad_account_id: string;
       campaign_id: string;
@@ -81,7 +81,7 @@ export type CreativeAuctionBulkHttpResponseBody = {
 
 export type CreativeAuctionBulkData = {
   requestId: string;
-  results: {
+  results?: {
     auctionResult?: AuctionResult;
     creatives: {
       banner?: Banner;
