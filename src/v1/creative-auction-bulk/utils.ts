@@ -44,7 +44,7 @@ export const translateCreativeAuctionBulkHttpResponseBodyToCreativeAuctionBulkDa
           amountMicro: result.auction_result.win_price.amount_micro,
         },
       },
-      creatives: result.creatives.map((creative) => ({
+      creatives: result.creatives?.map((creative) => ({
         banner: creative.banner && {
           creativeId: creative.banner.creative_id,
           imageUrl: creative.banner.image_url,

@@ -63,7 +63,7 @@ export type CreativeAuctionBulkHttpResponseBody = {
         amount_micro: string;
       };
     };
-    creatives: {
+    creatives?: {
       banner?: {
         creative_id: string;
         image_url: string;
@@ -83,7 +83,7 @@ export type CreativeAuctionBulkData = {
   requestId: string;
   results?: {
     auctionResult?: AuctionResult;
-    creatives: {
+    creatives?: {
       banner?: Banner;
     }[];
     items?: CreativeAdItem[];
