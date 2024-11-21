@@ -9,6 +9,7 @@ describe('auction/utils', () => {
     const params: AuctionParams = {
       requestId: 'test_request_id',
       sessionId: 'test_session_id',
+      customId: 'test_custom_id',
       user: {
         userId: 'test_user_id',
         yearOfBirth: 1994,
@@ -21,7 +22,7 @@ describe('auction/utils', () => {
         advertisingId: '7acefbed-d1f6-4e4e-aa26-74e93dd017e4',
         uniqueDeviceId: 'test_device_id',
         model: 'iPhone 7',
-        ip: '127.0.0.1',
+        persistentId: '127.0.0.1',
       },
       inventory: {
         inventoryId: 'my_inventory',
@@ -33,6 +34,46 @@ describe('auction/utils', () => {
           synonyms: ['vehicle', 'automobile'],
         },
       },
+      pageId: 'test_page_id',
+      customItemPool: {
+        items: [
+          {
+            id: 'test_item_id_1',
+            context: {
+              shippingCharge: { currency: 'USD', amountMicro: '100' },
+              distance: 10,
+              discount: {
+                rate: 0.1,
+                priceAmount: { currency: 'USD', amountMicro: '10' },
+              },
+            },
+            score: { qualityScore: 10 },
+          },
+        ],
+      },
+      filtering: {
+        category: {
+          operator: 'OR',
+          categories: ['Sports & Fitness > Athletic Clothing > Shoe'],
+        },
+        location: {
+          locations: ['test_location_1', 'test_location_2'],
+        },
+        brand: {
+          brandId: 'test_brand_id',
+        },
+        delivery: {
+          deliveryOption: 'test_delivery_option',
+        },
+        price: {
+          minPrice: 10,
+          maxPrice: 100,
+        },
+        salePrice: {
+          minSalePrice: 10,
+          maxSalePrice: 100,
+        },
+      },
     };
 
     expect(
@@ -40,6 +81,7 @@ describe('auction/utils', () => {
     ).toMatchObject({
       request_id: 'test_request_id',
       session_id: 'test_session_id',
+      custom_id: 'test_custom_id',
       user: {
         user_id: 'test_user_id',
         year_of_birth: 1994,
@@ -52,7 +94,7 @@ describe('auction/utils', () => {
         advertising_id: '7acefbed-d1f6-4e4e-aa26-74e93dd017e4',
         unique_device_id: 'test_device_id',
         model: 'iPhone 7',
-        ip: '127.0.0.1',
+        persistent_id: '127.0.0.1',
       },
       inventory: {
         inventory_id: 'my_inventory',
@@ -62,6 +104,46 @@ describe('auction/utils', () => {
         search_query: 'test_query',
         search_metadata: {
           synonyms: ['vehicle', 'automobile'],
+        },
+      },
+      page_id: 'test_page_id',
+      custom_item_pool: {
+        items: [
+          {
+            id: 'test_item_id_1',
+            context: {
+              shipping_charge: { currency: 'USD', amount_micro: '100' },
+              distance: 10,
+              discount: {
+                rate: 0.1,
+                price_amount: { currency: 'USD', amount_micro: '10' },
+              },
+            },
+            score: { quality_score: 10 },
+          },
+        ],
+      },
+      filtering: {
+        category: {
+          operator: 'OR',
+          categories: ['Sports & Fitness > Athletic Clothing > Shoe'],
+        },
+        location: {
+          locations: ['test_location_1', 'test_location_2'],
+        },
+        brand: {
+          brand_id: 'test_brand_id',
+        },
+        delivery: {
+          delivery_option: 'test_delivery_option',
+        },
+        price: {
+          min_price: 10,
+          max_price: 100,
+        },
+        sale_price: {
+          min_sale_price: 10,
+          max_sale_price: 100,
         },
       },
     });

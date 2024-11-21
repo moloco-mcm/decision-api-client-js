@@ -5,6 +5,7 @@ export const MOCK_BASE_URL = 'http://mock';
 export const AUCTION_PARAMS: AuctionParams = {
   requestId: 'test_request_id',
   sessionId: 'test_session_id',
+  customId: 'test_custom_id',
   user: {
     userId: 'test_user_id',
     yearOfBirth: 1994,
@@ -17,7 +18,7 @@ export const AUCTION_PARAMS: AuctionParams = {
     advertisingId: '7acefbed-d1f6-4e4e-aa26-74e93dd017e4',
     uniqueDeviceId: 'test_device_id',
     model: 'iPhone 7',
-    ip: '127.0.0.1',
+    persistentId: 'test_persistent_id',
   },
   inventory: {
     inventoryId: 'my_inventory',
@@ -29,4 +30,9 @@ export const AUCTION_PARAMS: AuctionParams = {
       synonyms: ['test_synonym_1', 'test_synonym_2'],
     },
   },
+  pageId: 'test_page_id',
+  customItemPool: {
+    items: [],
+  },
+  filtering: {},
 };
