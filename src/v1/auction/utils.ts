@@ -10,6 +10,7 @@ export const translateAuctionParamsToAuctionHttpRequestBody = (
 ): AuctionHttpRequestBody => ({
   request_id: params.requestId,
   session_id: params.sessionId,
+  custom_id: params.customId,
   user: params.user && {
     user_id: params.user.userId,
     year_of_birth: params.user.yearOfBirth,
@@ -22,7 +23,7 @@ export const translateAuctionParamsToAuctionHttpRequestBody = (
     advertising_id: params.device.advertisingId,
     unique_device_id: params.device.uniqueDeviceId,
     model: params.device.model,
-    ip: params.device.ip,
+    persistent_id: params.device.persistentId,
   },
   inventory: {
     inventory_id: params.inventory.inventoryId,
@@ -34,6 +35,52 @@ export const translateAuctionParamsToAuctionHttpRequestBody = (
       synonyms: params.inventory.searchMetadata.synonyms && [
         ...params.inventory.searchMetadata.synonyms,
       ],
+    },
+  },
+  page_id: params.pageId,
+  custom_item_pool: params.customItemPool && {
+    items:
+      params.customItemPool.items &&
+      params.customItemPool.items.map((item) => ({
+        id: item.id,
+        context: item.context && {
+          shipping_charge: item.context.shippingCharge && {
+            currency: item.context.shippingCharge.currency,
+            amount_micro: item.context.shippingCharge.amountMicro,
+          },
+          distance: item.context.distance,
+          discount: item.context.discount && {
+            rate: item.context.discount.rate,
+            price_amount: item.context.discount.priceAmount && {
+              currency: item.context.discount.priceAmount.currency,
+              amount_micro: item.context.discount.priceAmount.amountMicro,
+            },
+          },
+        },
+        score: item.score && { quality_score: item.score.qualityScore },
+      })),
+  },
+  filtering: params.filtering && {
+    category: params.filtering.category && {
+      operator: params.filtering.category.operator,
+      categories: [...params.filtering.category.categories],
+    },
+    location: params.filtering.location && {
+      locations: [...params.filtering.location.locations],
+    },
+    brand: params.filtering.brand && {
+      brand_id: params.filtering.brand.brandId,
+    },
+    delivery: params.filtering.delivery && {
+      delivery_option: params.filtering.delivery.deliveryOption,
+    },
+    price: params.filtering.price && {
+      min_price: params.filtering.price.minPrice,
+      max_price: params.filtering.price.maxPrice,
+    },
+    sale_price: params.filtering.salePrice && {
+      min_sale_price: params.filtering.salePrice.minSalePrice,
+      max_sale_price: params.filtering.salePrice.maxSalePrice,
     },
   },
 });

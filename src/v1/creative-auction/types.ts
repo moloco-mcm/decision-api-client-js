@@ -3,6 +3,7 @@ import { AuctionResult, Banner, CreativeAdItem } from '../types/external';
 export type CreativeAuctionParams = {
   requestId: string;
   sessionId?: string;
+  customId?: string;
   user?: {
     userId?: string;
     yearOfBirth?: number;
@@ -15,7 +16,7 @@ export type CreativeAuctionParams = {
     advertisingId?: string;
     uniqueDeviceId?: string;
     model?: string;
-    ip?: string;
+    persistentId?: string;
   };
   inventory: {
     inventoryId: string;
@@ -24,11 +25,23 @@ export type CreativeAuctionParams = {
     searchQuery?: string;
   };
   pageId?: string;
+  filtering?: {
+    category?: {
+      operator?: 'OR' | 'AND';
+      categories: string[];
+    };
+    location?: { locations: string[] };
+    brand?: { brandId: string };
+    delivery?: { deliveryOption: string };
+    price?: { minPrice: number; maxPrice: number };
+    salePrice?: { minSalePrice: number; maxSalePrice: number };
+  };
 };
 
 export type CreativeAuctionHttpRequestBody = {
   request_id: string;
   session_id?: string;
+  custom_id?: string;
   user?: {
     user_id?: string;
     year_of_birth?: number;
@@ -41,7 +54,7 @@ export type CreativeAuctionHttpRequestBody = {
     advertising_id?: string;
     unique_device_id?: string;
     model?: string;
-    ip?: string;
+    persistent_id?: string;
   };
   inventory: {
     inventory_id: string;
@@ -50,6 +63,17 @@ export type CreativeAuctionHttpRequestBody = {
     search_query?: string;
   };
   page_id?: string;
+  filtering?: {
+    category?: {
+      operator?: 'OR' | 'AND';
+      categories: string[];
+    };
+    location?: { locations: string[] };
+    brand?: { brand_id: string };
+    delivery?: { delivery_option: string };
+    price?: { min_price: number; max_price: number };
+    sale_price?: { min_sale_price: number; max_sale_price: number };
+  };
 };
 
 export type CreativeAuctionHttpResponseBody = {

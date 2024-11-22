@@ -12,6 +12,7 @@ describe('creative-auction/utils', () => {
     const params: CreativeAuctionParams = {
       requestId: 'test_request_id',
       sessionId: 'test_session_id',
+      customId: 'test_custom_id',
       user: {
         userId: 'test_user_id',
         yearOfBirth: 1994,
@@ -24,7 +25,7 @@ describe('creative-auction/utils', () => {
         advertisingId: '7acefbed-d1f6-4e4e-aa26-74e93dd017e4',
         uniqueDeviceId: 'test_device_id',
         model: 'iPhone 7',
-        ip: '127.0.0.1',
+        persistentId: 'test_persistent_id',
       },
       inventory: {
         inventoryId: 'my_inventory',
@@ -33,6 +34,29 @@ describe('creative-auction/utils', () => {
         searchQuery: 'test_query',
       },
       pageId: 'test_page_id',
+      filtering: {
+        category: {
+          operator: 'OR',
+          categories: ['Sports & Fitness > Athletic Clothing > Shoe'],
+        },
+        location: {
+          locations: ['test_location_1', 'test_location_2'],
+        },
+        brand: {
+          brandId: 'test_brand_id',
+        },
+        delivery: {
+          deliveryOption: 'test_delivery_option',
+        },
+        price: {
+          minPrice: 10,
+          maxPrice: 100,
+        },
+        salePrice: {
+          minSalePrice: 10,
+          maxSalePrice: 100,
+        },
+      },
     };
 
     expect(
@@ -40,6 +64,7 @@ describe('creative-auction/utils', () => {
     ).toMatchObject({
       request_id: 'test_request_id',
       session_id: 'test_session_id',
+      custom_id: 'test_custom_id',
       user: {
         user_id: 'test_user_id',
         year_of_birth: 1994,
@@ -52,7 +77,7 @@ describe('creative-auction/utils', () => {
         advertising_id: '7acefbed-d1f6-4e4e-aa26-74e93dd017e4',
         unique_device_id: 'test_device_id',
         model: 'iPhone 7',
-        ip: '127.0.0.1',
+        persistent_id: 'test_persistent_id',
       },
       inventory: {
         inventory_id: 'my_inventory',
@@ -61,6 +86,29 @@ describe('creative-auction/utils', () => {
         search_query: 'test_query',
       },
       page_id: 'test_page_id',
+      filtering: {
+        category: {
+          operator: 'OR',
+          categories: ['Sports & Fitness > Athletic Clothing > Shoe'],
+        },
+        location: {
+          locations: ['test_location_1', 'test_location_2'],
+        },
+        brand: {
+          brand_id: 'test_brand_id',
+        },
+        delivery: {
+          delivery_option: 'test_delivery_option',
+        },
+        price: {
+          min_price: 10,
+          max_price: 100,
+        },
+        sale_price: {
+          min_sale_price: 10,
+          max_sale_price: 100,
+        },
+      },
     });
   });
 
