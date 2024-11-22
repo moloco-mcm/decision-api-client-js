@@ -12,6 +12,7 @@ describe('creative-auction/utils', () => {
     const params: CreativeAuctionParams = {
       requestId: 'test_request_id',
       sessionId: 'test_session_id',
+      customId: 'test_custom_id',
       user: {
         userId: 'test_user_id',
         yearOfBirth: 1994,
@@ -63,6 +64,7 @@ describe('creative-auction/utils', () => {
     ).toMatchObject({
       request_id: 'test_request_id',
       session_id: 'test_session_id',
+      custom_id: 'test_custom_id',
       user: {
         user_id: 'test_user_id',
         year_of_birth: 1994,

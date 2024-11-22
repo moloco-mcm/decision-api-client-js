@@ -41,6 +41,7 @@ export type CreativeAuctionParams = {
 export type CreativeAuctionHttpRequestBody = {
   request_id: string;
   session_id?: string;
+  custom_id?: string;
   user?: {
     user_id?: string;
     year_of_birth?: number;

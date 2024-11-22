@@ -10,6 +10,7 @@ export const translateCreativeAuctionParamsToCreativeAuctionHttpRequestBody = (
 ): CreativeAuctionHttpRequestBody => ({
   request_id: params.requestId,
   session_id: params.sessionId,
+  custom_id: params.customId,
   user: params.user && {
     user_id: params.user.userId,
     year_of_birth: params.user.yearOfBirth,
