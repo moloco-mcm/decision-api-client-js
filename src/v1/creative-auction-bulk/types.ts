@@ -27,7 +27,7 @@ export type CreativeAuctionBulkParams = {
   pageId?: string;
   filtering?: {
     category?: {
-      operator?: string;
+      operator?: 'OR' | 'AND';
       categories: string[];
     };
     location?: { locations: string[] };
@@ -65,7 +65,7 @@ export type CreativeAuctionBulkHttpRequestBody = {
   page_id?: string;
   filtering?: {
     category?: {
-      operator?: string;
+      operator?: 'OR' | 'AND';
       categories: string[];
     };
     location?: { locations: string[] };

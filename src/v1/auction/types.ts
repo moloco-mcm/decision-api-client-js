@@ -48,7 +48,7 @@ export type AuctionParams = {
   };
   filtering?: {
     category?: {
-      operator?: string;
+      operator?: 'OR' | 'AND';
       categories: string[];
     };
     location?: { locations: string[] };
@@ -107,7 +107,7 @@ export type AuctionHttpRequestBody = {
   };
   filtering?: {
     category?: {
-      operator?: string;
+      operator?: 'OR' | 'AND';
       categories: string[];
     };
     location?: { locations: string[] };
