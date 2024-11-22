@@ -32,7 +32,42 @@ export const AUCTION_PARAMS: AuctionParams = {
   },
   pageId: 'test_page_id',
   customItemPool: {
-    items: [],
+    items: [
+      {
+        id: 'test_item_id_1',
+        context: {
+          shippingCharge: { currency: 'USD', amountMicro: '100' },
+          distance: 10,
+          discount: {
+            rate: 0.1,
+            priceAmount: { currency: 'USD', amountMicro: '10' },
+          },
+        },
+        score: { qualityScore: 10 },
+      },
+    ],
   },
-  filtering: {},
+  filtering: {
+    category: {
+      operator: 'OR',
+      categories: ['Sports & Fitness > Athletic Clothing > Shoe'],
+    },
+    location: {
+      locations: ['test_location_1', 'test_location_2'],
+    },
+    brand: {
+      brandId: 'test_brand_id',
+    },
+    delivery: {
+      deliveryOption: 'test_delivery_option',
+    },
+    price: {
+      minPrice: 10,
+      maxPrice: 100,
+    },
+    salePrice: {
+      minSalePrice: 10,
+      maxSalePrice: 100,
+    },
+  },
 };
