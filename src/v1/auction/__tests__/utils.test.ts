@@ -22,7 +22,7 @@ describe('auction/utils', () => {
         advertisingId: '7acefbed-d1f6-4e4e-aa26-74e93dd017e4',
         uniqueDeviceId: 'test_device_id',
         model: 'iPhone 7',
-        persistentId: '127.0.0.1',
+        persistentId: 'test_persistent_id',
       },
       inventory: {
         inventoryId: 'my_inventory',
@@ -94,7 +94,7 @@ describe('auction/utils', () => {
         advertising_id: '7acefbed-d1f6-4e4e-aa26-74e93dd017e4',
         unique_device_id: 'test_device_id',
         model: 'iPhone 7',
-        persistent_id: '127.0.0.1',
+        persistent_id: 'test_persistent_id',
       },
       inventory: {
         inventory_id: 'my_inventory',
