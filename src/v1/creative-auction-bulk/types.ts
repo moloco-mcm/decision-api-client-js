@@ -2,12 +2,19 @@ import { AuctionResult, Banner, CreativeAdItem } from '../types/external';
 
 export type CreativeAuctionBulkParams = {
   requestId: string;
+  channelType?:
+    | 'UNKNOWN_CHANNEL_TYPE'
+    | 'APP'
+    | 'SITE'
+    | 'DESKTOP_SITE'
+    | 'MOBILE_SITE';
+  domain?: string;
   sessionId?: string;
   customId?: string;
   user?: {
     userId?: string;
     yearOfBirth?: number;
-    gender?: string;
+    gender?: 'UNKNOWN_GENDER' | 'MALE' | 'FEMALE' | 'OTHER';
     interests?: string[];
   };
   device?: {
@@ -40,12 +47,19 @@ export type CreativeAuctionBulkParams = {
 
 export type CreativeAuctionBulkHttpRequestBody = {
   request_id: string;
+  channel_type?:
+    | 'UNKNOWN_CHANNEL_TYPE'
+    | 'APP'
+    | 'SITE'
+    | 'DESKTOP_SITE'
+    | 'MOBILE_SITE';
+  domain?: string;
   session_id?: string;
   custom_id?: string;
   user?: {
     user_id?: string;
     year_of_birth?: number;
-    gender?: string;
+    gender?: 'UNKNOWN_GENDER' | 'MALE' | 'FEMALE' | 'OTHER';
     interests?: string[];
   };
   device?: {
