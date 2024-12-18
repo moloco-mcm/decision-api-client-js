@@ -2,19 +2,14 @@ import { DecidedItem } from '../types/external';
 
 export type AuctionParams = {
   requestId: string;
-  channelType?:
-    | 'UNKNOWN_CHANNEL_TYPE'
-    | 'APP'
-    | 'SITE'
-    | 'DESKTOP_SITE'
-    | 'MOBILE_SITE';
+  channelType?: 'APP' | 'SITE' | 'DESKTOP_SITE' | 'MOBILE_SITE';
   domain?: string;
   sessionId?: string;
   customId?: string;
   user?: {
     userId?: string;
     yearOfBirth?: number;
-    gender?: 'UNKNOWN_GENDER' | 'MALE' | 'FEMALE' | 'OTHER';
+    gender?: 'MALE' | 'FEMALE' | 'OTHER';
     interests?: string[];
   };
   device?: {
@@ -68,19 +63,14 @@ export type AuctionParams = {
 
 export type AuctionHttpRequestBody = {
   request_id: string;
-  channel_type?:
-    | 'UNKNOWN_CHANNEL_TYPE'
-    | 'APP'
-    | 'SITE'
-    | 'DESKTOP_SITE'
-    | 'MOBILE_SITE';
+  channel_type?: 'APP' | 'SITE' | 'DESKTOP_SITE' | 'MOBILE_SITE';
   domain?: string;
   session_id?: string;
   custom_id?: string;
   user?: {
     user_id?: string;
     year_of_birth?: number;
-    gender?: 'UNKNOWN_GENDER' | 'MALE' | 'FEMALE' | 'OTHER';
+    gender?: 'MALE' | 'FEMALE' | 'OTHER';
     interests?: string[];
   };
   device?: {
