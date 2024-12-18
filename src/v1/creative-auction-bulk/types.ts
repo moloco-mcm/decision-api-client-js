@@ -1,4 +1,4 @@
-import { AuctionResult, Banner, CreativeAdItem } from '../types/external';
+import { AuctionResult, Banner, AdItem } from '../types/external';
 
 export type CreativeAuctionBulkParams = {
   requestId: string;
@@ -110,6 +110,6 @@ export type CreativeAuctionBulkData = {
     creatives?: {
       banner?: Banner;
     }[];
-    items?: CreativeAdItem[];
+    items?: AdItem[];
   }[];
 };

@@ -1,4 +1,4 @@
-import { AuctionResult, Banner, CreativeAdItem } from '../types/external';
+import { AuctionResult, Banner, AdItem } from '../types/external';
 
 export type CreativeAuctionParams = {
   requestId: string;
@@ -103,5 +103,5 @@ export type CreativeAuctionData = {
   requestId: string;
   auctionResult?: AuctionResult;
   banner?: Banner;
-  items?: CreativeAdItem[];
+  items?: AdItem[];
 };

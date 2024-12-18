@@ -2,6 +2,7 @@ import Axios from 'axios';
 import auction from './auction';
 import creativeAuction from './creative-auction';
 import creativeAuctionBulk from './creative-auction-bulk';
+import brandAuction from './brand-auction';
 import recommendation from './recommendation';
 
 import { Client, Context, CreateClientOptions } from './types';
@@ -39,6 +40,7 @@ export function createClient(options: CreateClientOptions): Client {
     auction: auction(context),
     creativeAuction: creativeAuction(context),
     creativeAuctionBulk: creativeAuctionBulk(context),
+    brandAuction: brandAuction(context),
     recommendation: recommendation(context),
   };
 }
