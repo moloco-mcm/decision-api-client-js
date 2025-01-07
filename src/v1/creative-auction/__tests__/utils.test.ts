@@ -11,6 +11,8 @@ describe('creative-auction/utils', () => {
   test('translateCreativeAuctionParamsToCreativeAuctionHttpRequestBody', () => {
     const params: CreativeAuctionParams = {
       requestId: 'test_request_id',
+      channelType: 'APP',
+      domain: 'test_domain',
       sessionId: 'test_session_id',
       customId: 'test_custom_id',
       user: {
@@ -63,6 +65,8 @@ describe('creative-auction/utils', () => {
       translateCreativeAuctionParamsToCreativeAuctionHttpRequestBody(params)
     ).toMatchObject({
       request_id: 'test_request_id',
+      channel_type: 'APP',
+      domain: 'test_domain',
       session_id: 'test_session_id',
       custom_id: 'test_custom_id',
       user: {

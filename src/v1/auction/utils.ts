@@ -9,6 +9,8 @@ export const translateAuctionParamsToAuctionHttpRequestBody = (
   params: AuctionParams
 ): AuctionHttpRequestBody => ({
   request_id: params.requestId,
+  channel_type: params.channelType,
+  domain: params.domain,
   session_id: params.sessionId,
   custom_id: params.customId,
   user: params.user && {

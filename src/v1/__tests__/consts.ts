@@ -4,6 +4,8 @@ export const MOCK_BASE_URL = 'http://mock';
 
 export const AUCTION_PARAMS: AuctionParams = {
   requestId: 'test_request_id',
+  channelType: 'APP',
+  domain: 'test_domain',
   sessionId: 'test_session_id',
   customId: 'test_custom_id',
   user: {
