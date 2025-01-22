@@ -11,6 +11,7 @@ import {
   RecommendationData,
   RecommendationParams,
 } from '../recommendation/types';
+import { BrandAuctionData, BrandAuctionParams } from '../brand-auction/types';
 
 /**
  * @category AuctionResult
@@ -25,12 +26,47 @@ export type AuctionResult = {
 };
 
 /**
- * @category CreativeAdItem
+ * @category AdItem
  */
-export type CreativeAdItem = {
+export type AdItem = {
   itemId: string;
   impTrackers: string[];
   clickTrackers: string[];
+};
+
+/**
+ * @category Asset
+ */
+export type Asset = {
+  id: string;
+  banner?: {
+    imageUrl: string;
+  };
+  logo?: {
+    imageUrl: string;
+  };
+  headline?: {
+    text: string;
+  };
+  cta?: {
+    text: string;
+  };
+  impTrackers: string[];
+  clickTrackers: string[];
+};
+
+/**
+ * @category LandingPage
+ */
+export type LandingPage = {
+  type: string;
+  customUrlSetting?: {
+    url: string;
+  };
+  productDetailSetting?: {
+    itemId: string;
+  };
+  productListSetting?: Record<string, unknown>;
 };
 
 /**
@@ -88,12 +124,21 @@ export interface Client {
    * Send a recommendation request. Throws one of the errors defined in {@link v1.errors}.
    */
   recommendation: (params: RecommendationParams) => Promise<RecommendationData>;
+  /**
+   * Send a brand auction request. Throws one of the errors defined in {@link v1.errors}.
+   */
+  brandAuction: (params: BrandAuctionParams) => Promise<BrandAuctionData>;
 }
 
 /**
  * @category Auction
  */
 export { AuctionData, AuctionParams } from '../auction/types';
+
+/**
+ * @category BrandAuction
+ */
+export { BrandAuctionData, BrandAuctionParams } from '../brand-auction/types';
 
 /**
  * @category Recommendation

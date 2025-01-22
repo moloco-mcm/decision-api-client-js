@@ -5,6 +5,7 @@ import creativeAuctionBulk from './creative-auction-bulk';
 import recommendation from './recommendation';
 
 import { Client, Context, CreateClientOptions } from './types';
+import brandAuction from './brand-auction';
 
 /**
  * Creates a new instance of API client.
@@ -39,6 +40,7 @@ export function createClient(options: CreateClientOptions): Client {
     auction: auction(context),
     creativeAuction: creativeAuction(context),
     creativeAuctionBulk: creativeAuctionBulk(context),
+    brandAuction: brandAuction(context),
     recommendation: recommendation(context),
   };
 }
