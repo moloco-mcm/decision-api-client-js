@@ -1,6 +1,6 @@
-import { AuctionResult, Banner, AdItem } from '../types/external';
+import { AuctionResult, AdItem, Asset, LandingPage } from '../types/external';
 
-export type CreativeAuctionBulkParams = {
+export type BrandAuctionParams = {
   requestId: string;
   channelType?: 'APP' | 'SITE' | 'DESKTOP_SITE' | 'MOBILE_SITE';
   domain?: string;
@@ -20,12 +20,12 @@ export type CreativeAuctionBulkParams = {
     model?: string;
     persistentId?: string;
   };
-  inventories: {
+  inventory: {
     inventoryId: string;
     items?: string[];
     categories?: string[];
     searchQuery?: string;
-  }[];
+  };
   pageId?: string;
   filtering?: {
     category?: {
@@ -40,9 +40,9 @@ export type CreativeAuctionBulkParams = {
   };
 };
 
-export type CreativeAuctionBulkHttpRequestBody = {
+export type BrandAuctionHttpRequestBody = {
   request_id: string;
-  channel_type?: 'APP' | 'SITE' | 'DESKTOP_SITE' | 'MOBILE_SITE';
+  channel_type?: 'APP' | 'SITE' | 'DESKTOP_SITE' | 'MOBILE_SITE' | 'DOOH';
   domain?: string;
   session_id?: string;
   custom_id?: string;
@@ -60,12 +60,12 @@ export type CreativeAuctionBulkHttpRequestBody = {
     model?: string;
     persistent_id?: string;
   };
-  inventories: {
+  inventory: {
     inventory_id: string;
     items?: string[];
     categories?: string[];
     search_query?: string;
-  }[];
+  };
   page_id?: string;
   filtering?: {
     category?: {
@@ -80,40 +80,64 @@ export type CreativeAuctionBulkHttpRequestBody = {
   };
 };
 
-export type CreativeAuctionBulkHttpResponseBody = {
+export type BrandAuctionHttpResponseBody = {
   request_id: string;
-  results?: {
-    auction_result?: {
-      ad_account_id: string;
-      campaign_id: string;
-      win_price?: {
-        currency: string;
-        amount_micro: string;
+  decisions?: {
+    inventory_id: string;
+    ads: {
+      auction_result?: {
+        ad_account_id: string;
+        campaign_id: string;
+        win_price?: {
+          currency: string;
+          amount_micro: string;
+        };
       };
-    };
-    creatives?: {
-      banner?: {
-        creative_id: string;
-        image_url: string;
+      asset: {
+        id: string;
+        banner?: {
+          image_url: string;
+        };
+        logo?: {
+          image_url: string;
+        };
+        headline?: {
+          text: string;
+        };
+        cta?: {
+          text: string;
+        };
         imp_trackers: string[];
         click_trackers: string[];
       };
-    }[];
-    items?: {
-      item_id: string;
-      imp_trackers: string[];
-      click_trackers: string[];
+      landing_page?: {
+        type: string;
+        custom_url_setting?: {
+          url: string;
+        };
+        product_detail_setting?: {
+          item_id: string;
+        };
+        product_list_setting?: Record<string, unknown>;
+      };
+      items?: {
+        item_id: string;
+        imp_trackers: string[];
+        click_trackers: string[];
+      }[];
     }[];
   }[];
 };
 
-export type CreativeAuctionBulkData = {
+export type BrandAuctionData = {
   requestId: string;
-  results?: {
-    auctionResult?: AuctionResult;
-    creatives?: {
-      banner?: Banner;
+  decisions?: {
+    inventoryId: string;
+    ads: {
+      auctionResult?: AuctionResult;
+      asset?: Asset;
+      landingPage?: LandingPage;
+      items?: AdItem[];
     }[];
-    items?: AdItem[];
   }[];
 };
