@@ -1,5 +1,5 @@
 import { DecidedItem } from '../types/external';
-
+import { FilteringForCamelCase, FilteringForSnakeCase } from '../types/common';
 export type AuctionParams = {
   requestId: string;
   channelType?: 'APP' | 'SITE' | 'DESKTOP_SITE' | 'MOBILE_SITE';
@@ -48,17 +48,7 @@ export type AuctionParams = {
       score?: { qualityScore: number };
     }[];
   };
-  filtering?: {
-    category?: {
-      operator?: 'OR' | 'AND';
-      categories: string[];
-    };
-    location?: { locations: string[] };
-    brand?: { brandId: string };
-    delivery?: { deliveryOption: string };
-    price?: { minPrice: number; maxPrice: number };
-    salePrice?: { minSalePrice: number; maxSalePrice: number };
-  };
+  filtering?: FilteringForCamelCase;
 };
 
 export type AuctionHttpRequestBody = {
@@ -109,17 +99,7 @@ export type AuctionHttpRequestBody = {
       score?: { quality_score: number };
     }[];
   };
-  filtering?: {
-    category?: {
-      operator?: 'OR' | 'AND';
-      categories: string[];
-    };
-    location?: { locations: string[] };
-    brand?: { brand_id: string };
-    delivery?: { delivery_option: string };
-    price?: { min_price: number; max_price: number };
-    sale_price?: { min_sale_price: number; max_sale_price: number };
-  };
+  filtering?: FilteringForSnakeCase;
 };
 
 export type AuctionHttpResponseBody = {

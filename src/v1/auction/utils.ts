@@ -71,7 +71,7 @@ export const translateAuctionParamsToAuctionHttpRequestBody = (
       locations: [...params.filtering.location.locations],
     },
     brand: params.filtering.brand && {
-      brand_id: params.filtering.brand.brandId,
+      brand_ids: params.filtering.brand.brandIds,
     },
     delivery: params.filtering.delivery && {
       delivery_option: params.filtering.delivery.deliveryOption,
@@ -83,6 +83,35 @@ export const translateAuctionParamsToAuctionHttpRequestBody = (
     sale_price: params.filtering.salePrice && {
       min_sale_price: params.filtering.salePrice.minSalePrice,
       max_sale_price: params.filtering.salePrice.maxSalePrice,
+    },
+    rating: params.filtering.rating && {
+      min: params.filtering.rating.min,
+      max: params.filtering.rating.max,
+    },
+    review_count: params.filtering.reviewCount && {
+      min: params.filtering.reviewCount.min,
+      max: params.filtering.reviewCount.max,
+    },
+    color: params.filtering.color && {
+      colors: [...params.filtering.color.colors],
+    },
+    gender: params.filtering.gender && {
+      genders: [...params.filtering.gender.genders],
+    },
+    size: params.filtering.size && {
+      sizes: [...params.filtering.size.sizes],
+    },
+    material: params.filtering.material && {
+      materials: [...params.filtering.material.materials],
+    },
+    pattern: params.filtering.pattern && {
+      patterns: [...params.filtering.pattern.patterns],
+    },
+    condition: params.filtering.condition && {
+      conditions: [...params.filtering.condition.conditions],
+    },
+    age_group: params.filtering.ageGroup && {
+      age_groups: [...params.filtering.ageGroup.ageGroups],
     },
   },
 });

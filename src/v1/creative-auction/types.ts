@@ -1,3 +1,4 @@
+import { FilteringForCamelCase, FilteringForSnakeCase } from '../types/common';
 import { AuctionResult, Banner, AdItem } from '../types/external';
 
 export type CreativeAuctionParams = {
@@ -27,17 +28,7 @@ export type CreativeAuctionParams = {
     searchQuery?: string;
   };
   pageId?: string;
-  filtering?: {
-    category?: {
-      operator?: 'OR' | 'AND';
-      categories: string[];
-    };
-    location?: { locations: string[] };
-    brand?: { brandId: string };
-    delivery?: { deliveryOption: string };
-    price?: { minPrice: number; maxPrice: number };
-    salePrice?: { minSalePrice: number; maxSalePrice: number };
-  };
+  filtering?: FilteringForCamelCase;
 };
 
 export type CreativeAuctionHttpRequestBody = {
@@ -67,17 +58,7 @@ export type CreativeAuctionHttpRequestBody = {
     search_query?: string;
   };
   page_id?: string;
-  filtering?: {
-    category?: {
-      operator?: 'OR' | 'AND';
-      categories: string[];
-    };
-    location?: { locations: string[] };
-    brand?: { brand_id: string };
-    delivery?: { delivery_option: string };
-    price?: { min_price: number; max_price: number };
-    sale_price?: { min_sale_price: number; max_sale_price: number };
-  };
+  filtering?: FilteringForSnakeCase;
 };
 
 export type CreativeAuctionHttpResponseBody = {

@@ -58,7 +58,7 @@ export const AUCTION_PARAMS: AuctionParams = {
       locations: ['test_location_1', 'test_location_2'],
     },
     brand: {
-      brandId: 'test_brand_id',
+      brandIds: ['test_brand_id_1', 'test_brand_id_2'],
     },
     delivery: {
       deliveryOption: 'test_delivery_option',
