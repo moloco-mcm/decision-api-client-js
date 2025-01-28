@@ -3,10 +3,7 @@ import {
   translateAuctionParamsToAuctionHttpRequestBody,
   translateAuctionHttpResponseBodyToAuctionResult,
 } from '../utils';
-import {
-  testFilteringForCamelCase,
-  testFilteringForSnakeCase,
-} from '../../utils';
+import { testFiltering, testFilteringHttpRequestBody } from '../../utils';
 
 describe('auction/utils', () => {
   test('translateAuctionParamsToAuctionHttpRequestBody', () => {
@@ -57,7 +54,7 @@ describe('auction/utils', () => {
           },
         ],
       },
-      filtering: testFilteringForCamelCase,
+      filtering: testFiltering,
     };
 
     expect(
@@ -109,7 +106,7 @@ describe('auction/utils', () => {
           },
         ],
       },
-      filtering: testFilteringForSnakeCase,
+      filtering: testFilteringHttpRequestBody,
     });
   });
 

@@ -1,6 +1,6 @@
-import { FilteringForCamelCase, FilteringForSnakeCase } from '../types/common';
+import { Filtering, FilteringHttpRequestBody } from '../types/common';
 
-export const testFilteringForCamelCase: FilteringForCamelCase = {
+export const testFiltering: Filtering = {
   category: {
     operator: 'OR',
     categories: ['Sports & Fitness > Athletic Clothing > Shoe'],
@@ -53,7 +53,7 @@ export const testFilteringForCamelCase: FilteringForCamelCase = {
   },
 };
 
-export const testFilteringForSnakeCase: FilteringForSnakeCase = {
+export const testFilteringHttpRequestBody: FilteringHttpRequestBody = {
   category: {
     operator: 'OR',
     categories: ['Sports & Fitness > Athletic Clothing > Shoe'],

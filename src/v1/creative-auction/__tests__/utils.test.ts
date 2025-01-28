@@ -1,7 +1,4 @@
-import {
-  testFilteringForCamelCase,
-  testFilteringForSnakeCase,
-} from '../../utils';
+import { testFiltering, testFilteringHttpRequestBody } from '../../utils';
 import {
   CreativeAuctionHttpResponseBody,
   CreativeAuctionParams,
@@ -40,7 +37,7 @@ describe('creative-auction/utils', () => {
         searchQuery: 'test_query',
       },
       pageId: 'test_page_id',
-      filtering: testFilteringForCamelCase,
+      filtering: testFiltering,
     };
 
     expect(
@@ -72,7 +69,7 @@ describe('creative-auction/utils', () => {
         search_query: 'test_query',
       },
       page_id: 'test_page_id',
-      filtering: testFilteringForSnakeCase,
+      filtering: testFilteringHttpRequestBody,
     });
   });
 

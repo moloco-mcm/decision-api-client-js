@@ -1,5 +1,5 @@
 import { DecidedItem } from '../types/external';
-import { FilteringForCamelCase, FilteringForSnakeCase } from '../types/common';
+import { Filtering, FilteringHttpRequestBody } from '../types/common';
 export type AuctionParams = {
   requestId: string;
   channelType?: 'APP' | 'SITE' | 'DESKTOP_SITE' | 'MOBILE_SITE';
@@ -48,7 +48,7 @@ export type AuctionParams = {
       score?: { qualityScore: number };
     }[];
   };
-  filtering?: FilteringForCamelCase;
+  filtering?: Filtering;
 };
 
 export type AuctionHttpRequestBody = {
@@ -99,7 +99,7 @@ export type AuctionHttpRequestBody = {
       score?: { quality_score: number };
     }[];
   };
-  filtering?: FilteringForSnakeCase;
+  filtering?: FilteringHttpRequestBody;
 };
 
 export type AuctionHttpResponseBody = {

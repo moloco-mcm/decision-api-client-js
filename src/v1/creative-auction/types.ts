@@ -1,4 +1,4 @@
-import { FilteringForCamelCase, FilteringForSnakeCase } from '../types/common';
+import { Filtering, FilteringHttpRequestBody } from '../types/common';
 import { AuctionResult, Banner, AdItem } from '../types/external';
 
 export type CreativeAuctionParams = {
@@ -28,7 +28,7 @@ export type CreativeAuctionParams = {
     searchQuery?: string;
   };
   pageId?: string;
-  filtering?: FilteringForCamelCase;
+  filtering?: Filtering;
 };
 
 export type CreativeAuctionHttpRequestBody = {
@@ -58,7 +58,7 @@ export type CreativeAuctionHttpRequestBody = {
     search_query?: string;
   };
   page_id?: string;
-  filtering?: FilteringForSnakeCase;
+  filtering?: FilteringHttpRequestBody;
 };
 
 export type CreativeAuctionHttpResponseBody = {

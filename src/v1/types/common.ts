@@ -1,6 +1,6 @@
 //Todo: add more common types here
 
-export type FilteringForCamelCase = {
+export type Filtering = {
   category?: {
     operator?: 'OR' | 'AND';
     categories: string[];
@@ -21,7 +21,7 @@ export type FilteringForCamelCase = {
   ageGroup?: { ageGroups: string[] };
 };
 
-export type FilteringForSnakeCase = {
+export type FilteringHttpRequestBody = {
   category?: {
     operator?: 'OR' | 'AND';
     categories: string[];
