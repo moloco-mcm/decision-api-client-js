@@ -42,5 +42,3 @@ export const apiFn = <
     }
   };
 };
-
-//Todo: Add a utility function to translate between camelCase and snake_case
