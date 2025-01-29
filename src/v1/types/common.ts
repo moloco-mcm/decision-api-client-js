@@ -27,7 +27,7 @@ export type FilteringHttpRequestBody = {
     categories: string[];
   };
   location?: { locations: string[] };
-  brand?: { brand_id?: string; brand_ids: string[] };
+  brand?: { brand_id?: string; brand_ids?: string[] };
   delivery?: { delivery_option: string };
   price?: { min_price: number; max_price: number };
   sale_price?: { min_sale_price: number; max_sale_price: number };
