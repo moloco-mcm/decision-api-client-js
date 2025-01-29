@@ -6,7 +6,7 @@ export type Filtering = {
     categories: string[];
   };
   location?: { locations: string[] };
-  brand?: { brandId?: string; brandIds: string[] };
+  brand?: { brandId?: string; brandIds?: string[] };
   delivery?: { deliveryOption: string };
   price?: { minPrice: number; maxPrice: number };
   salePrice?: { minSalePrice: number; maxSalePrice: number };
