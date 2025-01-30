@@ -3,6 +3,7 @@ import {
   translateAuctionParamsToAuctionHttpRequestBody,
   translateAuctionHttpResponseBodyToAuctionResult,
 } from '../utils';
+import { testFiltering, testFilteringHttpRequestBody } from '../../utils';
 
 describe('auction/utils', () => {
   test('translateAuctionParamsToAuctionHttpRequestBody', () => {
@@ -53,29 +54,7 @@ describe('auction/utils', () => {
           },
         ],
       },
-      filtering: {
-        category: {
-          operator: 'OR',
-          categories: ['Sports & Fitness > Athletic Clothing > Shoe'],
-        },
-        location: {
-          locations: ['test_location_1', 'test_location_2'],
-        },
-        brand: {
-          brandId: 'test_brand_id',
-        },
-        delivery: {
-          deliveryOption: 'test_delivery_option',
-        },
-        price: {
-          minPrice: 10,
-          maxPrice: 100,
-        },
-        salePrice: {
-          minSalePrice: 10,
-          maxSalePrice: 100,
-        },
-      },
+      filtering: testFiltering,
     };
 
     expect(
@@ -127,29 +106,7 @@ describe('auction/utils', () => {
           },
         ],
       },
-      filtering: {
-        category: {
-          operator: 'OR',
-          categories: ['Sports & Fitness > Athletic Clothing > Shoe'],
-        },
-        location: {
-          locations: ['test_location_1', 'test_location_2'],
-        },
-        brand: {
-          brand_id: 'test_brand_id',
-        },
-        delivery: {
-          delivery_option: 'test_delivery_option',
-        },
-        price: {
-          min_price: 10,
-          max_price: 100,
-        },
-        sale_price: {
-          min_sale_price: 10,
-          max_sale_price: 100,
-        },
-      },
+      filtering: testFilteringHttpRequestBody,
     });
   });
 
