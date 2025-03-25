@@ -12,6 +12,10 @@ import {
   RecommendationParams,
 } from '../recommendation/types';
 import { BrandAuctionData, BrandAuctionParams } from '../brand-auction/types';
+import {
+  DisplayAuctionData,
+  DisplayAuctionParams,
+} from '../display-auction/types';
 
 /**
  * @category AuctionResult
@@ -128,6 +132,10 @@ export interface Client {
    * Send a brand auction request. Throws one of the errors defined in {@link v1.errors}.
    */
   brandAuction: (params: BrandAuctionParams) => Promise<BrandAuctionData>;
+  /**
+   * Send a display auction request. Throws one of the errors defined in {@link v1.errors}.
+   */
+  displayAuction: (params: DisplayAuctionParams) => Promise<DisplayAuctionData>;
 }
 
 /**
@@ -147,3 +155,11 @@ export {
   RecommendationData,
   RecommendationParams,
 } from '../recommendation/types';
+
+/**
+ * @category DisplayAuction
+ */
+export {
+  DisplayAuctionData,
+  DisplayAuctionParams,
+} from '../display-auction/types';
