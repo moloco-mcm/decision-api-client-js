@@ -1,7 +1,7 @@
 import { Filtering, FilteringHttpRequestBody } from '../types/common';
 import { AuctionResult, Banner, AdItem } from '../types/external';
 
-export type CreativeAuctionParams = {
+export type DisplayAuctionParams = {
   requestId: string;
   channelType?: 'APP' | 'SITE' | 'DESKTOP_SITE' | 'MOBILE_SITE';
   domain?: string;
@@ -32,7 +32,7 @@ export type CreativeAuctionParams = {
   filtering?: Filtering;
 };
 
-export type CreativeAuctionHttpRequestBody = {
+export type DisplayAuctionHttpRequestBody = {
   request_id: string;
   channel_type?: 'APP' | 'SITE' | 'DESKTOP_SITE' | 'MOBILE_SITE';
   domain?: string;
@@ -62,7 +62,7 @@ export type CreativeAuctionHttpRequestBody = {
   filtering?: FilteringHttpRequestBody;
 };
 
-export type CreativeAuctionHttpResponseBody = {
+export type DisplayAuctionHttpResponseBody = {
   request_id: string;
   auction_result?: {
     ad_account_id: string;
@@ -85,7 +85,7 @@ export type CreativeAuctionHttpResponseBody = {
   }[];
 };
 
-export type CreativeAuctionData = {
+export type DisplayAuctionData = {
   requestId: string;
   auctionResult?: AuctionResult;
   banner?: Banner;
