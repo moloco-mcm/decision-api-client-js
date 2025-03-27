@@ -27,6 +27,7 @@ export const translateBrandAuctionParamsToBrandAuctionHttpRequestBody = (
   },
   inventory: {
     inventory_id: params.inventory.inventoryId,
+    num_ads: params.inventory.numAds,
     items: params.inventory.items && [...params.inventory.items],
     categories: params.inventory.categories && [...params.inventory.categories],
     search_query: params.inventory.searchQuery,

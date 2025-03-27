@@ -21,6 +21,7 @@ export type BrandAuctionParams = {
   };
   inventory: {
     inventoryId: string;
+    numAds?: number;
     items?: string[];
     categories?: string[];
     searchQuery?: string;
@@ -49,6 +50,7 @@ export type BrandAuctionHttpRequestBody = {
   };
   inventory: {
     inventory_id: string;
+    num_ads?: number;
     items?: string[];
     categories?: string[];
     search_query?: string;

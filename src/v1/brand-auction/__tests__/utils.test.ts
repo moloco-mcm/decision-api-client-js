@@ -27,6 +27,7 @@ describe('creative-auction/utils', () => {
       },
       inventory: {
         inventoryId: 'my_inventory',
+        numAds: 1,
         items: ['test_item_id_1', 'test_item_id_2'],
         categories: ['Sports & Fitness > Athletic Clothing > Shoe'],
         searchQuery: 'test_query',
@@ -57,6 +58,7 @@ describe('creative-auction/utils', () => {
       },
       inventory: {
         inventory_id: 'my_inventory',
+        num_ads: 1,
         items: ['test_item_id_1', 'test_item_id_2'],
         categories: ['Sports & Fitness > Athletic Clothing > Shoe'],
         search_query: 'test_query',
