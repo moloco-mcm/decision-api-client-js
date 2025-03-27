@@ -11,8 +11,6 @@ describe('recommendation/utils', () => {
       sessionId: 'test_session_id',
       user: {
         userId: 'test_user_id',
-        yearOfBirth: 1994,
-        gender: 'MALE',
         interests: ['outdoor', 'music'],
       },
       device: {
@@ -42,8 +40,6 @@ describe('recommendation/utils', () => {
       session_id: 'test_session_id',
       user: {
         user_id: 'test_user_id',
-        year_of_birth: 1994,
-        gender: 'MALE',
         interests: ['outdoor', 'music'],
       },
       device: {

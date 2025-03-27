@@ -5,8 +5,6 @@ export type RecommendationParams = {
   sessionId?: string;
   user?: {
     userId?: string;
-    yearOfBirth?: number;
-    gender?: string;
     interests?: string[];
   };
   device?: {
@@ -34,8 +32,6 @@ export type RecommendationHttpRequestBody = {
   session_id?: string;
   user?: {
     user_id?: string;
-    year_of_birth?: number;
-    gender?: string;
     interests?: string[];
   };
   device?: {

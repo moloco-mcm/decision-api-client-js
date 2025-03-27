@@ -8,8 +8,6 @@ export type AuctionParams = {
   customId?: string;
   user?: {
     userId?: string;
-    yearOfBirth?: number;
-    gender?: 'MALE' | 'FEMALE' | 'OTHER';
     interests?: string[];
   };
   device?: {
@@ -59,8 +57,6 @@ export type AuctionHttpRequestBody = {
   custom_id?: string;
   user?: {
     user_id?: string;
-    year_of_birth?: number;
-    gender?: 'MALE' | 'FEMALE' | 'OTHER';
     interests?: string[];
   };
   device?: {
