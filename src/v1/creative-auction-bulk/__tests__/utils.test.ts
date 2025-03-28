@@ -18,8 +18,6 @@ describe('creative-auction/utils', () => {
       customId: 'test_custom_id',
       user: {
         userId: 'test_user_id',
-        yearOfBirth: 1994,
-        gender: 'MALE',
         interests: ['outdoor', 'music'],
       },
       device: {
@@ -54,8 +52,6 @@ describe('creative-auction/utils', () => {
       custom_id: 'test_custom_id',
       user: {
         user_id: 'test_user_id',
-        year_of_birth: 1994,
-        gender: 'MALE',
         interests: ['outdoor', 'music'],
       },
       device: {

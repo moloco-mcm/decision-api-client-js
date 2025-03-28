@@ -14,8 +14,6 @@ export const translateCreativeAuctionBulkParamsToCreativeAuctionBulkHttpRequestB
     custom_id: params.customId,
     user: params.user && {
       user_id: params.user.userId,
-      year_of_birth: params.user.yearOfBirth,
-      gender: params.user.gender,
       interests: params.user.interests && [...params.user.interests],
     },
     device: params.device && {

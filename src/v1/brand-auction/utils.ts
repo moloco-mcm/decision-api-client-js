@@ -15,8 +15,6 @@ export const translateBrandAuctionParamsToBrandAuctionHttpRequestBody = (
   custom_id: params.customId,
   user: params.user && {
     user_id: params.user.userId,
-    year_of_birth: params.user.yearOfBirth,
-    gender: params.user.gender,
     interests: params.user.interests && [...params.user.interests],
   },
   device: params.device && {
@@ -29,6 +27,7 @@ export const translateBrandAuctionParamsToBrandAuctionHttpRequestBody = (
   },
   inventory: {
     inventory_id: params.inventory.inventoryId,
+    num_ads: params.inventory.numAds,
     items: params.inventory.items && [...params.inventory.items],
     categories: params.inventory.categories && [...params.inventory.categories],
     search_query: params.inventory.searchQuery,

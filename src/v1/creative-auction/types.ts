@@ -9,9 +9,6 @@ export type CreativeAuctionParams = {
   customId?: string;
   user?: {
     userId?: string;
-    // Todo: need to confirm if we need to remove yearOfBirth and gender
-    yearOfBirth?: number;
-    gender?: 'MALE' | 'FEMALE' | 'OTHER';
     interests?: string[];
   };
   device?: {
@@ -40,8 +37,6 @@ export type CreativeAuctionHttpRequestBody = {
   custom_id?: string;
   user?: {
     user_id?: string;
-    year_of_birth?: number;
-    gender?: 'MALE' | 'FEMALE' | 'OTHER';
     interests?: string[];
   };
   device?: {

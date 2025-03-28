@@ -10,8 +10,6 @@ export const AUCTION_PARAMS: AuctionParams = {
   customId: 'test_custom_id',
   user: {
     userId: 'test_user_id',
-    yearOfBirth: 1994,
-    gender: 'MALE',
     interests: ['outdoor', 'music'],
   },
   device: {

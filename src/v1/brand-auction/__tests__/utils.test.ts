@@ -15,8 +15,6 @@ describe('creative-auction/utils', () => {
       customId: 'test_custom_id',
       user: {
         userId: 'test_user_id',
-        yearOfBirth: 1994,
-        gender: 'MALE',
         interests: ['outdoor', 'music'],
       },
       device: {
@@ -29,6 +27,7 @@ describe('creative-auction/utils', () => {
       },
       inventory: {
         inventoryId: 'my_inventory',
+        numAds: 1,
         items: ['test_item_id_1', 'test_item_id_2'],
         categories: ['Sports & Fitness > Athletic Clothing > Shoe'],
         searchQuery: 'test_query',
@@ -47,8 +46,6 @@ describe('creative-auction/utils', () => {
       custom_id: 'test_custom_id',
       user: {
         user_id: 'test_user_id',
-        year_of_birth: 1994,
-        gender: 'MALE',
         interests: ['outdoor', 'music'],
       },
       device: {
@@ -61,6 +58,7 @@ describe('creative-auction/utils', () => {
       },
       inventory: {
         inventory_id: 'my_inventory',
+        num_ads: 1,
         items: ['test_item_id_1', 'test_item_id_2'],
         categories: ['Sports & Fitness > Athletic Clothing > Shoe'],
         search_query: 'test_query',

@@ -9,8 +9,6 @@ export type BrandAuctionParams = {
   customId?: string;
   user?: {
     userId?: string;
-    yearOfBirth?: number;
-    gender?: 'MALE' | 'FEMALE' | 'OTHER';
     interests?: string[];
   };
   device?: {
@@ -23,6 +21,7 @@ export type BrandAuctionParams = {
   };
   inventory: {
     inventoryId: string;
+    numAds?: number;
     items?: string[];
     categories?: string[];
     searchQuery?: string;
@@ -39,8 +38,6 @@ export type BrandAuctionHttpRequestBody = {
   custom_id?: string;
   user?: {
     user_id?: string;
-    year_of_birth?: number;
-    gender?: 'MALE' | 'FEMALE' | 'OTHER';
     interests?: string[];
   };
   device?: {
@@ -53,6 +50,7 @@ export type BrandAuctionHttpRequestBody = {
   };
   inventory: {
     inventory_id: string;
+    num_ads?: number;
     items?: string[];
     categories?: string[];
     search_query?: string;
