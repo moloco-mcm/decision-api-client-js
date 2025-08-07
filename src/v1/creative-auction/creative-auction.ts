@@ -42,7 +42,18 @@ const translatePostCreativeAuctionResponse: TranslationFn<
   return translateCreativeAuctionHttpResponseBodyToCreativeAuctionData(data);
 };
 
-export const creativeAuction = (context: Context) =>
-  apiFn(context, postCreativeAuction, translatePostCreativeAuctionResponse);
+export const creativeAuction = (context: Context) => {
+  const fn = apiFn(
+    context,
+    postCreativeAuction,
+    translatePostCreativeAuctionResponse
+  );
+  return (params: CreativeAuctionParams) => {
+    console.warn(
+      'creativeAuction is deprecated. Use displayAuction instead for similar functionality.'
+    );
+    return fn(params);
+  };
+};
 
 export default creativeAuction;
