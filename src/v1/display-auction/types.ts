@@ -1,5 +1,5 @@
 import { Filtering, FilteringHttpRequestBody } from '../types/common';
-import { AuctionResult, Banner, AdItem } from '../types/external';
+import { AuctionResult, Asset, LandingPage } from '../types/external';
 
 export type DisplayAuctionParams = {
   requestId: string;
@@ -19,12 +19,15 @@ export type DisplayAuctionParams = {
     model?: string;
     persistentId?: string;
   };
-  inventory: {
+  inventories: {
     inventoryId: string;
     items?: string[];
     categories?: string[];
     searchQuery?: string;
-  };
+    video?: {
+      format?: 'MP4_360P' | 'MP4_720P' | 'HLS';
+    };
+  }[];
   pageId?: string;
   filtering?: Filtering;
 };
@@ -47,42 +50,74 @@ export type DisplayAuctionHttpRequestBody = {
     model?: string;
     persistent_id?: string;
   };
-  inventory: {
+  inventories: {
     inventory_id: string;
     items?: string[];
     categories?: string[];
     search_query?: string;
-  };
+    video?: {
+      format?: 'MP4_360P' | 'MP4_720P' | 'HLS';
+    };
+  }[];
   page_id?: string;
   filtering?: FilteringHttpRequestBody;
 };
 
 export type DisplayAuctionHttpResponseBody = {
   request_id: string;
-  auction_result?: {
-    ad_account_id: string;
-    campaign_id: string;
-    win_price?: {
-      currency: string;
-      amount_micro: string;
-    };
-  };
-  banner?: {
-    creative_id: string;
-    image_url: string;
-    imp_trackers: string[];
-    click_trackers: string[];
-  };
-  items?: {
-    item_id: string;
-    imp_trackers: string[];
-    click_trackers: string[];
+  decisions?: {
+    inventory_id: string;
+    ads: {
+      auction_result?: {
+        ad_account_id: string;
+        campaign_id: string;
+        win_price?: {
+          currency: string;
+          amount_micro: string;
+        };
+      };
+      asset: {
+        id: string;
+        banner?: {
+          media_type?: 'IMAGE' | 'VIDEO';
+          image_url?: string;
+          video_url?: string;
+          video_thumbnail_url?: string;
+        };
+        logo?: {
+          image_url: string;
+        };
+        headline?: {
+          text: string;
+        };
+        cta?: {
+          text: string;
+        };
+        imp_trackers: string[];
+        click_trackers: string[];
+      };
+      landing_page?: {
+        type: string;
+        custom_url_setting?: {
+          url: string;
+        };
+        product_detail_setting?: {
+          item_id: string;
+        };
+        product_list_setting?: Record<string, unknown>;
+      };
+    }[];
   }[];
 };
 
 export type DisplayAuctionData = {
   requestId: string;
-  auctionResult?: AuctionResult;
-  banner?: Banner;
-  items?: AdItem[];
+  decisions?: {
+    inventoryId: string;
+    ads: {
+      auctionResult?: AuctionResult;
+      asset?: Asset;
+      landingPage?: LandingPage;
+    }[];
+  }[];
 };
