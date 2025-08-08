@@ -19,13 +19,16 @@ export type BrandAuctionParams = {
     model?: string;
     persistentId?: string;
   };
-  inventory: {
+  inventories: {
     inventoryId: string;
     numAds?: number;
     items?: string[];
     categories?: string[];
     searchQuery?: string;
-  };
+    video?: {
+      format?: 'MP4_360P' | 'MP4_720P' | 'HLS';
+    };
+  }[];
   pageId?: string;
   filtering?: Filtering;
 };
@@ -48,13 +51,16 @@ export type BrandAuctionHttpRequestBody = {
     model?: string;
     persistent_id?: string;
   };
-  inventory: {
+  inventories: {
     inventory_id: string;
     num_ads?: number;
     items?: string[];
     categories?: string[];
     search_query?: string;
-  };
+    video?: {
+      format?: 'MP4_360P' | 'MP4_720P' | 'HLS';
+    };
+  }[];
   page_id?: string;
   filtering?: FilteringHttpRequestBody;
 };
@@ -75,7 +81,10 @@ export type BrandAuctionHttpResponseBody = {
       asset: {
         id: string;
         banner?: {
-          image_url: string;
+          media_type?: 'IMAGE' | 'VIDEO';
+          image_url?: string;
+          video_url?: string;
+          video_thumbnail_url?: string;
         };
         logo?: {
           image_url: string;

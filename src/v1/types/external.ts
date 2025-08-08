@@ -44,7 +44,10 @@ export type AdItem = {
 export type Asset = {
   id: string;
   banner?: {
-    imageUrl: string;
+    mediaType?: 'IMAGE' | 'VIDEO';
+    imageUrl?: string;
+    videoUrl?: string;
+    videoThumbnailUrl?: string;
   };
   logo?: {
     imageUrl: string;

@@ -25,12 +25,14 @@ describe('display-auction/utils', () => {
         model: 'iPhone 7',
         persistentId: 'test_persistent_id',
       },
-      inventory: {
-        inventoryId: 'my_inventory',
-        items: ['test_item_id_1', 'test_item_id_2'],
-        categories: ['Sports & Fitness > Athletic Clothing > Shoe'],
-        searchQuery: 'test_query',
-      },
+      inventories: [
+        {
+          inventoryId: 'my_inventory',
+          items: ['test_item_id_1', 'test_item_id_2'],
+          categories: ['Sports & Fitness > Athletic Clothing > Shoe'],
+          searchQuery: 'test_query',
+        },
+      ],
       pageId: 'test_page_id',
       filtering: testFiltering,
     };
@@ -55,50 +57,57 @@ describe('display-auction/utils', () => {
         model: 'iPhone 7',
         persistent_id: 'test_persistent_id',
       },
-      inventory: {
-        inventory_id: 'my_inventory',
-        items: ['test_item_id_1', 'test_item_id_2'],
-        categories: ['Sports & Fitness > Athletic Clothing > Shoe'],
-        search_query: 'test_query',
-      },
+      inventories: [
+        {
+          inventory_id: 'my_inventory',
+          items: ['test_item_id_1', 'test_item_id_2'],
+          categories: ['Sports & Fitness > Athletic Clothing > Shoe'],
+          search_query: 'test_query',
+        },
+      ],
       page_id: 'test_page_id',
       filtering: testFilteringHttpRequestBody,
     });
   });
 
-  test('translateAuctionHttpResponseBodyToAuctionResult', () => {
+  test('translateDisplayAuctionHttpResponseBodyToDisplayAuctionData', () => {
     const data: DisplayAuctionHttpResponseBody = {
       request_id: 'test_request_id',
-      auction_result: {
-        ad_account_id: 'test_ad_account_id',
-        campaign_id: 'test_campaign_id',
-        win_price: {
-          currency: 'USD',
-          amount_micro: '100',
-        },
-      },
-      banner: {
-        creative_id: 'test_creative_id',
-        image_url: 'http://test-creative-image-url',
-        imp_trackers: [
-          'https://mock-imp-tracker-1',
-          'https://mock-imp-tracker-2',
-        ],
-        click_trackers: [
-          'https://mock-click-tracker-1',
-          'https://mock-click-tracker-2',
-        ],
-      },
-      items: [
+      decisions: [
         {
-          item_id: 'test-item-id',
-          imp_trackers: [
-            'https://mock-imp-tracker-1',
-            'https://mock-imp-tracker-2',
-          ],
-          click_trackers: [
-            'https://mock-click-tracker-1',
-            'https://mock-click-tracker-2',
+          inventory_id: 'test_inventory_id',
+          ads: [
+            {
+              auction_result: {
+                ad_account_id: 'test_ad_account_id',
+                campaign_id: 'test_campaign_id',
+                win_price: {
+                  currency: 'USD',
+                  amount_micro: '100',
+                },
+              },
+              asset: {
+                id: 'test_asset_id',
+                banner: {
+                  media_type: 'IMAGE',
+                  image_url: 'http://test-creative-image-url',
+                },
+                imp_trackers: [
+                  'https://mock-imp-tracker-1',
+                  'https://mock-imp-tracker-2',
+                ],
+                click_trackers: [
+                  'https://mock-click-tracker-1',
+                  'https://mock-click-tracker-2',
+                ],
+              },
+              landing_page: {
+                type: 'test_landing_page_type',
+                custom_url_setting: {
+                  url: 'http://test-landing-page-url',
+                },
+              },
+            },
           ],
         },
       ],
@@ -108,36 +117,35 @@ describe('display-auction/utils', () => {
       translateDisplayAuctionHttpResponseBodyToDisplayAuctionData(data)
     ).toMatchObject({
       requestId: 'test_request_id',
-      auctionResult: {
-        adAccountId: 'test_ad_account_id',
-        campaignId: 'test_campaign_id',
-        winPrice: {
-          currency: 'USD',
-          amountMicro: '100',
-        },
-      },
-      banner: {
-        creativeId: 'test_creative_id',
-        imageUrl: 'http://test-creative-image-url',
-        impTrackers: [
-          'https://mock-imp-tracker-1',
-          'https://mock-imp-tracker-2',
-        ],
-        clickTrackers: [
-          'https://mock-click-tracker-1',
-          'https://mock-click-tracker-2',
-        ],
-      },
-      items: [
+      decisions: [
         {
-          itemId: 'test-item-id',
-          impTrackers: [
-            'https://mock-imp-tracker-1',
-            'https://mock-imp-tracker-2',
-          ],
-          clickTrackers: [
-            'https://mock-click-tracker-1',
-            'https://mock-click-tracker-2',
+          inventoryId: 'test_inventory_id',
+          ads: [
+            {
+              auctionResult: {
+                adAccountId: 'test_ad_account_id',
+                campaignId: 'test_campaign_id',
+                winPrice: {
+                  currency: 'USD',
+                  amountMicro: '100',
+                },
+              },
+              asset: {
+                id: 'test_asset_id',
+                banner: {
+                  mediaType: 'IMAGE',
+                  imageUrl: 'http://test-creative-image-url',
+                },
+                impTrackers: [
+                  'https://mock-imp-tracker-1',
+                  'https://mock-imp-tracker-2',
+                ],
+                clickTrackers: [
+                  'https://mock-click-tracker-1',
+                  'https://mock-click-tracker-2',
+                ],
+              },
+            },
           ],
         },
       ],

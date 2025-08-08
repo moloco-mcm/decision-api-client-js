@@ -25,13 +25,15 @@ describe('creative-auction/utils', () => {
         model: 'iPhone 7',
         persistentId: 'test_persistent_id',
       },
-      inventory: {
-        inventoryId: 'my_inventory',
-        numAds: 1,
-        items: ['test_item_id_1', 'test_item_id_2'],
-        categories: ['Sports & Fitness > Athletic Clothing > Shoe'],
-        searchQuery: 'test_query',
-      },
+      inventories: [
+        {
+          inventoryId: 'my_inventory',
+          numAds: 1,
+          items: ['test_item_id_1', 'test_item_id_2'],
+          categories: ['Sports & Fitness > Athletic Clothing > Shoe'],
+          searchQuery: 'test_query',
+        },
+      ],
       pageId: 'test_page_id',
       filtering: testFiltering,
     };
@@ -56,13 +58,15 @@ describe('creative-auction/utils', () => {
         model: 'iPhone 7',
         persistent_id: 'test_persistent_id',
       },
-      inventory: {
-        inventory_id: 'my_inventory',
-        num_ads: 1,
-        items: ['test_item_id_1', 'test_item_id_2'],
-        categories: ['Sports & Fitness > Athletic Clothing > Shoe'],
-        search_query: 'test_query',
-      },
+      inventories: [
+        {
+          inventory_id: 'my_inventory',
+          num_ads: 1,
+          items: ['test_item_id_1', 'test_item_id_2'],
+          categories: ['Sports & Fitness > Athletic Clothing > Shoe'],
+          search_query: 'test_query',
+        },
+      ],
       page_id: 'test_page_id',
       filtering: testFilteringHttpRequestBody,
     });
@@ -87,6 +91,7 @@ describe('creative-auction/utils', () => {
               asset: {
                 id: 'test_asset_id',
                 banner: {
+                  media_type: 'IMAGE',
                   image_url: 'http://test-creative-image-url',
                 },
                 imp_trackers: [
@@ -143,6 +148,7 @@ describe('creative-auction/utils', () => {
               asset: {
                 id: 'test_asset_id',
                 banner: {
+                  mediaType: 'IMAGE',
                   imageUrl: 'http://test-creative-image-url',
                 },
                 impTrackers: [

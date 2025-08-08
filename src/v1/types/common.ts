@@ -7,7 +7,7 @@ export type Filtering = {
   };
   location?: { locations: string[] };
   brand?: { brandId?: string; brandIds?: string[] };
-  delivery?: { deliveryOption: string };
+  delivery?: { deliveryOption?: string; deliveryOptions?: string[] };
   price?: { minPrice: number; maxPrice: number };
   salePrice?: { minSalePrice: number; maxSalePrice: number };
   rating?: { min: number; max: number };
@@ -28,7 +28,7 @@ export type FilteringHttpRequestBody = {
   };
   location?: { locations: string[] };
   brand?: { brand_id?: string; brand_ids?: string[] };
-  delivery?: { delivery_option: string };
+  delivery?: { delivery_option?: string; delivery_options?: string[] };
   price?: { min_price: number; max_price: number };
   sale_price?: { min_sale_price: number; max_sale_price: number };
   rating?: { min: number; max: number };

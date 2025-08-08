@@ -25,13 +25,16 @@ export const translateBrandAuctionParamsToBrandAuctionHttpRequestBody = (
     model: params.device.model,
     persistent_id: params.device.persistentId,
   },
-  inventory: {
-    inventory_id: params.inventory.inventoryId,
-    num_ads: params.inventory.numAds,
-    items: params.inventory.items && [...params.inventory.items],
-    categories: params.inventory.categories && [...params.inventory.categories],
-    search_query: params.inventory.searchQuery,
-  },
+  inventories: params.inventories.map((inventory) => ({
+    inventory_id: inventory.inventoryId,
+    num_ads: inventory.numAds,
+    items: inventory.items && [...inventory.items],
+    categories: inventory.categories && [...inventory.categories],
+    search_query: inventory.searchQuery,
+    video: inventory.video && {
+      format: inventory.video.format,
+    },
+  })),
   page_id: params.pageId,
   filtering: params.filtering && {
     category: params.filtering.category && {
@@ -46,6 +49,9 @@ export const translateBrandAuctionParamsToBrandAuctionHttpRequestBody = (
     },
     delivery: params.filtering.delivery && {
       delivery_option: params.filtering.delivery.deliveryOption,
+      delivery_options: params.filtering.delivery.deliveryOptions && [
+        ...params.filtering.delivery.deliveryOptions,
+      ],
     },
     price: params.filtering.price && {
       min_price: params.filtering.price.minPrice,
@@ -105,7 +111,18 @@ export const translateBrandAuctionHttpResponseBodyToBrandAuctionData = (
       asset: ad.asset && {
         id: ad.asset.id,
         banner: ad.asset.banner && {
-          imageUrl: ad.asset.banner.image_url,
+          ...(ad.asset.banner.media_type && {
+            mediaType: ad.asset.banner.media_type,
+          }),
+          ...(ad.asset.banner.image_url && {
+            imageUrl: ad.asset.banner.image_url,
+          }),
+          ...(ad.asset.banner.video_url && {
+            videoUrl: ad.asset.banner.video_url,
+          }),
+          ...(ad.asset.banner.video_thumbnail_url && {
+            videoThumbnailUrl: ad.asset.banner.video_thumbnail_url,
+          }),
         },
         logo: ad.asset.logo && {
           imageUrl: ad.asset.logo.image_url,

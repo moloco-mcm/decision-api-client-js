@@ -25,12 +25,15 @@ export const translateDisplayAuctionParamsToDisplayAuctionHttpRequestBody = (
     model: params.device.model,
     persistent_id: params.device.persistentId,
   },
-  inventory: {
-    inventory_id: params.inventory.inventoryId,
-    items: params.inventory.items && [...params.inventory.items],
-    categories: params.inventory.categories && [...params.inventory.categories],
-    search_query: params.inventory.searchQuery,
-  },
+  inventories: params.inventories.map((inventory) => ({
+    inventory_id: inventory.inventoryId,
+    items: inventory.items && [...inventory.items],
+    categories: inventory.categories && [...inventory.categories],
+    search_query: inventory.searchQuery,
+    video: inventory.video && {
+      format: inventory.video.format,
+    },
+  })),
   page_id: params.pageId,
   filtering: params.filtering && {
     category: params.filtering.category && {
@@ -45,6 +48,9 @@ export const translateDisplayAuctionParamsToDisplayAuctionHttpRequestBody = (
     },
     delivery: params.filtering.delivery && {
       delivery_option: params.filtering.delivery.deliveryOption,
+      delivery_options: params.filtering.delivery.deliveryOptions && [
+        ...params.filtering.delivery.deliveryOptions,
+      ],
     },
     price: params.filtering.price && {
       min_price: params.filtering.price.minPrice,
@@ -90,23 +96,55 @@ export const translateDisplayAuctionHttpResponseBodyToDisplayAuctionData = (
   data: DisplayAuctionHttpResponseBody
 ): DisplayAuctionData => ({
   requestId: data.request_id,
-  auctionResult: data.auction_result && {
-    adAccountId: data.auction_result.ad_account_id,
-    campaignId: data.auction_result.campaign_id,
-    winPrice: data.auction_result.win_price && {
-      currency: data.auction_result.win_price.currency,
-      amountMicro: data.auction_result.win_price.amount_micro,
-    },
-  },
-  banner: data.banner && {
-    creativeId: data.banner.creative_id,
-    imageUrl: data.banner.image_url,
-    impTrackers: [...data.banner.imp_trackers],
-    clickTrackers: [...data.banner.click_trackers],
-  },
-  items: data.items?.map((item) => ({
-    itemId: item.item_id,
-    impTrackers: [...item.imp_trackers],
-    clickTrackers: [...item.click_trackers],
+  decisions: data.decisions?.map((decision) => ({
+    inventoryId: decision.inventory_id,
+    ads: decision.ads.map((ad) => ({
+      auctionResult: ad.auction_result && {
+        adAccountId: ad.auction_result.ad_account_id,
+        campaignId: ad.auction_result.campaign_id,
+        winPrice: ad.auction_result.win_price && {
+          currency: ad.auction_result.win_price.currency,
+          amountMicro: ad.auction_result.win_price.amount_micro,
+        },
+      },
+      asset: ad.asset && {
+        id: ad.asset.id,
+        banner: ad.asset.banner && {
+          ...(ad.asset.banner.media_type && {
+            mediaType: ad.asset.banner.media_type,
+          }),
+          ...(ad.asset.banner.image_url && {
+            imageUrl: ad.asset.banner.image_url,
+          }),
+          ...(ad.asset.banner.video_url && {
+            videoUrl: ad.asset.banner.video_url,
+          }),
+          ...(ad.asset.banner.video_thumbnail_url && {
+            videoThumbnailUrl: ad.asset.banner.video_thumbnail_url,
+          }),
+        },
+        logo: ad.asset.logo && {
+          imageUrl: ad.asset.logo.image_url,
+        },
+        headline: ad.asset.headline && {
+          text: ad.asset.headline.text,
+        },
+        cta: ad.asset.cta && {
+          text: ad.asset.cta.text,
+        },
+        impTrackers: [...ad.asset.imp_trackers],
+        clickTrackers: [...ad.asset.click_trackers],
+      },
+      landingPage: ad.landing_page && {
+        type: ad.landing_page.type,
+        customUrlSetting: ad.landing_page.custom_url_setting && {
+          url: ad.landing_page.custom_url_setting.url,
+        },
+        productDetailSetting: ad.landing_page.product_detail_setting && {
+          itemId: ad.landing_page.product_detail_setting.item_id,
+        },
+        productListSetting: ad.landing_page.product_list_setting,
+      },
+    })),
   })),
 });
