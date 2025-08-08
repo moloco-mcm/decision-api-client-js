@@ -114,12 +114,14 @@ export interface Client {
   auction: (params: AuctionParams) => Promise<AuctionData>;
   /**
    * Send an auction request for creative ads. Throws one of the errors defined in {@link v1.errors}.
+   * @deprecated Use displayAuction instead for similar functionality.
    */
   creativeAuction: (
     params: CreativeAuctionParams
   ) => Promise<CreativeAuctionData>;
   /**
    * Send an bulk auction request for creative ads. Throws one of the errors defined in {@link v1.errors}.
+   * @deprecated Use brandAuction for bulk creative auction functionality.
    */
   creativeAuctionBulk: (
     params: CreativeAuctionBulkParams

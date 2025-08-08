@@ -46,11 +46,18 @@ const translatePostCreativeAuctionBulkResponse: TranslationFn<
   );
 };
 
-export const creativeAuctionBulk = (context: Context) =>
-  apiFn(
+export const creativeAuctionBulk = (context: Context) => {
+  const fn = apiFn(
     context,
     postCreativeAuctionBulk,
     translatePostCreativeAuctionBulkResponse
   );
+  return (params: CreativeAuctionBulkParams) => {
+    console.warn(
+      'creativeAuctionBulk is deprecated. Use brandAuction for bulk creative auction functionality.'
+    );
+    return fn(params);
+  };
+};
 
 export default creativeAuctionBulk;
