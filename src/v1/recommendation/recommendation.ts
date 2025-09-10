@@ -44,7 +44,18 @@ const translatePostRecommendationResponse: TranslationFn<
   return translateRecommendationHttpResponseBodyToRecommendationResult(data);
 };
 
-export const recommendation = (context: Context) =>
-  apiFn(context, postRecommendation, translatePostRecommendationResponse);
+export const recommendation = (context: Context) => {
+  const fn = apiFn(
+    context,
+    postRecommendation,
+    translatePostRecommendationResponse
+  );
+  return (params: RecommendationParams) => {
+    console.warn(
+      'recommendation is deprecated. This API is no longer supported in the current specification.'
+    );
+    return fn(params);
+  };
+};
 
 export default recommendation;

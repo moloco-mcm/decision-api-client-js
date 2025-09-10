@@ -16,6 +16,10 @@ import {
   DisplayAuctionData,
   DisplayAuctionParams,
 } from '../display-auction/types';
+import {
+  ProductAuctionData,
+  ProductAuctionParams,
+} from '../product-auction/types';
 
 /**
  * @category AuctionResult
@@ -113,6 +117,7 @@ export type CreateClientOptions = {
 export interface Client {
   /**
    * Send an auction request. Throws one of the errors defined in {@link v1.errors}.
+   * @deprecated Use productAuction instead for multi-inventory support.
    */
   auction: (params: AuctionParams) => Promise<AuctionData>;
   /**
@@ -131,6 +136,7 @@ export interface Client {
   ) => Promise<CreativeAuctionBulkData>;
   /**
    * Send a recommendation request. Throws one of the errors defined in {@link v1.errors}.
+   * @deprecated This API is no longer supported in the current specification.
    */
   recommendation: (params: RecommendationParams) => Promise<RecommendationData>;
   /**
@@ -141,6 +147,10 @@ export interface Client {
    * Send a display auction request. Throws one of the errors defined in {@link v1.errors}.
    */
   displayAuction: (params: DisplayAuctionParams) => Promise<DisplayAuctionData>;
+  /**
+   * Send a product auction request. Throws one of the errors defined in {@link v1.errors}.
+   */
+  productAuction: (params: ProductAuctionParams) => Promise<ProductAuctionData>;
 }
 
 /**
@@ -168,3 +178,11 @@ export {
   DisplayAuctionData,
   DisplayAuctionParams,
 } from '../display-auction/types';
+
+/**
+ * @category ProductAuction
+ */
+export {
+  ProductAuctionData,
+  ProductAuctionParams,
+} from '../product-auction/types';

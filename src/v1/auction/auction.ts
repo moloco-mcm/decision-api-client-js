@@ -39,7 +39,14 @@ const translatePostAuctionResponse: TranslationFn<
   return translateAuctionHttpResponseBodyToAuctionResult(data);
 };
 
-export const auction = (context: Context) =>
-  apiFn(context, postAuction, translatePostAuctionResponse);
+export const auction = (context: Context) => {
+  const fn = apiFn(context, postAuction, translatePostAuctionResponse);
+  return (params: AuctionParams) => {
+    console.warn(
+      'auction is deprecated. Use productAuction instead for multi-inventory support.'
+    );
+    return fn(params);
+  };
+};
 
 export default auction;
