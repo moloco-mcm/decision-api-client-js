@@ -97,6 +97,7 @@ export type BrandAuctionHttpResponseBody = {
         };
         imp_trackers: string[];
         click_trackers: string[];
+        track_id?: string;
       };
       landing_page?: {
         type: string;
@@ -112,6 +113,7 @@ export type BrandAuctionHttpResponseBody = {
         item_id: string;
         imp_trackers: string[];
         click_trackers: string[];
+        track_id?: string;
       }[];
     }[];
   }[];

@@ -40,6 +40,7 @@ export type AdItem = {
   itemId: string;
   impTrackers: string[];
   clickTrackers: string[];
+  trackId?: string;
 };
 
 /**
@@ -64,6 +65,7 @@ export type Asset = {
   };
   impTrackers: string[];
   clickTrackers: string[];
+  trackId?: string;
 };
 
 /**

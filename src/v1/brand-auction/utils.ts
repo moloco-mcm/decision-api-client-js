@@ -135,6 +135,7 @@ export const translateBrandAuctionHttpResponseBodyToBrandAuctionData = (
         },
         impTrackers: [...ad.asset.imp_trackers],
         clickTrackers: [...ad.asset.click_trackers],
+        trackId: ad.asset.track_id,
       },
       landingPage: ad.landing_page && {
         type: ad.landing_page.type,
@@ -150,6 +151,7 @@ export const translateBrandAuctionHttpResponseBodyToBrandAuctionData = (
         itemId: item.item_id,
         impTrackers: [...item.imp_trackers],
         clickTrackers: [...item.click_trackers],
+        trackId: item.track_id,
       })),
     })),
   })),
