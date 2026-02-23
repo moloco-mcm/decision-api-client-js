@@ -27,6 +27,7 @@ export const translateDisplayAuctionParamsToDisplayAuctionHttpRequestBody = (
   },
   inventories: params.inventories.map((inventory) => ({
     inventory_id: inventory.inventoryId,
+    num_ads: inventory.numAds,
     items: inventory.items && [...inventory.items],
     categories: inventory.categories && [...inventory.categories],
     search_query: inventory.searchQuery,
@@ -134,6 +135,7 @@ export const translateDisplayAuctionHttpResponseBodyToDisplayAuctionData = (
         },
         impTrackers: [...ad.asset.imp_trackers],
         clickTrackers: [...ad.asset.click_trackers],
+        trackId: ad.asset.track_id,
       },
       landingPage: ad.landing_page && {
         type: ad.landing_page.type,
