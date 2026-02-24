@@ -114,4 +114,22 @@ client.auction({ ... })
 - [Full Library Reference](https://moloco-rmp.github.io/decision-api-client-js)
 - [RMP Decision API Reference](https://moloco-rmp.readme.io/reference)
 
+## Development
+
+### Syncing with Proto Definitions
+
+This library's TypeScript types are kept in sync with proto definitions in the `rmp-infra` repository. To check if types are synchronized and update them if needed:
+
+```
+/sync-proto
+```
+
+The skill will automatically:
+- Locate the rmp-infra repository
+- Compare proto definitions with TypeScript types
+- Update types if differences are found
+- Run tests and generate documentation
+
+See [.claude/skills/sync-proto/README.md](.claude/skills/sync-proto/README.md) for details.
+
 © Moloco, Inc. 2022 All rights reserved. Released under Apache 2.0 License
