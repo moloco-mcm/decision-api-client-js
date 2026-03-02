@@ -1,3 +1,4 @@
+# ref: https://docs.npmjs.com/trusted-publishers/
 # ref: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages#publishing-packages-using-yarn
 name: Publish Package to NPM
 on:
@@ -6,17 +7,19 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: "18.x"
+          node-version: "22.x"
           registry-url: "https://registry.npmjs.org"
       - name: Install Dependencies
         run: yarn install
       - name: Build
         run: yarn build
       - name: Publish to NPM
-        run: yarn publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        # Must use npm publish (not yarn publish) — OIDC Trusted Publishing is only supported by the npm CLI
+        run: npm publish --provenance --access public

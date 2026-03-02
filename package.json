@@ -74,6 +74,10 @@
       "git add"
     ]
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/moloco-mcm/decision-api-client-js"
+  },
   "publishConfig": {
     "access": "public"
   }
