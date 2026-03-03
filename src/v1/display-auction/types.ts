@@ -21,6 +21,7 @@ export type DisplayAuctionParams = {
   };
   inventories: {
     inventoryId: string;
+    numAds?: number;
     items?: string[];
     categories?: string[];
     searchQuery?: string;
@@ -52,6 +53,7 @@ export type DisplayAuctionHttpRequestBody = {
   };
   inventories: {
     inventory_id: string;
+    num_ads?: number;
     items?: string[];
     categories?: string[];
     search_query?: string;
@@ -95,6 +97,7 @@ export type DisplayAuctionHttpResponseBody = {
         };
         imp_trackers: string[];
         click_trackers: string[];
+        track_id?: string;
       };
       landing_page?: {
         type: string;
