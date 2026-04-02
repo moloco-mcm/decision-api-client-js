@@ -9,7 +9,7 @@ import {
 
 export type BrandAuctionParams = {
   requestId: string;
-  channelType?: 'APP' | 'SITE' | 'DESKTOP_SITE' | 'MOBILE_SITE' | 'DOOH';
+  channelType?: 'APP' | 'SITE' | 'DESKTOP_SITE' | 'MOBILE_SITE';
   domain?: string;
   sessionId?: string;
   customId?: string;
@@ -41,7 +41,7 @@ export type BrandAuctionParams = {
 
 export type BrandAuctionHttpRequestBody = {
   request_id: string;
-  channel_type?: 'APP' | 'SITE' | 'DESKTOP_SITE' | 'MOBILE_SITE' | 'DOOH';
+  channel_type?: 'APP' | 'SITE' | 'DESKTOP_SITE' | 'MOBILE_SITE';
   domain?: string;
   session_id?: string;
   custom_id?: string;
