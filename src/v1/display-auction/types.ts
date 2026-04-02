@@ -1,5 +1,10 @@
 import { Filtering, FilteringHttpRequestBody } from '../types/common';
-import { AuctionResult, Asset, LandingPage } from '../types/external';
+import {
+  AuctionResult,
+  Asset,
+  LandingPage,
+  InvalidInputWarning,
+} from '../types/external';
 
 export type DisplayAuctionParams = {
   requestId: string;
@@ -111,6 +116,10 @@ export type DisplayAuctionHttpResponseBody = {
       };
     }[];
   }[];
+  invalid_input_warnings?: {
+    warning_message: string;
+    inventory_id: string;
+  }[];
 };
 
 export type DisplayAuctionData = {
@@ -123,4 +132,5 @@ export type DisplayAuctionData = {
       landingPage?: LandingPage;
     }[];
   }[];
+  invalidInputWarnings?: InvalidInputWarning[];
 };

@@ -149,4 +149,8 @@ export const translateDisplayAuctionHttpResponseBodyToDisplayAuctionData = (
       },
     })),
   })),
+  invalidInputWarnings: data.invalid_input_warnings?.map((warning) => ({
+    warningMessage: warning.warning_message,
+    inventoryId: warning.inventory_id,
+  })),
 });
