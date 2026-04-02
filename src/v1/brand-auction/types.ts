@@ -1,5 +1,11 @@
 import { Filtering, FilteringHttpRequestBody } from '../types/common';
-import { AuctionResult, AdItem, Asset, LandingPage } from '../types/external';
+import {
+  AuctionResult,
+  AdItem,
+  Asset,
+  LandingPage,
+  InvalidInputWarning,
+} from '../types/external';
 
 export type BrandAuctionParams = {
   requestId: string;
@@ -35,7 +41,7 @@ export type BrandAuctionParams = {
 
 export type BrandAuctionHttpRequestBody = {
   request_id: string;
-  channel_type?: 'APP' | 'SITE' | 'DESKTOP_SITE' | 'MOBILE_SITE' | 'DOOH';
+  channel_type?: 'APP' | 'SITE' | 'DESKTOP_SITE' | 'MOBILE_SITE';
   domain?: string;
   session_id?: string;
   custom_id?: string;
@@ -117,6 +123,10 @@ export type BrandAuctionHttpResponseBody = {
       }[];
     }[];
   }[];
+  invalid_input_warnings?: {
+    warning_message: string;
+    inventory_id: string;
+  }[];
 };
 
 export type BrandAuctionData = {
@@ -130,4 +140,5 @@ export type BrandAuctionData = {
       items?: AdItem[];
     }[];
   }[];
+  invalidInputWarnings?: InvalidInputWarning[];
 };

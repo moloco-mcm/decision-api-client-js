@@ -1,5 +1,5 @@
 import { Filtering, FilteringHttpRequestBody } from '../types/common';
-import { DecidedItem } from '../types/external';
+import { DecidedItem, InvalidInputWarning } from '../types/external';
 
 export type ProductAuctionParams = {
   requestId: string;
@@ -136,6 +136,10 @@ export type ProductAuctionHttpResponseBody = {
       track_id?: string;
     }[];
   }[];
+  invalid_input_warnings?: {
+    warning_message: string;
+    inventory_id: string;
+  }[];
 };
 
 export type ProductAuctionData = {
@@ -144,4 +148,5 @@ export type ProductAuctionData = {
     inventoryId: string;
     decidedItems?: DecidedItem[];
   }[];
+  invalidInputWarnings?: InvalidInputWarning[];
 };

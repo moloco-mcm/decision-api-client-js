@@ -83,6 +83,14 @@ export type LandingPage = {
 };
 
 /**
+ * @category InvalidInputWarning
+ */
+export type InvalidInputWarning = {
+  warningMessage: string;
+  inventoryId: string;
+};
+
+/**
  * @category Banner
  */
 export type Banner = {
