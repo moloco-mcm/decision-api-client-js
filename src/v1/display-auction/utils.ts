@@ -1,3 +1,4 @@
+import { CampaignMetadata } from '../types/external';
 import {
   DisplayAuctionParams,
   DisplayAuctionHttpRequestBody,
@@ -36,6 +37,11 @@ export const translateDisplayAuctionParamsToDisplayAuctionHttpRequestBody = (
     },
   })),
   page_id: params.pageId,
+  response_setting: params.responseSetting && {
+    campaign_metadata_fields: params.responseSetting.campaignMetadataFields && [
+      ...params.responseSetting.campaignMetadataFields,
+    ],
+  },
   filtering: params.filtering && {
     category: params.filtering.category && {
       operator: params.filtering.category.operator,
@@ -106,6 +112,11 @@ export const translateDisplayAuctionHttpResponseBodyToDisplayAuctionData = (
         winPrice: ad.auction_result.win_price && {
           currency: ad.auction_result.win_price.currency,
           amountMicro: ad.auction_result.win_price.amount_micro,
+        },
+        campaignMetadata: ad.auction_result.campaign_metadata && {
+          adOperationType: ad.auction_result.campaign_metadata
+            .ad_operation_type as CampaignMetadata['adOperationType'],
+          alias: ad.auction_result.campaign_metadata.alias,
         },
       },
       asset: ad.asset && {

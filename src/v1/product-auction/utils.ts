@@ -1,3 +1,4 @@
+import { CampaignMetadata } from '../types/external';
 import {
   ProductAuctionParams,
   ProductAuctionHttpRequestBody,
@@ -124,6 +125,11 @@ export const translateProductAuctionParamsToProductAuctionHttpRequestBody = (
       criteria: params.deduplicationSetting.perRequest.criteria,
     },
   },
+  response_setting: params.responseSetting && {
+    campaign_metadata_fields: params.responseSetting.campaignMetadataFields && [
+      ...params.responseSetting.campaignMetadataFields,
+    ],
+  },
 });
 
 export const translateProductAuctionHttpResponseBodyToProductAuctionData = (
@@ -140,6 +146,11 @@ export const translateProductAuctionHttpResponseBodyToProductAuctionData = (
         winPrice: item.auction_result.win_price && {
           currency: item.auction_result.win_price.currency,
           amountMicro: item.auction_result.win_price.amount_micro,
+        },
+        campaignMetadata: item.auction_result.campaign_metadata && {
+          adOperationType: item.auction_result.campaign_metadata
+            .ad_operation_type as CampaignMetadata['adOperationType'],
+          alias: item.auction_result.campaign_metadata.alias,
         },
       },
       impTrackers: [...item.imp_trackers],

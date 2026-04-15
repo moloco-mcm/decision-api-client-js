@@ -8,6 +8,7 @@ import { Client, Context, CreateClientOptions } from './types';
 import brandAuction from './brand-auction';
 import displayAuction from './display-auction';
 import productAuction from './product-auction';
+import reservedDisplayAuction from './reserved-display-auction';
 
 /**
  * Creates a new instance of API client.
@@ -46,6 +47,7 @@ export function createClient(options: CreateClientOptions): Client {
     recommendation: recommendation(context),
     displayAuction: displayAuction(context),
     productAuction: productAuction(context),
+    reservedDisplayAuction: reservedDisplayAuction(context),
   };
 }
 
