@@ -1,5 +1,9 @@
 import { Filtering, FilteringHttpRequestBody } from '../types/common';
-import { DecidedItem, InvalidInputWarning } from '../types/external';
+import {
+  CampaignResponseSetting,
+  DecidedItem,
+  InvalidInputWarning,
+} from '../types/external';
 
 export type ProductAuctionParams = {
   requestId: string;
@@ -57,6 +61,7 @@ export type ProductAuctionParams = {
       criteria?: 'CRITERIA_DEFAULT' | 'CRITERIA_NONE' | 'CRITERIA_ITEM_ID';
     };
   };
+  responseSetting?: CampaignResponseSetting;
 };
 
 export type ProductAuctionHttpRequestBody = {
@@ -115,6 +120,9 @@ export type ProductAuctionHttpRequestBody = {
       criteria?: 'CRITERIA_DEFAULT' | 'CRITERIA_NONE' | 'CRITERIA_ITEM_ID';
     };
   };
+  response_setting?: {
+    campaign_metadata_fields?: string[];
+  };
 };
 
 export type ProductAuctionHttpResponseBody = {
@@ -129,6 +137,10 @@ export type ProductAuctionHttpResponseBody = {
         win_price?: {
           currency: string;
           amount_micro: string;
+        };
+        campaign_metadata?: {
+          ad_operation_type?: string;
+          alias?: string;
         };
       };
       imp_trackers: string[];

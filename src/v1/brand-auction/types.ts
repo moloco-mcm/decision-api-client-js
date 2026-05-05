@@ -3,6 +3,7 @@ import {
   AuctionResult,
   AdItem,
   Asset,
+  CampaignResponseSetting,
   LandingPage,
   InvalidInputWarning,
 } from '../types/external';
@@ -37,6 +38,7 @@ export type BrandAuctionParams = {
   }[];
   pageId?: string;
   filtering?: Filtering;
+  responseSetting?: CampaignResponseSetting;
 };
 
 export type BrandAuctionHttpRequestBody = {
@@ -69,6 +71,9 @@ export type BrandAuctionHttpRequestBody = {
   }[];
   page_id?: string;
   filtering?: FilteringHttpRequestBody;
+  response_setting?: {
+    campaign_metadata_fields?: string[];
+  };
 };
 
 export type BrandAuctionHttpResponseBody = {
@@ -82,6 +87,10 @@ export type BrandAuctionHttpResponseBody = {
         win_price?: {
           currency: string;
           amount_micro: string;
+        };
+        campaign_metadata?: {
+          ad_operation_type?: string;
+          alias?: string;
         };
       };
       asset: {

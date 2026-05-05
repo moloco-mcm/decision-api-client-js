@@ -20,6 +20,28 @@ import {
   ProductAuctionData,
   ProductAuctionParams,
 } from '../product-auction/types';
+import {
+  ReservedDisplayAuctionData,
+  ReservedDisplayAuctionParams,
+} from '../reserved-display-auction/types';
+
+/**
+ * @category CampaignMetadata
+ */
+export type CampaignMetadata = {
+  adOperationType?:
+    | 'AD_OPERATION_TYPE_DEFAULT'
+    | 'AD_OPERATION_TYPE_SELF_SERVED'
+    | 'AD_OPERATION_TYPE_MANAGED';
+  alias?: string;
+};
+
+/**
+ * @category CampaignResponseSetting
+ */
+export type CampaignResponseSetting = {
+  campaignMetadataFields?: ('FIELD_UNKNOWN' | 'AD_OPERATION_TYPE' | 'ALIAS')[];
+};
 
 /**
  * @category AuctionResult
@@ -31,6 +53,7 @@ export type AuctionResult = {
     currency: string;
     amountMicro: string;
   };
+  campaignMetadata?: CampaignMetadata;
 };
 
 /**
@@ -80,6 +103,54 @@ export type LandingPage = {
     itemId: string;
   };
   productListSetting?: Record<string, unknown>;
+};
+
+/**
+ * @category ReservedLandingPage
+ */
+export type ReservedLandingPage = {
+  type: string;
+  customUrlSetting?: {
+    url: string;
+  };
+};
+
+/**
+ * @category ReservedDisplayAdInfo
+ */
+export type ReservedDisplayAdInfo = {
+  adAccountId: string;
+  lineItemId: string;
+};
+
+/**
+ * @category ReservedAsset
+ */
+export type ReservedAsset = {
+  id: string;
+  banner?: {
+    mediaType?: 'IMAGE' | 'VIDEO';
+    imageUrl?: string;
+    altText?: string;
+  };
+  customText?: {
+    text: string;
+    color?: string;
+    backgroundColor?: string;
+    displayTitle?: string;
+  };
+  headline?: {
+    text: string;
+    color?: string;
+    backgroundColor?: string;
+    displayTitle?: string;
+  };
+  metadata?: {
+    attributes?: Record<string, string>;
+  };
+  impTrackers: string[];
+  clickTrackers: string[];
+  trackId?: string;
 };
 
 /**
@@ -161,6 +232,12 @@ export interface Client {
    * Send a product auction request. Throws one of the errors defined in {@link v1.errors}.
    */
   productAuction: (params: ProductAuctionParams) => Promise<ProductAuctionData>;
+  /**
+   * Send a reserved display auction request. Throws one of the errors defined in {@link v1.errors}.
+   */
+  reservedDisplayAuction: (
+    params: ReservedDisplayAuctionParams
+  ) => Promise<ReservedDisplayAuctionData>;
 }
 
 /**
@@ -196,3 +273,11 @@ export {
   ProductAuctionData,
   ProductAuctionParams,
 } from '../product-auction/types';
+
+/**
+ * @category ReservedDisplayAuction
+ */
+export {
+  ReservedDisplayAuctionData,
+  ReservedDisplayAuctionParams,
+} from '../reserved-display-auction/types';

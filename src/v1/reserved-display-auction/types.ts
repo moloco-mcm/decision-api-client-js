@@ -1,17 +1,14 @@
-import { Filtering, FilteringHttpRequestBody } from '../types/common';
 import {
-  AuctionResult,
-  Asset,
-  CampaignResponseSetting,
-  LandingPage,
   InvalidInputWarning,
+  ReservedAsset,
+  ReservedDisplayAdInfo,
+  ReservedLandingPage,
 } from '../types/external';
 
-export type DisplayAuctionParams = {
+export type ReservedDisplayAuctionParams = {
   requestId: string;
   channelType?: 'APP' | 'SITE' | 'DESKTOP_SITE' | 'MOBILE_SITE';
   domain?: string;
-  sessionId?: string;
   customId?: string;
   user?: {
     userId?: string;
@@ -27,24 +24,20 @@ export type DisplayAuctionParams = {
   };
   inventories: {
     inventoryId: string;
-    numAds?: number;
-    items?: string[];
-    categories?: string[];
-    searchQuery?: string;
-    video?: {
-      format?: 'MP4_360P' | 'MP4_720P' | 'HLS';
+    targeting?: {
+      keyValues?: {
+        keyId: string;
+        valueIds?: string[];
+      }[];
     };
   }[];
   pageId?: string;
-  filtering?: Filtering;
-  responseSetting?: CampaignResponseSetting;
 };
 
-export type DisplayAuctionHttpRequestBody = {
+export type ReservedDisplayAuctionHttpRequestBody = {
   request_id: string;
   channel_type?: 'APP' | 'SITE' | 'DESKTOP_SITE' | 'MOBILE_SITE';
   domain?: string;
-  session_id?: string;
   custom_id?: string;
   user?: {
     user_id?: string;
@@ -60,54 +53,42 @@ export type DisplayAuctionHttpRequestBody = {
   };
   inventories: {
     inventory_id: string;
-    num_ads?: number;
-    items?: string[];
-    categories?: string[];
-    search_query?: string;
-    video?: {
-      format?: 'MP4_360P' | 'MP4_720P' | 'HLS';
+    targeting?: {
+      key_values?: {
+        key_id: string;
+        value_ids?: string[];
+      }[];
     };
   }[];
   page_id?: string;
-  filtering?: FilteringHttpRequestBody;
-  response_setting?: {
-    campaign_metadata_fields?: string[];
-  };
 };
 
-export type DisplayAuctionHttpResponseBody = {
+export type ReservedDisplayAuctionHttpResponseBody = {
   request_id: string;
   decisions?: {
     inventory_id: string;
-    ads: {
-      auction_result?: {
-        ad_account_id: string;
-        campaign_id: string;
-        win_price?: {
-          currency: string;
-          amount_micro: string;
-        };
-        campaign_metadata?: {
-          ad_operation_type?: string;
-          alias?: string;
-        };
-      };
-      asset: {
+    ads?: {
+      asset?: {
         id: string;
         banner?: {
           media_type?: 'IMAGE' | 'VIDEO';
           image_url?: string;
-          video_url?: string;
-          video_thumbnail_url?: string;
+          alt_text?: string;
         };
-        logo?: {
-          image_url: string;
+        custom_text?: {
+          text: string;
+          color?: string;
+          background_color?: string;
+          display_title?: string;
         };
         headline?: {
           text: string;
+          color?: string;
+          background_color?: string;
+          display_title?: string;
         };
-        cta?: {
-          text: string;
+        metadata?: {
+          attributes?: Record<string, string>;
         };
         imp_trackers: string[];
         click_trackers: string[];
@@ -118,10 +99,10 @@ export type DisplayAuctionHttpResponseBody = {
         custom_url_setting?: {
           url: string;
         };
-        product_detail_setting?: {
-          item_id: string;
-        };
-        product_list_setting?: Record<string, unknown>;
+      };
+      ad_info?: {
+        ad_account_id: string;
+        line_item_id: string;
       };
     }[];
   }[];
@@ -131,14 +112,14 @@ export type DisplayAuctionHttpResponseBody = {
   }[];
 };
 
-export type DisplayAuctionData = {
+export type ReservedDisplayAuctionData = {
   requestId: string;
   decisions?: {
     inventoryId: string;
-    ads: {
-      auctionResult?: AuctionResult;
-      asset?: Asset;
-      landingPage?: LandingPage;
+    ads?: {
+      asset?: ReservedAsset;
+      landingPage?: ReservedLandingPage;
+      adInfo?: ReservedDisplayAdInfo;
     }[];
   }[];
   invalidInputWarnings?: InvalidInputWarning[];
