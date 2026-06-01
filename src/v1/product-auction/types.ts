@@ -3,6 +3,7 @@ import {
   CampaignResponseSetting,
   DecidedItem,
   InvalidInputWarning,
+  PersonalizationMode,
 } from '../types/external';
 
 export type ProductAuctionParams = {
@@ -61,6 +62,7 @@ export type ProductAuctionParams = {
       criteria?: 'CRITERIA_DEFAULT' | 'CRITERIA_NONE' | 'CRITERIA_ITEM_ID';
     };
   };
+  personalizationMode?: PersonalizationMode;
   responseSetting?: CampaignResponseSetting;
 };
 
@@ -120,6 +122,7 @@ export type ProductAuctionHttpRequestBody = {
       criteria?: 'CRITERIA_DEFAULT' | 'CRITERIA_NONE' | 'CRITERIA_ITEM_ID';
     };
   };
+  personalization_mode?: string;
   response_setting?: {
     campaign_metadata_fields?: string[];
   };
@@ -135,6 +138,10 @@ export type ProductAuctionHttpResponseBody = {
         ad_account_id: string;
         campaign_id: string;
         win_price?: {
+          currency: string;
+          amount_micro: string;
+        };
+        win_price_advertiser?: {
           currency: string;
           amount_micro: string;
         };

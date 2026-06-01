@@ -35,6 +35,7 @@ describe('creative-auction/utils', () => {
         },
       ],
       pageId: 'test_page_id',
+      personalizationMode: 'STANDARD',
       filtering: testFiltering,
     };
 
@@ -68,6 +69,7 @@ describe('creative-auction/utils', () => {
         },
       ],
       page_id: 'test_page_id',
+      personalization_mode: 'STANDARD',
       filtering: testFilteringHttpRequestBody,
     });
   });
@@ -86,6 +88,10 @@ describe('creative-auction/utils', () => {
                 win_price: {
                   currency: 'USD',
                   amount_micro: '100',
+                },
+                win_price_advertiser: {
+                  currency: 'KRW',
+                  amount_micro: '130000',
                 },
               },
               asset: {
@@ -143,6 +149,10 @@ describe('creative-auction/utils', () => {
                 winPrice: {
                   currency: 'USD',
                   amountMicro: '100',
+                },
+                winPriceAdvertiser: {
+                  currency: 'KRW',
+                  amountMicro: '130000',
                 },
               },
               asset: {

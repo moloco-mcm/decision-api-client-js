@@ -1,5 +1,7 @@
 import {
   InvalidInputWarning,
+  LineItemResponseSetting,
+  PersonalizationMode,
   ReservedAsset,
   ReservedDisplayAdInfo,
   ReservedLandingPage,
@@ -32,6 +34,8 @@ export type ReservedDisplayAuctionParams = {
     };
   }[];
   pageId?: string;
+  personalizationMode?: PersonalizationMode;
+  responseSetting?: LineItemResponseSetting;
 };
 
 export type ReservedDisplayAuctionHttpRequestBody = {
@@ -61,6 +65,10 @@ export type ReservedDisplayAuctionHttpRequestBody = {
     };
   }[];
   page_id?: string;
+  personalization_mode?: string;
+  response_setting?: {
+    line_item_metadata_fields?: string[];
+  };
 };
 
 export type ReservedDisplayAuctionHttpResponseBody = {
@@ -103,6 +111,10 @@ export type ReservedDisplayAuctionHttpResponseBody = {
       ad_info?: {
         ad_account_id: string;
         line_item_id: string;
+        order_id: string;
+        line_item_metadata?: {
+          alias?: string;
+        };
       };
     }[];
   }[];

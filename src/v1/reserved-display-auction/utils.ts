@@ -35,6 +35,13 @@ export const translateReservedDisplayAuctionParamsToReservedDisplayAuctionHttpRe
       },
     })),
     page_id: params.pageId,
+    personalization_mode: params.personalizationMode,
+    response_setting: params.responseSetting && {
+      line_item_metadata_fields: params.responseSetting
+        .lineItemMetadataFields && [
+        ...params.responseSetting.lineItemMetadataFields,
+      ],
+    },
   });
 
 export const translateReservedDisplayAuctionHttpResponseBodyToReservedDisplayAuctionData =
@@ -86,6 +93,10 @@ export const translateReservedDisplayAuctionHttpResponseBodyToReservedDisplayAuc
         adInfo: ad.ad_info && {
           adAccountId: ad.ad_info.ad_account_id,
           lineItemId: ad.ad_info.line_item_id,
+          orderId: ad.ad_info.order_id,
+          lineItemMetadata: ad.ad_info.line_item_metadata && {
+            alias: ad.ad_info.line_item_metadata.alias,
+          },
         },
       })),
     })),

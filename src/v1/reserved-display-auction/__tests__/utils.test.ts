@@ -40,6 +40,10 @@ describe('reserved-display-auction/utils', () => {
         },
       ],
       pageId: 'test_page_id',
+      personalizationMode: 'STANDARD',
+      responseSetting: {
+        lineItemMetadataFields: ['ALIAS'],
+      },
     };
 
     expect(
@@ -77,6 +81,10 @@ describe('reserved-display-auction/utils', () => {
         },
       ],
       page_id: 'test_page_id',
+      personalization_mode: 'STANDARD',
+      response_setting: {
+        line_item_metadata_fields: ['ALIAS'],
+      },
     });
   });
 
@@ -131,6 +139,10 @@ describe('reserved-display-auction/utils', () => {
               ad_info: {
                 ad_account_id: 'test_ad_account_id',
                 line_item_id: 'test_line_item_id',
+                order_id: 'test_order_id',
+                line_item_metadata: {
+                  alias: 'test_line_item_alias',
+                },
               },
             },
           ],
@@ -198,6 +210,10 @@ describe('reserved-display-auction/utils', () => {
               adInfo: {
                 adAccountId: 'test_ad_account_id',
                 lineItemId: 'test_line_item_id',
+                orderId: 'test_order_id',
+                lineItemMetadata: {
+                  alias: 'test_line_item_alias',
+                },
               },
             },
           ],

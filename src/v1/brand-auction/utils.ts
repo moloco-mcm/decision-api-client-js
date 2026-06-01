@@ -37,6 +37,7 @@ export const translateBrandAuctionParamsToBrandAuctionHttpRequestBody = (
     },
   })),
   page_id: params.pageId,
+  personalization_mode: params.personalizationMode,
   response_setting: params.responseSetting && {
     campaign_metadata_fields: params.responseSetting.campaignMetadataFields && [
       ...params.responseSetting.campaignMetadataFields,
@@ -112,6 +113,10 @@ export const translateBrandAuctionHttpResponseBodyToBrandAuctionData = (
         winPrice: ad.auction_result.win_price && {
           currency: ad.auction_result.win_price.currency,
           amountMicro: ad.auction_result.win_price.amount_micro,
+        },
+        winPriceAdvertiser: ad.auction_result.win_price_advertiser && {
+          currency: ad.auction_result.win_price_advertiser.currency,
+          amountMicro: ad.auction_result.win_price_advertiser.amount_micro,
         },
         campaignMetadata: ad.auction_result.campaign_metadata && {
           adOperationType: ad.auction_result.campaign_metadata

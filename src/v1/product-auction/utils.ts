@@ -119,6 +119,7 @@ export const translateProductAuctionParamsToProductAuctionHttpRequestBody = (
     },
   })),
   page_id: params.pageId,
+  personalization_mode: params.personalizationMode,
   deduplication_setting: params.deduplicationSetting && {
     per_request: params.deduplicationSetting.perRequest && {
       method: params.deduplicationSetting.perRequest.method,
@@ -146,6 +147,10 @@ export const translateProductAuctionHttpResponseBodyToProductAuctionData = (
         winPrice: item.auction_result.win_price && {
           currency: item.auction_result.win_price.currency,
           amountMicro: item.auction_result.win_price.amount_micro,
+        },
+        winPriceAdvertiser: item.auction_result.win_price_advertiser && {
+          currency: item.auction_result.win_price_advertiser.currency,
+          amountMicro: item.auction_result.win_price_advertiser.amount_micro,
         },
         campaignMetadata: item.auction_result.campaign_metadata && {
           adOperationType: item.auction_result.campaign_metadata
