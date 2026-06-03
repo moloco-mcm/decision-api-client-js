@@ -5,6 +5,7 @@ import {
   CampaignResponseSetting,
   LandingPage,
   InvalidInputWarning,
+  PersonalizationMode,
 } from '../types/external';
 
 export type DisplayAuctionParams = {
@@ -37,6 +38,7 @@ export type DisplayAuctionParams = {
   }[];
   pageId?: string;
   filtering?: Filtering;
+  personalizationMode?: PersonalizationMode;
   responseSetting?: CampaignResponseSetting;
 };
 
@@ -70,6 +72,7 @@ export type DisplayAuctionHttpRequestBody = {
   }[];
   page_id?: string;
   filtering?: FilteringHttpRequestBody;
+  personalization_mode?: string;
   response_setting?: {
     campaign_metadata_fields?: string[];
   };
@@ -84,6 +87,10 @@ export type DisplayAuctionHttpResponseBody = {
         ad_account_id: string;
         campaign_id: string;
         win_price?: {
+          currency: string;
+          amount_micro: string;
+        };
+        win_price_advertiser?: {
           currency: string;
           amount_micro: string;
         };

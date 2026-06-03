@@ -26,6 +26,15 @@ import {
 } from '../reserved-display-auction/types';
 
 /**
+ * @category PersonalizationMode
+ */
+export type PersonalizationMode =
+  | 'UNKNOWN_PERSONALIZATION_MODE'
+  | 'STANDARD'
+  | 'METRIC_ONLY'
+  | 'ID_LESS';
+
+/**
  * @category CampaignMetadata
  */
 export type CampaignMetadata = {
@@ -44,12 +53,30 @@ export type CampaignResponseSetting = {
 };
 
 /**
+ * @category LineItemMetadata
+ */
+export type LineItemMetadata = {
+  alias?: string;
+};
+
+/**
+ * @category LineItemResponseSetting
+ */
+export type LineItemResponseSetting = {
+  lineItemMetadataFields?: ('FIELD_UNKNOWN' | 'ALIAS')[];
+};
+
+/**
  * @category AuctionResult
  */
 export type AuctionResult = {
   adAccountId: string;
   campaignId: string;
   winPrice?: {
+    currency: string;
+    amountMicro: string;
+  };
+  winPriceAdvertiser?: {
     currency: string;
     amountMicro: string;
   };
@@ -121,6 +148,8 @@ export type ReservedLandingPage = {
 export type ReservedDisplayAdInfo = {
   adAccountId: string;
   lineItemId: string;
+  orderId: string;
+  lineItemMetadata?: LineItemMetadata;
 };
 
 /**

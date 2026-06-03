@@ -42,6 +42,7 @@ describe('product-auction/utils', () => {
         },
       ],
       pageId: 'test_page_id',
+      personalizationMode: 'STANDARD',
       deduplicationSetting: {
         perRequest: {
           method: 'METHOD_WATERFALL',
@@ -87,6 +88,7 @@ describe('product-auction/utils', () => {
         },
       ],
       page_id: 'test_page_id',
+      personalization_mode: 'STANDARD',
       deduplication_setting: {
         per_request: {
           method: 'METHOD_WATERFALL',
@@ -111,6 +113,10 @@ describe('product-auction/utils', () => {
                 win_price: {
                   currency: 'USD',
                   amount_micro: '100',
+                },
+                win_price_advertiser: {
+                  currency: 'KRW',
+                  amount_micro: '130000',
                 },
               },
               imp_trackers: [
@@ -144,6 +150,10 @@ describe('product-auction/utils', () => {
                 winPrice: {
                   currency: 'USD',
                   amountMicro: '100',
+                },
+                winPriceAdvertiser: {
+                  currency: 'KRW',
+                  amountMicro: '130000',
                 },
               },
               impTrackers: [
