@@ -5,4 +5,6 @@ dist
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.claude/
+.claude/*
+!.claude/skills/
+.claude/settings.local.json

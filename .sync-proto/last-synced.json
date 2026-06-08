@@ -1,0 +1,7 @@
+{
+  "rmp_infra_repo": "moloco/rmp-infra",
+  "proto_path": "protocol/api/adcloud/rmp/decision/v1/public",
+  "rmp_infra_sha": "",
+  "synced_at": null,
+  "note": "rmp_infra_sha is intentionally empty so the first /sync-proto run performs a full comparison and establishes the baseline. The skill updates rmp_infra_sha and synced_at after a successful sync. The weekly workflow's change-gate skips the run when this SHA already matches the latest rmp-infra commit touching proto_path."
+}

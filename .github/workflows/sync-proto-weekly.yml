@@ -1,0 +1,126 @@
+name: Weekly proto sync
+
+# Autonomous weekly sync of this client's TypeScript types with the decision
+# proto definitions in moloco/rmp-infra. Mirrors the rmp-portal "fe-codeian"
+# pattern (self-hosted runner + Vertex AI + cross-org GitHub App), right-sized
+# to a single job for this small, single-purpose sync.
+#
+# Flow:
+#   1. Mint a GitHub App token scoped to BOTH repos (read rmp-infra, write here).
+#   2. change-gate: skip the (paid) agent run if the protos haven't moved.
+#   3. Run Claude Code -> /sync-proto -> updates types, validates, opens a DRAFT PR.
+#   4. Slack notify on completion; a separate ubuntu-latest job reports failures
+#      (survives self-hosted runner death).
+#
+# PREREQUISITES (provisioned by infra / org admins — see .claude/skills/sync-proto/README.md):
+#   - This repo authorized on the moloco self-hosted runner group (label: moloco-infra-cicd-4x).
+#   - Vertex AI access on that runner (project moloco-rmp-dev, region us-east5) with
+#     the chosen Claude model enabled. CONFIRM the model below is available on Vertex.
+#   - GitHub App APP_ID_MCM_CLAUDE_CODE installed on moloco/rmp-infra (Contents: read)
+#     AND moloco-mcm/decision-api-client-js (Contents + Pull requests: write).
+#     Provide vars.APP_ID_MCM_CLAUDE_CODE + secrets.APP_PRIVATE_KEY_MCM_CLAUDE_CODE.
+#   - secrets.SLACK_WEBHOOK_URL for notifications.
+
+on:
+  # Weekly, Mondays 07:00 PT (14:00 UTC) — fresh draft PR for the week's review.
+  schedule:
+    - cron: '0 14 * * 1'
+  # Manual trigger retained for one-off validation/testing only (the intended
+  # path is the cron above; humans don't normally trigger this).
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    name: Sync types from rmp-infra
+    runs-on: moloco-infra-cicd-4x # self-hosted; required for Vertex AI credentials
+    timeout-minutes: 30
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Generate GitHub App token (cross-org read rmp-infra, write here)
+        uses: actions/create-github-app-token@a8d616148505b5069dccd32f177bb87d7f39123b # v2.1.1
+        id: app-token
+        with:
+          app-id: ${{ vars.APP_ID_MCM_CLAUDE_CODE }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY_MCM_CLAUDE_CODE }}
+          owner: ${{ github.repository_owner }}
+          repositories: |
+            decision-api-client-js
+            rmp-infra
+
+      - name: Checkout
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24.x'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Change-gate (skip if protos unchanged)
+        id: gate
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: bash .github/scripts/proto-change-gate.sh
+
+      - name: Run Claude Code — /sync-proto
+        if: steps.gate.outputs.changed == 'true'
+        uses: anthropics/claude-code-action@9db782c3a17ef2bfc274cd17411bc3e0a5ba1345 # v1.0.115
+        env:
+          ANTHROPIC_VERTEX_PROJECT_ID: moloco-rmp-dev
+          CLOUD_ML_REGION: us-east5
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        with:
+          use_vertex: 'true'
+          github_token: ${{ steps.app-token.outputs.token }}
+          # CONFIRM this model is enabled on the Vertex project before trusting the cron
+          # (fe-codeian hit "model not available" on Vertex and had to pin an exact id).
+          claude_args: >-
+            --model claude-opus-4-6
+            --allowedTools "Skill,Bash,Read,Edit,Write,Grep,Glob"
+          prompt: >-
+            Run the /sync-proto skill to sync this client's TypeScript types with
+            the moloco/rmp-infra decision proto definitions. You are running
+            non-interactively in CI: do not ask questions, follow the skill, and
+            open a DRAFT PR if (and only if) there are type changes that pass all
+            gates. If there are no changes, do nothing.
+
+      - name: Notify Slack (completion)
+        if: ${{ always() && steps.gate.outputs.changed == 'true' }}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          UPSTREAM_SHA: ${{ steps.gate.outputs.upstream_sha }}
+        run: |
+          PRS=$(gh pr list --label sync-proto --state open --json url,title --jq '[.[].url] | join("\n")')
+          if [ -n "$PRS" ]; then
+            TEXT=":satellite: *Weekly proto sync* opened a draft PR (rmp-infra @ \`${UPSTREAM_SHA:0:7}\`):\n${PRS}"
+          else
+            TEXT=":white_check_mark: *Weekly proto sync* ran — no type changes needed (rmp-infra @ \`${UPSTREAM_SHA:0:7}\`).\n${RUN_URL}"
+          fi
+          curl -sf -X POST -H 'Content-type: application/json' \
+            --data "$(jq -nc --arg t "$TEXT" '{text:$t}')" "$SLACK_WEBHOOK_URL"
+
+  notify-failure:
+    name: Notify failure
+    needs: sync
+    if: failure()
+    runs-on: ubuntu-latest # not self-hosted, so it still fires if the sync runner dies
+    steps:
+      - name: Notify Slack (failure)
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          TEXT=":x: *Weekly proto sync failed.* ${RUN_URL}"
+          curl -sf -X POST -H 'Content-type: application/json' \
+            --data "$(jq -nc --arg t "$TEXT" '{text:$t}')" "$SLACK_WEBHOOK_URL"
