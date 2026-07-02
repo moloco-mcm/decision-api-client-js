@@ -39,6 +39,16 @@ export type BrandAuctionParams = {
   }[];
   pageId?: string;
   filtering?: Filtering;
+  deduplicationSetting?: {
+    perRequest?: {
+      method?: 'METHOD_DEFAULT' | 'METHOD_WATERFALL' | 'METHOD_INTERLEAVED';
+      criteria?:
+        | 'CRITERIA_DEFAULT'
+        | 'CRITERIA_NONE'
+        | 'CRITERIA_AD_ACCOUNT_ID'
+        | 'CRITERIA_CAMPAIGN_ID';
+    };
+  };
   personalizationMode?: PersonalizationMode;
   responseSetting?: CampaignResponseSetting;
 };
@@ -73,6 +83,16 @@ export type BrandAuctionHttpRequestBody = {
   }[];
   page_id?: string;
   filtering?: FilteringHttpRequestBody;
+  deduplication_setting?: {
+    per_request?: {
+      method?: 'METHOD_DEFAULT' | 'METHOD_WATERFALL' | 'METHOD_INTERLEAVED';
+      criteria?:
+        | 'CRITERIA_DEFAULT'
+        | 'CRITERIA_NONE'
+        | 'CRITERIA_AD_ACCOUNT_ID'
+        | 'CRITERIA_CAMPAIGN_ID';
+    };
+  };
   personalization_mode?: string;
   response_setting?: {
     campaign_metadata_fields?: string[];
@@ -98,6 +118,7 @@ export type BrandAuctionHttpResponseBody = {
         campaign_metadata?: {
           ad_operation_type?: string;
           alias?: string;
+          ad_payer?: string;
         };
       };
       asset: {

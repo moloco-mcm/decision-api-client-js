@@ -58,8 +58,14 @@ export type ProductAuctionParams = {
   pageId?: string;
   deduplicationSetting?: {
     perRequest?: {
-      method?: 'METHOD_DEFAULT' | 'METHOD_WATERFALL';
-      criteria?: 'CRITERIA_DEFAULT' | 'CRITERIA_NONE' | 'CRITERIA_ITEM_ID';
+      method?: 'METHOD_DEFAULT' | 'METHOD_WATERFALL' | 'METHOD_INTERLEAVED';
+      criteria?:
+        | 'CRITERIA_DEFAULT'
+        | 'CRITERIA_NONE'
+        | 'CRITERIA_ITEM_ID'
+        | 'CRITERIA_AD_ACCOUNT_ID'
+        | 'CRITERIA_CAMPAIGN_ID'
+        | 'CRITERIA_LINE_ITEM_ID';
     };
   };
   personalizationMode?: PersonalizationMode;
@@ -118,8 +124,14 @@ export type ProductAuctionHttpRequestBody = {
   page_id?: string;
   deduplication_setting?: {
     per_request?: {
-      method?: 'METHOD_DEFAULT' | 'METHOD_WATERFALL';
-      criteria?: 'CRITERIA_DEFAULT' | 'CRITERIA_NONE' | 'CRITERIA_ITEM_ID';
+      method?: 'METHOD_DEFAULT' | 'METHOD_WATERFALL' | 'METHOD_INTERLEAVED';
+      criteria?:
+        | 'CRITERIA_DEFAULT'
+        | 'CRITERIA_NONE'
+        | 'CRITERIA_ITEM_ID'
+        | 'CRITERIA_AD_ACCOUNT_ID'
+        | 'CRITERIA_CAMPAIGN_ID'
+        | 'CRITERIA_LINE_ITEM_ID';
     };
   };
   personalization_mode?: string;
@@ -148,6 +160,7 @@ export type ProductAuctionHttpResponseBody = {
         campaign_metadata?: {
           ad_operation_type?: string;
           alias?: string;
+          ad_payer?: string;
         };
       };
       imp_trackers: string[];
