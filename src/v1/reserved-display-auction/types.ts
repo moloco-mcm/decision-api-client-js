@@ -34,6 +34,12 @@ export type ReservedDisplayAuctionParams = {
     };
   }[];
   pageId?: string;
+  deduplicationSetting?: {
+    perRequest?: {
+      method?: 'METHOD_DEFAULT' | 'METHOD_WATERFALL' | 'METHOD_INTERLEAVED';
+      criteria?: 'CRITERIA_DEFAULT' | 'CRITERIA_NONE' | 'CRITERIA_LINE_ITEM_ID';
+    };
+  };
   personalizationMode?: PersonalizationMode;
   responseSetting?: LineItemResponseSetting;
 };
@@ -65,6 +71,12 @@ export type ReservedDisplayAuctionHttpRequestBody = {
     };
   }[];
   page_id?: string;
+  deduplication_setting?: {
+    per_request?: {
+      method?: 'METHOD_DEFAULT' | 'METHOD_WATERFALL' | 'METHOD_INTERLEAVED';
+      criteria?: 'CRITERIA_DEFAULT' | 'CRITERIA_NONE' | 'CRITERIA_LINE_ITEM_ID';
+    };
+  };
   personalization_mode?: string;
   response_setting?: {
     line_item_metadata_fields?: string[];
@@ -114,6 +126,7 @@ export type ReservedDisplayAuctionHttpResponseBody = {
         order_id: string;
         line_item_metadata?: {
           alias?: string;
+          ad_payer?: string;
         };
       };
     }[];
