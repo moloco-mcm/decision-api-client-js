@@ -117,6 +117,12 @@ export const translateProductAuctionParamsToProductAuctionHttpRequestBody = (
         age_groups: [...inventory.filtering.ageGroup.ageGroups],
       },
     },
+    targeting: inventory.targeting && {
+      key_values: inventory.targeting.keyValues?.map((keyValue) => ({
+        key_id: keyValue.keyId,
+        value_ids: keyValue.valueIds && [...keyValue.valueIds],
+      })),
+    },
   })),
   page_id: params.pageId,
   personalization_mode: params.personalizationMode,
@@ -124,6 +130,9 @@ export const translateProductAuctionParamsToProductAuctionHttpRequestBody = (
     per_request: params.deduplicationSetting.perRequest && {
       method: params.deduplicationSetting.perRequest.method,
       criteria: params.deduplicationSetting.perRequest.criteria,
+    },
+    per_inventory: params.deduplicationSetting.perInventory && {
+      criteria: params.deduplicationSetting.perInventory.criteria,
     },
   },
   response_setting: params.responseSetting && {
@@ -156,6 +165,7 @@ export const translateProductAuctionHttpResponseBodyToProductAuctionData = (
           adOperationType: item.auction_result.campaign_metadata
             .ad_operation_type as CampaignMetadata['adOperationType'],
           alias: item.auction_result.campaign_metadata.alias,
+          adPayer: item.auction_result.campaign_metadata.ad_payer,
         },
       },
       impTrackers: [...item.imp_trackers],

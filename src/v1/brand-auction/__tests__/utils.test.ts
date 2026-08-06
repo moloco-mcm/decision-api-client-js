@@ -32,11 +32,24 @@ describe('creative-auction/utils', () => {
           items: ['test_item_id_1', 'test_item_id_2'],
           categories: ['Sports & Fitness > Athletic Clothing > Shoe'],
           searchQuery: 'test_query',
+          targeting: {
+            keyValues: [{ keyId: 'key1', valueIds: ['value1', 'value2'] }],
+          },
+          filtering: testFiltering,
         },
       ],
       pageId: 'test_page_id',
       personalizationMode: 'STANDARD',
       filtering: testFiltering,
+      deduplicationSetting: {
+        perRequest: {
+          method: 'METHOD_INTERLEAVED',
+          criteria: 'CRITERIA_CAMPAIGN_ID',
+        },
+        perInventory: {
+          criteria: 'CRITERIA_AD_ACCOUNT_ID',
+        },
+      },
     };
 
     expect(
@@ -66,11 +79,24 @@ describe('creative-auction/utils', () => {
           items: ['test_item_id_1', 'test_item_id_2'],
           categories: ['Sports & Fitness > Athletic Clothing > Shoe'],
           search_query: 'test_query',
+          targeting: {
+            key_values: [{ key_id: 'key1', value_ids: ['value1', 'value2'] }],
+          },
+          filtering: testFilteringHttpRequestBody,
         },
       ],
       page_id: 'test_page_id',
       personalization_mode: 'STANDARD',
       filtering: testFilteringHttpRequestBody,
+      deduplication_setting: {
+        per_request: {
+          method: 'METHOD_INTERLEAVED',
+          criteria: 'CRITERIA_CAMPAIGN_ID',
+        },
+        per_inventory: {
+          criteria: 'CRITERIA_AD_ACCOUNT_ID',
+        },
+      },
     });
   });
 
@@ -92,6 +118,11 @@ describe('creative-auction/utils', () => {
                 win_price_advertiser: {
                   currency: 'KRW',
                   amount_micro: '130000',
+                },
+                campaign_metadata: {
+                  ad_operation_type: 'AD_OPERATION_TYPE_MANAGED',
+                  alias: 'test_campaign_alias',
+                  ad_payer: 'test_ad_payer',
                 },
               },
               asset: {
@@ -153,6 +184,11 @@ describe('creative-auction/utils', () => {
                 winPriceAdvertiser: {
                   currency: 'KRW',
                   amountMicro: '130000',
+                },
+                campaignMetadata: {
+                  adOperationType: 'AD_OPERATION_TYPE_MANAGED',
+                  alias: 'test_campaign_alias',
+                  adPayer: 'test_ad_payer',
                 },
               },
               asset: {

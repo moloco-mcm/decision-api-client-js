@@ -27,6 +27,7 @@ export const translateReservedDisplayAuctionParamsToReservedDisplayAuctionHttpRe
     },
     inventories: params.inventories.map((inventory) => ({
       inventory_id: inventory.inventoryId,
+      num_ads: inventory.numAds,
       targeting: inventory.targeting && {
         key_values: inventory.targeting.keyValues?.map((kv) => ({
           key_id: kv.keyId,
@@ -41,6 +42,15 @@ export const translateReservedDisplayAuctionParamsToReservedDisplayAuctionHttpRe
         .lineItemMetadataFields && [
         ...params.responseSetting.lineItemMetadataFields,
       ],
+    },
+    deduplication_setting: params.deduplicationSetting && {
+      per_request: params.deduplicationSetting.perRequest && {
+        method: params.deduplicationSetting.perRequest.method,
+        criteria: params.deduplicationSetting.perRequest.criteria,
+      },
+      per_inventory: params.deduplicationSetting.perInventory && {
+        criteria: params.deduplicationSetting.perInventory.criteria,
+      },
     },
   });
 
@@ -96,6 +106,7 @@ export const translateReservedDisplayAuctionHttpResponseBodyToReservedDisplayAuc
           orderId: ad.ad_info.order_id,
           lineItemMetadata: ad.ad_info.line_item_metadata && {
             alias: ad.ad_info.line_item_metadata.alias,
+            adPayer: ad.ad_info.line_item_metadata.ad_payer,
           },
         },
       })),

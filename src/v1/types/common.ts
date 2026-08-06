@@ -1,5 +1,59 @@
 //Todo: add more common types here
 
+export type Targeting = {
+  keyValues?: {
+    keyId: string;
+    valueIds?: string[];
+  }[];
+};
+
+export type TargetingHttpRequestBody = {
+  key_values?: {
+    key_id: string;
+    value_ids?: string[];
+  }[];
+};
+
+export type DeduplicationMethod =
+  | 'METHOD_DEFAULT'
+  | 'METHOD_WATERFALL'
+  | 'METHOD_INTERLEAVED';
+
+export type DeduplicationCriteria =
+  | 'CRITERIA_DEFAULT'
+  | 'CRITERIA_NONE'
+  | 'CRITERIA_ITEM_ID'
+  | 'CRITERIA_AD_ACCOUNT_ID'
+  | 'CRITERIA_CAMPAIGN_ID'
+  | 'CRITERIA_LINE_ITEM_ID';
+
+/**
+ * Each endpoint narrows `TCriteria` to the criteria it supports.
+ */
+export type DeduplicationSetting<
+  TCriteria extends DeduplicationCriteria = DeduplicationCriteria
+> = {
+  perRequest?: {
+    method?: DeduplicationMethod;
+    criteria?: TCriteria;
+  };
+  perInventory?: {
+    criteria?: TCriteria;
+  };
+};
+
+export type DeduplicationSettingHttpRequestBody<
+  TCriteria extends DeduplicationCriteria = DeduplicationCriteria
+> = {
+  per_request?: {
+    method?: DeduplicationMethod;
+    criteria?: TCriteria;
+  };
+  per_inventory?: {
+    criteria?: TCriteria;
+  };
+};
+
 export type Filtering = {
   category?: {
     operator?: 'OR' | 'AND';
