@@ -16,6 +16,12 @@ import {
   PersonalizationMode,
 } from '../types/external';
 
+export type BrandDeduplicationCriteria =
+  | 'CRITERIA_DEFAULT'
+  | 'CRITERIA_NONE'
+  | 'CRITERIA_AD_ACCOUNT_ID'
+  | 'CRITERIA_CAMPAIGN_ID';
+
 export type BrandAuctionParams = {
   requestId: string;
   channelType?: 'APP' | 'SITE' | 'DESKTOP_SITE' | 'MOBILE_SITE';
@@ -54,7 +60,7 @@ export type BrandAuctionParams = {
   filtering?: Filtering;
   personalizationMode?: PersonalizationMode;
   responseSetting?: CampaignResponseSetting;
-  deduplicationSetting?: DeduplicationSetting;
+  deduplicationSetting?: DeduplicationSetting<BrandDeduplicationCriteria>;
 };
 
 export type BrandAuctionHttpRequestBody = {
@@ -93,7 +99,7 @@ export type BrandAuctionHttpRequestBody = {
   response_setting?: {
     campaign_metadata_fields?: string[];
   };
-  deduplication_setting?: DeduplicationSettingHttpRequestBody;
+  deduplication_setting?: DeduplicationSettingHttpRequestBody<BrandDeduplicationCriteria>;
 };
 
 export type BrandAuctionHttpResponseBody = {

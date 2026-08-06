@@ -15,6 +15,12 @@ import {
   PersonalizationMode,
 } from '../types/external';
 
+export type DisplayDeduplicationCriteria =
+  | 'CRITERIA_DEFAULT'
+  | 'CRITERIA_NONE'
+  | 'CRITERIA_AD_ACCOUNT_ID'
+  | 'CRITERIA_CAMPAIGN_ID';
+
 export type DisplayAuctionParams = {
   requestId: string;
   channelType?: 'APP' | 'SITE' | 'DESKTOP_SITE' | 'MOBILE_SITE';
@@ -52,7 +58,7 @@ export type DisplayAuctionParams = {
   filtering?: Filtering;
   personalizationMode?: PersonalizationMode;
   responseSetting?: CampaignResponseSetting;
-  deduplicationSetting?: DeduplicationSetting;
+  deduplicationSetting?: DeduplicationSetting<DisplayDeduplicationCriteria>;
 };
 
 export type DisplayAuctionHttpRequestBody = {
@@ -90,7 +96,7 @@ export type DisplayAuctionHttpRequestBody = {
   response_setting?: {
     campaign_metadata_fields?: string[];
   };
-  deduplication_setting?: DeduplicationSettingHttpRequestBody;
+  deduplication_setting?: DeduplicationSettingHttpRequestBody<DisplayDeduplicationCriteria>;
 };
 
 export type DisplayAuctionHttpResponseBody = {

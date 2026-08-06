@@ -14,6 +14,11 @@ export type TargetingHttpRequestBody = {
   }[];
 };
 
+export type DeduplicationMethod =
+  | 'METHOD_DEFAULT'
+  | 'METHOD_WATERFALL'
+  | 'METHOD_INTERLEAVED';
+
 export type DeduplicationCriteria =
   | 'CRITERIA_DEFAULT'
   | 'CRITERIA_NONE'
@@ -22,23 +27,30 @@ export type DeduplicationCriteria =
   | 'CRITERIA_CAMPAIGN_ID'
   | 'CRITERIA_LINE_ITEM_ID';
 
-export type DeduplicationSetting = {
+/**
+ * Each endpoint narrows `TCriteria` to the criteria it supports.
+ */
+export type DeduplicationSetting<
+  TCriteria extends DeduplicationCriteria = DeduplicationCriteria
+> = {
   perRequest?: {
-    method?: 'METHOD_DEFAULT' | 'METHOD_WATERFALL' | 'METHOD_INTERLEAVED';
-    criteria?: DeduplicationCriteria;
+    method?: DeduplicationMethod;
+    criteria?: TCriteria;
   };
   perInventory?: {
-    criteria?: DeduplicationCriteria;
+    criteria?: TCriteria;
   };
 };
 
-export type DeduplicationSettingHttpRequestBody = {
+export type DeduplicationSettingHttpRequestBody<
+  TCriteria extends DeduplicationCriteria = DeduplicationCriteria
+> = {
   per_request?: {
-    method?: 'METHOD_DEFAULT' | 'METHOD_WATERFALL' | 'METHOD_INTERLEAVED';
-    criteria?: DeduplicationCriteria;
+    method?: DeduplicationMethod;
+    criteria?: TCriteria;
   };
   per_inventory?: {
-    criteria?: DeduplicationCriteria;
+    criteria?: TCriteria;
   };
 };
 

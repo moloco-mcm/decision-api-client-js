@@ -13,6 +13,12 @@ import {
   ReservedLandingPage,
 } from '../types/external';
 
+export type ReservedDisplayDeduplicationCriteria =
+  | 'CRITERIA_DEFAULT'
+  | 'CRITERIA_NONE'
+  | 'CRITERIA_AD_ACCOUNT_ID'
+  | 'CRITERIA_LINE_ITEM_ID';
+
 export type ReservedDisplayAuctionParams = {
   requestId: string;
   channelType?: 'APP' | 'SITE' | 'DESKTOP_SITE' | 'MOBILE_SITE';
@@ -38,7 +44,7 @@ export type ReservedDisplayAuctionParams = {
   pageId?: string;
   personalizationMode?: PersonalizationMode;
   responseSetting?: LineItemResponseSetting;
-  deduplicationSetting?: DeduplicationSetting;
+  deduplicationSetting?: DeduplicationSetting<ReservedDisplayDeduplicationCriteria>;
 };
 
 export type ReservedDisplayAuctionHttpRequestBody = {
@@ -68,7 +74,7 @@ export type ReservedDisplayAuctionHttpRequestBody = {
   response_setting?: {
     line_item_metadata_fields?: string[];
   };
-  deduplication_setting?: DeduplicationSettingHttpRequestBody;
+  deduplication_setting?: DeduplicationSettingHttpRequestBody<ReservedDisplayDeduplicationCriteria>;
 };
 
 export type ReservedDisplayAuctionHttpResponseBody = {

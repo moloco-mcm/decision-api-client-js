@@ -13,6 +13,11 @@ import {
   PersonalizationMode,
 } from '../types/external';
 
+export type ProductDeduplicationCriteria =
+  | 'CRITERIA_DEFAULT'
+  | 'CRITERIA_NONE'
+  | 'CRITERIA_ITEM_ID';
+
 export type ProductAuctionParams = {
   requestId: string;
   channelType?: 'APP' | 'SITE' | 'DESKTOP_SITE' | 'MOBILE_SITE';
@@ -64,7 +69,7 @@ export type ProductAuctionParams = {
     targeting?: Targeting;
   }[];
   pageId?: string;
-  deduplicationSetting?: DeduplicationSetting;
+  deduplicationSetting?: DeduplicationSetting<ProductDeduplicationCriteria>;
   personalizationMode?: PersonalizationMode;
   responseSetting?: CampaignResponseSetting;
 };
@@ -120,7 +125,7 @@ export type ProductAuctionHttpRequestBody = {
     targeting?: TargetingHttpRequestBody;
   }[];
   page_id?: string;
-  deduplication_setting?: DeduplicationSettingHttpRequestBody;
+  deduplication_setting?: DeduplicationSettingHttpRequestBody<ProductDeduplicationCriteria>;
   personalization_mode?: string;
   response_setting?: {
     campaign_metadata_fields?: string[];
