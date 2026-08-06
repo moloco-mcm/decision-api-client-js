@@ -1,4 +1,11 @@
-import { Filtering, FilteringHttpRequestBody } from '../types/common';
+import {
+  DeduplicationSetting,
+  DeduplicationSettingHttpRequestBody,
+  Filtering,
+  FilteringHttpRequestBody,
+  Targeting,
+  TargetingHttpRequestBody,
+} from '../types/common';
 import {
   CampaignResponseSetting,
   DecidedItem,
@@ -54,14 +61,10 @@ export type ProductAuctionParams = {
       }[];
     };
     filtering?: Filtering;
+    targeting?: Targeting;
   }[];
   pageId?: string;
-  deduplicationSetting?: {
-    perRequest?: {
-      method?: 'METHOD_DEFAULT' | 'METHOD_WATERFALL';
-      criteria?: 'CRITERIA_DEFAULT' | 'CRITERIA_NONE' | 'CRITERIA_ITEM_ID';
-    };
-  };
+  deduplicationSetting?: DeduplicationSetting;
   personalizationMode?: PersonalizationMode;
   responseSetting?: CampaignResponseSetting;
 };
@@ -114,14 +117,10 @@ export type ProductAuctionHttpRequestBody = {
       }[];
     };
     filtering?: FilteringHttpRequestBody;
+    targeting?: TargetingHttpRequestBody;
   }[];
   page_id?: string;
-  deduplication_setting?: {
-    per_request?: {
-      method?: 'METHOD_DEFAULT' | 'METHOD_WATERFALL';
-      criteria?: 'CRITERIA_DEFAULT' | 'CRITERIA_NONE' | 'CRITERIA_ITEM_ID';
-    };
-  };
+  deduplication_setting?: DeduplicationSettingHttpRequestBody;
   personalization_mode?: string;
   response_setting?: {
     campaign_metadata_fields?: string[];
@@ -148,6 +147,7 @@ export type ProductAuctionHttpResponseBody = {
         campaign_metadata?: {
           ad_operation_type?: string;
           alias?: string;
+          ad_payer?: string;
         };
       };
       imp_trackers: string[];

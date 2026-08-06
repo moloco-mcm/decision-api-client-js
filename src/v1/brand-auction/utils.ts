@@ -1,3 +1,4 @@
+import { Filtering, FilteringHttpRequestBody } from '../types/common';
 import { CampaignMetadata } from '../types/external';
 import {
   BrandAuctionParams,
@@ -5,6 +6,64 @@ import {
   BrandAuctionHttpResponseBody,
   BrandAuctionData,
 } from './types';
+
+const translateFiltering = (
+  filtering: Filtering
+): FilteringHttpRequestBody => ({
+  category: filtering.category && {
+    operator: filtering.category.operator,
+    categories: [...filtering.category.categories],
+  },
+  location: filtering.location && {
+    locations: [...filtering.location.locations],
+  },
+  brand: filtering.brand && {
+    brand_ids: filtering.brand.brandIds,
+  },
+  delivery: filtering.delivery && {
+    delivery_option: filtering.delivery.deliveryOption,
+    delivery_options: filtering.delivery.deliveryOptions && [
+      ...filtering.delivery.deliveryOptions,
+    ],
+  },
+  price: filtering.price && {
+    min_price: filtering.price.minPrice,
+    max_price: filtering.price.maxPrice,
+  },
+  sale_price: filtering.salePrice && {
+    min_sale_price: filtering.salePrice.minSalePrice,
+    max_sale_price: filtering.salePrice.maxSalePrice,
+  },
+  rating: filtering.rating && {
+    min: filtering.rating.min,
+    max: filtering.rating.max,
+  },
+  review_count: filtering.reviewCount && {
+    min: filtering.reviewCount.min,
+    max: filtering.reviewCount.max,
+  },
+  color: filtering.color && {
+    colors: [...filtering.color.colors],
+  },
+  gender: filtering.gender && {
+    genders: [...filtering.gender.genders],
+  },
+  size: filtering.size && {
+    sizes: [...filtering.size.sizes],
+  },
+  material: filtering.material && {
+    materials: [...filtering.material.materials],
+  },
+  pattern: filtering.pattern && {
+    patterns: [...filtering.pattern.patterns],
+  },
+  condition: filtering.condition && {
+    conditions: [...filtering.condition.conditions],
+  },
+  age_group: filtering.ageGroup && {
+    age_groups: [...filtering.ageGroup.ageGroups],
+  },
+});
 
 export const translateBrandAuctionParamsToBrandAuctionHttpRequestBody = (
   params: BrandAuctionParams
@@ -35,6 +94,13 @@ export const translateBrandAuctionParamsToBrandAuctionHttpRequestBody = (
     video: inventory.video && {
       format: inventory.video.format,
     },
+    targeting: inventory.targeting && {
+      key_values: inventory.targeting.keyValues?.map((keyValue) => ({
+        key_id: keyValue.keyId,
+        value_ids: keyValue.valueIds && [...keyValue.valueIds],
+      })),
+    },
+    filtering: inventory.filtering && translateFiltering(inventory.filtering),
   })),
   page_id: params.pageId,
   personalization_mode: params.personalizationMode,
@@ -43,61 +109,16 @@ export const translateBrandAuctionParamsToBrandAuctionHttpRequestBody = (
       ...params.responseSetting.campaignMetadataFields,
     ],
   },
-  filtering: params.filtering && {
-    category: params.filtering.category && {
-      operator: params.filtering.category.operator,
-      categories: [...params.filtering.category.categories],
+  deduplication_setting: params.deduplicationSetting && {
+    per_request: params.deduplicationSetting.perRequest && {
+      method: params.deduplicationSetting.perRequest.method,
+      criteria: params.deduplicationSetting.perRequest.criteria,
     },
-    location: params.filtering.location && {
-      locations: [...params.filtering.location.locations],
-    },
-    brand: params.filtering.brand && {
-      brand_ids: params.filtering.brand.brandIds,
-    },
-    delivery: params.filtering.delivery && {
-      delivery_option: params.filtering.delivery.deliveryOption,
-      delivery_options: params.filtering.delivery.deliveryOptions && [
-        ...params.filtering.delivery.deliveryOptions,
-      ],
-    },
-    price: params.filtering.price && {
-      min_price: params.filtering.price.minPrice,
-      max_price: params.filtering.price.maxPrice,
-    },
-    sale_price: params.filtering.salePrice && {
-      min_sale_price: params.filtering.salePrice.minSalePrice,
-      max_sale_price: params.filtering.salePrice.maxSalePrice,
-    },
-    rating: params.filtering.rating && {
-      min: params.filtering.rating.min,
-      max: params.filtering.rating.max,
-    },
-    review_count: params.filtering.reviewCount && {
-      min: params.filtering.reviewCount.min,
-      max: params.filtering.reviewCount.max,
-    },
-    color: params.filtering.color && {
-      colors: [...params.filtering.color.colors],
-    },
-    gender: params.filtering.gender && {
-      genders: [...params.filtering.gender.genders],
-    },
-    size: params.filtering.size && {
-      sizes: [...params.filtering.size.sizes],
-    },
-    material: params.filtering.material && {
-      materials: [...params.filtering.material.materials],
-    },
-    pattern: params.filtering.pattern && {
-      patterns: [...params.filtering.pattern.patterns],
-    },
-    condition: params.filtering.condition && {
-      conditions: [...params.filtering.condition.conditions],
-    },
-    age_group: params.filtering.ageGroup && {
-      age_groups: [...params.filtering.ageGroup.ageGroups],
+    per_inventory: params.deduplicationSetting.perInventory && {
+      criteria: params.deduplicationSetting.perInventory.criteria,
     },
   },
+  filtering: params.filtering && translateFiltering(params.filtering),
 });
 
 export const translateBrandAuctionHttpResponseBodyToBrandAuctionData = (
@@ -122,6 +143,7 @@ export const translateBrandAuctionHttpResponseBodyToBrandAuctionData = (
           adOperationType: ad.auction_result.campaign_metadata
             .ad_operation_type as CampaignMetadata['adOperationType'],
           alias: ad.auction_result.campaign_metadata.alias,
+          adPayer: ad.auction_result.campaign_metadata.ad_payer,
         },
       },
       asset: ad.asset && {

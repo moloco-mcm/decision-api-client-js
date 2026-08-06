@@ -1,4 +1,11 @@
-import { Filtering, FilteringHttpRequestBody } from '../types/common';
+import {
+  DeduplicationSetting,
+  DeduplicationSettingHttpRequestBody,
+  Filtering,
+  FilteringHttpRequestBody,
+  Targeting,
+  TargetingHttpRequestBody,
+} from '../types/common';
 import {
   AuctionResult,
   Asset,
@@ -35,11 +42,17 @@ export type DisplayAuctionParams = {
     video?: {
       format?: 'MP4_360P' | 'MP4_720P' | 'HLS';
     };
+    targeting?: Targeting;
   }[];
   pageId?: string;
+  /**
+   * @deprecated Not part of the public Decision API. The display auction
+   * endpoint no longer accepts filtering.
+   */
   filtering?: Filtering;
   personalizationMode?: PersonalizationMode;
   responseSetting?: CampaignResponseSetting;
+  deduplicationSetting?: DeduplicationSetting;
 };
 
 export type DisplayAuctionHttpRequestBody = {
@@ -69,6 +82,7 @@ export type DisplayAuctionHttpRequestBody = {
     video?: {
       format?: 'MP4_360P' | 'MP4_720P' | 'HLS';
     };
+    targeting?: TargetingHttpRequestBody;
   }[];
   page_id?: string;
   filtering?: FilteringHttpRequestBody;
@@ -76,6 +90,7 @@ export type DisplayAuctionHttpRequestBody = {
   response_setting?: {
     campaign_metadata_fields?: string[];
   };
+  deduplication_setting?: DeduplicationSettingHttpRequestBody;
 };
 
 export type DisplayAuctionHttpResponseBody = {
@@ -97,6 +112,7 @@ export type DisplayAuctionHttpResponseBody = {
         campaign_metadata?: {
           ad_operation_type?: string;
           alias?: string;
+          ad_payer?: string;
         };
       };
       asset: {

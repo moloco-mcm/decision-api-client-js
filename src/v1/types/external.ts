@@ -43,13 +43,19 @@ export type CampaignMetadata = {
     | 'AD_OPERATION_TYPE_SELF_SERVED'
     | 'AD_OPERATION_TYPE_MANAGED';
   alias?: string;
+  adPayer?: string;
 };
 
 /**
  * @category CampaignResponseSetting
  */
 export type CampaignResponseSetting = {
-  campaignMetadataFields?: ('FIELD_UNKNOWN' | 'AD_OPERATION_TYPE' | 'ALIAS')[];
+  campaignMetadataFields?: (
+    | 'FIELD_UNKNOWN'
+    | 'AD_OPERATION_TYPE'
+    | 'ALIAS'
+    | 'AD_PAYER'
+  )[];
 };
 
 /**
@@ -57,13 +63,14 @@ export type CampaignResponseSetting = {
  */
 export type LineItemMetadata = {
   alias?: string;
+  adPayer?: string;
 };
 
 /**
  * @category LineItemResponseSetting
  */
 export type LineItemResponseSetting = {
-  lineItemMetadataFields?: ('FIELD_UNKNOWN' | 'ALIAS')[];
+  lineItemMetadataFields?: ('FIELD_UNKNOWN' | 'ALIAS' | 'AD_PAYER')[];
 };
 
 /**
@@ -268,6 +275,21 @@ export interface Client {
     params: ReservedDisplayAuctionParams
   ) => Promise<ReservedDisplayAuctionData>;
 }
+
+/**
+ * @category Filtering
+ */
+export { Filtering } from './common';
+
+/**
+ * @category Targeting
+ */
+export { Targeting } from './common';
+
+/**
+ * @category DeduplicationSetting
+ */
+export { DeduplicationCriteria, DeduplicationSetting } from './common';
 
 /**
  * @category Auction

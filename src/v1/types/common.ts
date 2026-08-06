@@ -1,5 +1,47 @@
 //Todo: add more common types here
 
+export type Targeting = {
+  keyValues?: {
+    keyId: string;
+    valueIds?: string[];
+  }[];
+};
+
+export type TargetingHttpRequestBody = {
+  key_values?: {
+    key_id: string;
+    value_ids?: string[];
+  }[];
+};
+
+export type DeduplicationCriteria =
+  | 'CRITERIA_DEFAULT'
+  | 'CRITERIA_NONE'
+  | 'CRITERIA_ITEM_ID'
+  | 'CRITERIA_AD_ACCOUNT_ID'
+  | 'CRITERIA_CAMPAIGN_ID'
+  | 'CRITERIA_LINE_ITEM_ID';
+
+export type DeduplicationSetting = {
+  perRequest?: {
+    method?: 'METHOD_DEFAULT' | 'METHOD_WATERFALL' | 'METHOD_INTERLEAVED';
+    criteria?: DeduplicationCriteria;
+  };
+  perInventory?: {
+    criteria?: DeduplicationCriteria;
+  };
+};
+
+export type DeduplicationSettingHttpRequestBody = {
+  per_request?: {
+    method?: 'METHOD_DEFAULT' | 'METHOD_WATERFALL' | 'METHOD_INTERLEAVED';
+    criteria?: DeduplicationCriteria;
+  };
+  per_inventory?: {
+    criteria?: DeduplicationCriteria;
+  };
+};
+
 export type Filtering = {
   category?: {
     operator?: 'OR' | 'AND';

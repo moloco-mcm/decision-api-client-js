@@ -1,4 +1,11 @@
-import { Filtering, FilteringHttpRequestBody } from '../types/common';
+import {
+  DeduplicationSetting,
+  DeduplicationSettingHttpRequestBody,
+  Filtering,
+  FilteringHttpRequestBody,
+  Targeting,
+  TargetingHttpRequestBody,
+} from '../types/common';
 import {
   AuctionResult,
   AdItem,
@@ -36,11 +43,18 @@ export type BrandAuctionParams = {
     video?: {
       format?: 'MP4_360P' | 'MP4_720P' | 'HLS';
     };
+    targeting?: Targeting;
+    filtering?: Filtering;
   }[];
   pageId?: string;
+  /**
+   * @deprecated Not part of the public Decision API. Set `filtering` on each
+   * inventory instead.
+   */
   filtering?: Filtering;
   personalizationMode?: PersonalizationMode;
   responseSetting?: CampaignResponseSetting;
+  deduplicationSetting?: DeduplicationSetting;
 };
 
 export type BrandAuctionHttpRequestBody = {
@@ -70,6 +84,8 @@ export type BrandAuctionHttpRequestBody = {
     video?: {
       format?: 'MP4_360P' | 'MP4_720P' | 'HLS';
     };
+    targeting?: TargetingHttpRequestBody;
+    filtering?: FilteringHttpRequestBody;
   }[];
   page_id?: string;
   filtering?: FilteringHttpRequestBody;
@@ -77,6 +93,7 @@ export type BrandAuctionHttpRequestBody = {
   response_setting?: {
     campaign_metadata_fields?: string[];
   };
+  deduplication_setting?: DeduplicationSettingHttpRequestBody;
 };
 
 export type BrandAuctionHttpResponseBody = {
@@ -98,6 +115,7 @@ export type BrandAuctionHttpResponseBody = {
         campaign_metadata?: {
           ad_operation_type?: string;
           alias?: string;
+          ad_payer?: string;
         };
       };
       asset: {

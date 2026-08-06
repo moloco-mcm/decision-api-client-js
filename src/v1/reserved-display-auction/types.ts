@@ -1,4 +1,10 @@
 import {
+  DeduplicationSetting,
+  DeduplicationSettingHttpRequestBody,
+  Targeting,
+  TargetingHttpRequestBody,
+} from '../types/common';
+import {
   InvalidInputWarning,
   LineItemResponseSetting,
   PersonalizationMode,
@@ -26,16 +32,13 @@ export type ReservedDisplayAuctionParams = {
   };
   inventories: {
     inventoryId: string;
-    targeting?: {
-      keyValues?: {
-        keyId: string;
-        valueIds?: string[];
-      }[];
-    };
+    numAds?: number;
+    targeting?: Targeting;
   }[];
   pageId?: string;
   personalizationMode?: PersonalizationMode;
   responseSetting?: LineItemResponseSetting;
+  deduplicationSetting?: DeduplicationSetting;
 };
 
 export type ReservedDisplayAuctionHttpRequestBody = {
@@ -57,18 +60,15 @@ export type ReservedDisplayAuctionHttpRequestBody = {
   };
   inventories: {
     inventory_id: string;
-    targeting?: {
-      key_values?: {
-        key_id: string;
-        value_ids?: string[];
-      }[];
-    };
+    num_ads?: number;
+    targeting?: TargetingHttpRequestBody;
   }[];
   page_id?: string;
   personalization_mode?: string;
   response_setting?: {
     line_item_metadata_fields?: string[];
   };
+  deduplication_setting?: DeduplicationSettingHttpRequestBody;
 };
 
 export type ReservedDisplayAuctionHttpResponseBody = {
@@ -114,6 +114,7 @@ export type ReservedDisplayAuctionHttpResponseBody = {
         order_id: string;
         line_item_metadata?: {
           alias?: string;
+          ad_payer?: string;
         };
       };
     }[];

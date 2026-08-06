@@ -39,13 +39,19 @@ describe('product-auction/utils', () => {
             synonyms: ['shoes', 'footwear'],
           },
           filtering: testFiltering,
+          targeting: {
+            keyValues: [{ keyId: 'key1', valueIds: ['value1', 'value2'] }],
+          },
         },
       ],
       pageId: 'test_page_id',
       personalizationMode: 'STANDARD',
       deduplicationSetting: {
         perRequest: {
-          method: 'METHOD_WATERFALL',
+          method: 'METHOD_INTERLEAVED',
+          criteria: 'CRITERIA_ITEM_ID',
+        },
+        perInventory: {
           criteria: 'CRITERIA_ITEM_ID',
         },
       },
@@ -85,13 +91,19 @@ describe('product-auction/utils', () => {
             synonyms: ['shoes', 'footwear'],
           },
           filtering: testFilteringHttpRequestBody,
+          targeting: {
+            key_values: [{ key_id: 'key1', value_ids: ['value1', 'value2'] }],
+          },
         },
       ],
       page_id: 'test_page_id',
       personalization_mode: 'STANDARD',
       deduplication_setting: {
         per_request: {
-          method: 'METHOD_WATERFALL',
+          method: 'METHOD_INTERLEAVED',
+          criteria: 'CRITERIA_ITEM_ID',
+        },
+        per_inventory: {
           criteria: 'CRITERIA_ITEM_ID',
         },
       },
@@ -117,6 +129,11 @@ describe('product-auction/utils', () => {
                 win_price_advertiser: {
                   currency: 'KRW',
                   amount_micro: '130000',
+                },
+                campaign_metadata: {
+                  ad_operation_type: 'AD_OPERATION_TYPE_MANAGED',
+                  alias: 'test_campaign_alias',
+                  ad_payer: 'test_ad_payer',
                 },
               },
               imp_trackers: [
@@ -154,6 +171,11 @@ describe('product-auction/utils', () => {
                 winPriceAdvertiser: {
                   currency: 'KRW',
                   amountMicro: '130000',
+                },
+                campaignMetadata: {
+                  adOperationType: 'AD_OPERATION_TYPE_MANAGED',
+                  alias: 'test_campaign_alias',
+                  adPayer: 'test_ad_payer',
                 },
               },
               impTrackers: [
