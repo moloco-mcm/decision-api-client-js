@@ -29,6 +29,7 @@ describe('reserved-display-auction/utils', () => {
       inventories: [
         {
           inventoryId: 'my_inventory',
+          numAds: 2,
           targeting: {
             keyValues: [
               {
@@ -42,7 +43,16 @@ describe('reserved-display-auction/utils', () => {
       pageId: 'test_page_id',
       personalizationMode: 'STANDARD',
       responseSetting: {
-        lineItemMetadataFields: ['ALIAS'],
+        lineItemMetadataFields: ['ALIAS', 'AD_PAYER'],
+      },
+      deduplicationSetting: {
+        perRequest: {
+          method: 'METHOD_INTERLEAVED',
+          criteria: 'CRITERIA_LINE_ITEM_ID',
+        },
+        perInventory: {
+          criteria: 'CRITERIA_AD_ACCOUNT_ID',
+        },
       },
     };
 
@@ -70,6 +80,7 @@ describe('reserved-display-auction/utils', () => {
       inventories: [
         {
           inventory_id: 'my_inventory',
+          num_ads: 2,
           targeting: {
             key_values: [
               {
@@ -83,7 +94,16 @@ describe('reserved-display-auction/utils', () => {
       page_id: 'test_page_id',
       personalization_mode: 'STANDARD',
       response_setting: {
-        line_item_metadata_fields: ['ALIAS'],
+        line_item_metadata_fields: ['ALIAS', 'AD_PAYER'],
+      },
+      deduplication_setting: {
+        per_request: {
+          method: 'METHOD_INTERLEAVED',
+          criteria: 'CRITERIA_LINE_ITEM_ID',
+        },
+        per_inventory: {
+          criteria: 'CRITERIA_AD_ACCOUNT_ID',
+        },
       },
     });
   });
@@ -142,6 +162,7 @@ describe('reserved-display-auction/utils', () => {
                 order_id: 'test_order_id',
                 line_item_metadata: {
                   alias: 'test_line_item_alias',
+                  ad_payer: 'test_ad_payer',
                 },
               },
             },
@@ -213,6 +234,7 @@ describe('reserved-display-auction/utils', () => {
                 orderId: 'test_order_id',
                 lineItemMetadata: {
                   alias: 'test_line_item_alias',
+                  adPayer: 'test_ad_payer',
                 },
               },
             },

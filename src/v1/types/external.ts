@@ -277,6 +277,25 @@ export interface Client {
 }
 
 /**
+ * @category Filtering
+ */
+export { Filtering } from './common';
+
+/**
+ * @category Targeting
+ */
+export { Targeting } from './common';
+
+/**
+ * @category DeduplicationSetting
+ */
+export {
+  DeduplicationCriteria,
+  DeduplicationMethod,
+  DeduplicationSetting,
+} from './common';
+
+/**
  * @category Auction
  */
 export { AuctionData, AuctionParams } from '../auction/types';
@@ -284,7 +303,11 @@ export { AuctionData, AuctionParams } from '../auction/types';
 /**
  * @category BrandAuction
  */
-export { BrandAuctionData, BrandAuctionParams } from '../brand-auction/types';
+export {
+  BrandAuctionData,
+  BrandAuctionParams,
+  BrandDeduplicationCriteria,
+} from '../brand-auction/types';
 
 /**
  * @category Recommendation
@@ -300,6 +323,7 @@ export {
 export {
   DisplayAuctionData,
   DisplayAuctionParams,
+  DisplayDeduplicationCriteria,
 } from '../display-auction/types';
 
 /**
@@ -308,6 +332,7 @@ export {
 export {
   ProductAuctionData,
   ProductAuctionParams,
+  ProductDeduplicationCriteria,
 } from '../product-auction/types';
 
 /**
@@ -316,4 +341,5 @@ export {
 export {
   ReservedDisplayAuctionData,
   ReservedDisplayAuctionParams,
+  ReservedDisplayDeduplicationCriteria,
 } from '../reserved-display-auction/types';

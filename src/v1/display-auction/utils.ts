@@ -35,6 +35,12 @@ export const translateDisplayAuctionParamsToDisplayAuctionHttpRequestBody = (
     video: inventory.video && {
       format: inventory.video.format,
     },
+    targeting: inventory.targeting && {
+      key_values: inventory.targeting.keyValues?.map((keyValue) => ({
+        key_id: keyValue.keyId,
+        value_ids: keyValue.valueIds && [...keyValue.valueIds],
+      })),
+    },
   })),
   page_id: params.pageId,
   personalization_mode: params.personalizationMode,
@@ -42,6 +48,15 @@ export const translateDisplayAuctionParamsToDisplayAuctionHttpRequestBody = (
     campaign_metadata_fields: params.responseSetting.campaignMetadataFields && [
       ...params.responseSetting.campaignMetadataFields,
     ],
+  },
+  deduplication_setting: params.deduplicationSetting && {
+    per_request: params.deduplicationSetting.perRequest && {
+      method: params.deduplicationSetting.perRequest.method,
+      criteria: params.deduplicationSetting.perRequest.criteria,
+    },
+    per_inventory: params.deduplicationSetting.perInventory && {
+      criteria: params.deduplicationSetting.perInventory.criteria,
+    },
   },
   filtering: params.filtering && {
     category: params.filtering.category && {
@@ -122,6 +137,7 @@ export const translateDisplayAuctionHttpResponseBodyToDisplayAuctionData = (
           adOperationType: ad.auction_result.campaign_metadata
             .ad_operation_type as CampaignMetadata['adOperationType'],
           alias: ad.auction_result.campaign_metadata.alias,
+          adPayer: ad.auction_result.campaign_metadata.ad_payer,
         },
       },
       asset: ad.asset && {

@@ -1,10 +1,22 @@
-import { Filtering, FilteringHttpRequestBody } from '../types/common';
+import {
+  DeduplicationSetting,
+  DeduplicationSettingHttpRequestBody,
+  Filtering,
+  FilteringHttpRequestBody,
+  Targeting,
+  TargetingHttpRequestBody,
+} from '../types/common';
 import {
   CampaignResponseSetting,
   DecidedItem,
   InvalidInputWarning,
   PersonalizationMode,
 } from '../types/external';
+
+export type ProductDeduplicationCriteria =
+  | 'CRITERIA_DEFAULT'
+  | 'CRITERIA_NONE'
+  | 'CRITERIA_ITEM_ID';
 
 export type ProductAuctionParams = {
   requestId: string;
@@ -54,20 +66,10 @@ export type ProductAuctionParams = {
       }[];
     };
     filtering?: Filtering;
+    targeting?: Targeting;
   }[];
   pageId?: string;
-  deduplicationSetting?: {
-    perRequest?: {
-      method?: 'METHOD_DEFAULT' | 'METHOD_WATERFALL' | 'METHOD_INTERLEAVED';
-      criteria?:
-        | 'CRITERIA_DEFAULT'
-        | 'CRITERIA_NONE'
-        | 'CRITERIA_ITEM_ID'
-        | 'CRITERIA_AD_ACCOUNT_ID'
-        | 'CRITERIA_CAMPAIGN_ID'
-        | 'CRITERIA_LINE_ITEM_ID';
-    };
-  };
+  deduplicationSetting?: DeduplicationSetting<ProductDeduplicationCriteria>;
   personalizationMode?: PersonalizationMode;
   responseSetting?: CampaignResponseSetting;
 };
@@ -120,20 +122,10 @@ export type ProductAuctionHttpRequestBody = {
       }[];
     };
     filtering?: FilteringHttpRequestBody;
+    targeting?: TargetingHttpRequestBody;
   }[];
   page_id?: string;
-  deduplication_setting?: {
-    per_request?: {
-      method?: 'METHOD_DEFAULT' | 'METHOD_WATERFALL' | 'METHOD_INTERLEAVED';
-      criteria?:
-        | 'CRITERIA_DEFAULT'
-        | 'CRITERIA_NONE'
-        | 'CRITERIA_ITEM_ID'
-        | 'CRITERIA_AD_ACCOUNT_ID'
-        | 'CRITERIA_CAMPAIGN_ID'
-        | 'CRITERIA_LINE_ITEM_ID';
-    };
-  };
+  deduplication_setting?: DeduplicationSettingHttpRequestBody<ProductDeduplicationCriteria>;
   personalization_mode?: string;
   response_setting?: {
     campaign_metadata_fields?: string[];

@@ -1,4 +1,10 @@
 import {
+  DeduplicationSetting,
+  DeduplicationSettingHttpRequestBody,
+  Targeting,
+  TargetingHttpRequestBody,
+} from '../types/common';
+import {
   InvalidInputWarning,
   LineItemResponseSetting,
   PersonalizationMode,
@@ -6,6 +12,12 @@ import {
   ReservedDisplayAdInfo,
   ReservedLandingPage,
 } from '../types/external';
+
+export type ReservedDisplayDeduplicationCriteria =
+  | 'CRITERIA_DEFAULT'
+  | 'CRITERIA_NONE'
+  | 'CRITERIA_AD_ACCOUNT_ID'
+  | 'CRITERIA_LINE_ITEM_ID';
 
 export type ReservedDisplayAuctionParams = {
   requestId: string;
@@ -26,22 +38,13 @@ export type ReservedDisplayAuctionParams = {
   };
   inventories: {
     inventoryId: string;
-    targeting?: {
-      keyValues?: {
-        keyId: string;
-        valueIds?: string[];
-      }[];
-    };
+    numAds?: number;
+    targeting?: Targeting;
   }[];
   pageId?: string;
-  deduplicationSetting?: {
-    perRequest?: {
-      method?: 'METHOD_DEFAULT' | 'METHOD_WATERFALL' | 'METHOD_INTERLEAVED';
-      criteria?: 'CRITERIA_DEFAULT' | 'CRITERIA_NONE' | 'CRITERIA_LINE_ITEM_ID';
-    };
-  };
   personalizationMode?: PersonalizationMode;
   responseSetting?: LineItemResponseSetting;
+  deduplicationSetting?: DeduplicationSetting<ReservedDisplayDeduplicationCriteria>;
 };
 
 export type ReservedDisplayAuctionHttpRequestBody = {
@@ -63,24 +66,15 @@ export type ReservedDisplayAuctionHttpRequestBody = {
   };
   inventories: {
     inventory_id: string;
-    targeting?: {
-      key_values?: {
-        key_id: string;
-        value_ids?: string[];
-      }[];
-    };
+    num_ads?: number;
+    targeting?: TargetingHttpRequestBody;
   }[];
   page_id?: string;
-  deduplication_setting?: {
-    per_request?: {
-      method?: 'METHOD_DEFAULT' | 'METHOD_WATERFALL' | 'METHOD_INTERLEAVED';
-      criteria?: 'CRITERIA_DEFAULT' | 'CRITERIA_NONE' | 'CRITERIA_LINE_ITEM_ID';
-    };
-  };
   personalization_mode?: string;
   response_setting?: {
     line_item_metadata_fields?: string[];
   };
+  deduplication_setting?: DeduplicationSettingHttpRequestBody<ReservedDisplayDeduplicationCriteria>;
 };
 
 export type ReservedDisplayAuctionHttpResponseBody = {

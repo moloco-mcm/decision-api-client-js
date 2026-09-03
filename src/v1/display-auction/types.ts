@@ -1,4 +1,11 @@
-import { Filtering, FilteringHttpRequestBody } from '../types/common';
+import {
+  DeduplicationSetting,
+  DeduplicationSettingHttpRequestBody,
+  Filtering,
+  FilteringHttpRequestBody,
+  Targeting,
+  TargetingHttpRequestBody,
+} from '../types/common';
 import {
   AuctionResult,
   Asset,
@@ -7,6 +14,12 @@ import {
   InvalidInputWarning,
   PersonalizationMode,
 } from '../types/external';
+
+export type DisplayDeduplicationCriteria =
+  | 'CRITERIA_DEFAULT'
+  | 'CRITERIA_NONE'
+  | 'CRITERIA_AD_ACCOUNT_ID'
+  | 'CRITERIA_CAMPAIGN_ID';
 
 export type DisplayAuctionParams = {
   requestId: string;
@@ -35,21 +48,17 @@ export type DisplayAuctionParams = {
     video?: {
       format?: 'MP4_360P' | 'MP4_720P' | 'HLS';
     };
+    targeting?: Targeting;
   }[];
   pageId?: string;
+  /**
+   * @deprecated Not part of the public Decision API. The display auction
+   * endpoint no longer accepts filtering.
+   */
   filtering?: Filtering;
-  deduplicationSetting?: {
-    perRequest?: {
-      method?: 'METHOD_DEFAULT' | 'METHOD_WATERFALL' | 'METHOD_INTERLEAVED';
-      criteria?:
-        | 'CRITERIA_DEFAULT'
-        | 'CRITERIA_NONE'
-        | 'CRITERIA_AD_ACCOUNT_ID'
-        | 'CRITERIA_CAMPAIGN_ID';
-    };
-  };
   personalizationMode?: PersonalizationMode;
   responseSetting?: CampaignResponseSetting;
+  deduplicationSetting?: DeduplicationSetting<DisplayDeduplicationCriteria>;
 };
 
 export type DisplayAuctionHttpRequestBody = {
@@ -79,23 +88,15 @@ export type DisplayAuctionHttpRequestBody = {
     video?: {
       format?: 'MP4_360P' | 'MP4_720P' | 'HLS';
     };
+    targeting?: TargetingHttpRequestBody;
   }[];
   page_id?: string;
   filtering?: FilteringHttpRequestBody;
-  deduplication_setting?: {
-    per_request?: {
-      method?: 'METHOD_DEFAULT' | 'METHOD_WATERFALL' | 'METHOD_INTERLEAVED';
-      criteria?:
-        | 'CRITERIA_DEFAULT'
-        | 'CRITERIA_NONE'
-        | 'CRITERIA_AD_ACCOUNT_ID'
-        | 'CRITERIA_CAMPAIGN_ID';
-    };
-  };
   personalization_mode?: string;
   response_setting?: {
     campaign_metadata_fields?: string[];
   };
+  deduplication_setting?: DeduplicationSettingHttpRequestBody<DisplayDeduplicationCriteria>;
 };
 
 export type DisplayAuctionHttpResponseBody = {

@@ -1,4 +1,11 @@
-import { Filtering, FilteringHttpRequestBody } from '../types/common';
+import {
+  DeduplicationSetting,
+  DeduplicationSettingHttpRequestBody,
+  Filtering,
+  FilteringHttpRequestBody,
+  Targeting,
+  TargetingHttpRequestBody,
+} from '../types/common';
 import {
   AuctionResult,
   AdItem,
@@ -8,6 +15,12 @@ import {
   InvalidInputWarning,
   PersonalizationMode,
 } from '../types/external';
+
+export type BrandDeduplicationCriteria =
+  | 'CRITERIA_DEFAULT'
+  | 'CRITERIA_NONE'
+  | 'CRITERIA_AD_ACCOUNT_ID'
+  | 'CRITERIA_CAMPAIGN_ID';
 
 export type BrandAuctionParams = {
   requestId: string;
@@ -36,21 +49,18 @@ export type BrandAuctionParams = {
     video?: {
       format?: 'MP4_360P' | 'MP4_720P' | 'HLS';
     };
+    targeting?: Targeting;
+    filtering?: Filtering;
   }[];
   pageId?: string;
+  /**
+   * @deprecated Not part of the public Decision API. Set `filtering` on each
+   * inventory instead.
+   */
   filtering?: Filtering;
-  deduplicationSetting?: {
-    perRequest?: {
-      method?: 'METHOD_DEFAULT' | 'METHOD_WATERFALL' | 'METHOD_INTERLEAVED';
-      criteria?:
-        | 'CRITERIA_DEFAULT'
-        | 'CRITERIA_NONE'
-        | 'CRITERIA_AD_ACCOUNT_ID'
-        | 'CRITERIA_CAMPAIGN_ID';
-    };
-  };
   personalizationMode?: PersonalizationMode;
   responseSetting?: CampaignResponseSetting;
+  deduplicationSetting?: DeduplicationSetting<BrandDeduplicationCriteria>;
 };
 
 export type BrandAuctionHttpRequestBody = {
@@ -80,23 +90,16 @@ export type BrandAuctionHttpRequestBody = {
     video?: {
       format?: 'MP4_360P' | 'MP4_720P' | 'HLS';
     };
+    targeting?: TargetingHttpRequestBody;
+    filtering?: FilteringHttpRequestBody;
   }[];
   page_id?: string;
   filtering?: FilteringHttpRequestBody;
-  deduplication_setting?: {
-    per_request?: {
-      method?: 'METHOD_DEFAULT' | 'METHOD_WATERFALL' | 'METHOD_INTERLEAVED';
-      criteria?:
-        | 'CRITERIA_DEFAULT'
-        | 'CRITERIA_NONE'
-        | 'CRITERIA_AD_ACCOUNT_ID'
-        | 'CRITERIA_CAMPAIGN_ID';
-    };
-  };
   personalization_mode?: string;
   response_setting?: {
     campaign_metadata_fields?: string[];
   };
+  deduplication_setting?: DeduplicationSettingHttpRequestBody<BrandDeduplicationCriteria>;
 };
 
 export type BrandAuctionHttpResponseBody = {
