@@ -1,6 +1,6 @@
 {
   "name": "@moloco-rmp/decision-api-client",
-  "version": "3.5.0",
+  "version": "3.5.1",
   "license": "Apache-2.0",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
@@ -46,7 +46,7 @@
     "typescript": "^5.9.2"
   },
   "dependencies": {
-    "axios": "^1.6.0"
+    "axios": "^1.16.0"
   },
   "eslintConfig": {
     "parser": "@typescript-eslint/parser",
